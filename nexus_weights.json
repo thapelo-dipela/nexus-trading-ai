@@ -1,0 +1,52 @@
+[
+  {
+    "agent_id": "momentum",
+    "weight": 1.0127909886533941,
+    "trades_closed": 91,
+    "pnl_total": 106.41317300008583,
+    "wins": 66,
+    "losses": 10,
+    "retired": false,
+    "consecutive_floor_trades": 0
+  },
+  {
+    "agent_id": "sentiment",
+    "weight": 1.023213226156011,
+    "trades_closed": 91,
+    "pnl_total": 103.02895352424244,
+    "wins": 68,
+    "losses": 13,
+    "retired": false,
+    "consecutive_floor_trades": 0
+  },
+  {
+    "agent_id": "risk_guardian",
+    "weight": 1.0032488902378542,
+    "trades_closed": 91,
+    "pnl_total": 3.423253782934075,
+    "wins": 1,
+    "losses": 9,
+    "retired": false,
+    "consecutive_floor_trades": 0
+  },
+  {
+    "agent_id": "mean_reversion",
+    "weight": 1.0035601155944833,
+    "trades_closed": 90,
+    "pnl_total": 0.8091096872656253,
+    "wins": 0,
+    "losses": 9,
+    "retired": false,
+    "consecutive_floor_trades": 0
+  },
+  {
+    "agent_id": "orderflow",
+    "weight": 0.9992447090096713,
+    "trades_closed": 15,
+    "pnl_total": -12.588236916271281,
+    "wins": 4,
+    "losses": 11,
+    "retired": false,
+    "consecutive_floor_trades": 0
+  }
+]

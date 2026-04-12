@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "streamlit": "^2.51.2"
+  }
+}

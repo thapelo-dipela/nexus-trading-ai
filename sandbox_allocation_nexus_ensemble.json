@@ -1,0 +1,11 @@
+{
+  "status": "CLAIMED",
+  "agent_id": "nexus_ensemble",
+  "team_name": "NEXUS Trading AI",
+  "sub_account_address": "0xfa5199aca4555931147b5787b0280add82ae7a23",
+  "capital_type": "TESTNET",
+  "capital_allocated_usd": 1000000.0,
+  "vault_address": "0x0000000000000000000000000000000000000000",
+  "claimed_at": 1776010985,
+  "nonce": 2189492333
+}

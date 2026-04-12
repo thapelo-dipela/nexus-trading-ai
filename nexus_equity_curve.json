@@ -1,0 +1,1059 @@
+[
+  {
+    "timestamp": 1775988542,
+    "equity": 10000.0,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 0
+  },
+  {
+    "timestamp": 1775988849,
+    "equity": 10000.0,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 0
+  },
+  {
+    "timestamp": 1775989131,
+    "equity": 10000.0,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 0
+  },
+  {
+    "timestamp": 1775989840,
+    "equity": 9994.932509355223,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775989949,
+    "equity": 9994.932509355223,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990092,
+    "equity": -5.067490644775754,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990258,
+    "equity": 9994.932509355223,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990287,
+    "equity": 9994.932509355223,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990401,
+    "equity": -5.09663558049431,
+    "cash": 0.0,
+    "unrealised_pnl": -0.029144935718556055,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990596,
+    "equity": 9994.893649440932,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.038859914291408074,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990710,
+    "equity": -5.09663558049431,
+    "cash": 0.0,
+    "unrealised_pnl": -0.029144935718556055,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775990906,
+    "equity": 9994.893649440932,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.038859914291408074,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991019,
+    "equity": -5.132874964273633,
+    "cash": 0.0,
+    "unrealised_pnl": -0.06538431949787879,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991216,
+    "equity": 9994.850164998557,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.08234435666519742,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991328,
+    "equity": -5.132874964273633,
+    "cash": 0.0,
+    "unrealised_pnl": -0.06538431949787879,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991524,
+    "equity": 9994.850164998557,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.08234435666519742,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991637,
+    "equity": -5.229999074610045,
+    "cash": 0.0,
+    "unrealised_pnl": -0.16250842983429098,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991833,
+    "equity": 9994.73917659705,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.1933327581742756,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775991946,
+    "equity": -5.229999074610045,
+    "cash": 0.0,
+    "unrealised_pnl": -0.16250842983429098,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992141,
+    "equity": 9994.73917659705,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.1933327581742756,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992255,
+    "equity": -5.15800071577133,
+    "cash": 0.0,
+    "unrealised_pnl": -0.09051007099557612,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992450,
+    "equity": 9994.819164541024,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.11334481419922854,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992564,
+    "equity": -5.15800071577133,
+    "cash": 0.0,
+    "unrealised_pnl": -0.09051007099557612,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992758,
+    "equity": 9994.819164541024,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.11334481419922854,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775992873,
+    "equity": -5.108488527290544,
+    "cash": 0.0,
+    "unrealised_pnl": -0.040997882514789724,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993067,
+    "equity": 9994.873171257566,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.05933809765705687,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993183,
+    "equity": -5.108488527290544,
+    "cash": 0.0,
+    "unrealised_pnl": -0.040997882514789724,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993376,
+    "equity": 9994.873171257566,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.05933809765705687,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993492,
+    "equity": -5.098975395748078,
+    "cash": 0.0,
+    "unrealised_pnl": -0.03148475097232421,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993685,
+    "equity": 9994.883415056789,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.04909429843479764,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993801,
+    "equity": -5.098975395748078,
+    "cash": 0.0,
+    "unrealised_pnl": -0.03148475097232421,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775993994,
+    "equity": 9994.744022349581,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.18848700564265167,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775994111,
+    "equity": -5.2383844725969295,
+    "cash": 0.0,
+    "unrealised_pnl": -0.17089382782117518,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775994304,
+    "equity": 9994.744022349581,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.18848700564265167,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775994421,
+    "equity": -5.2383844725969295,
+    "cash": 0.0,
+    "unrealised_pnl": -0.17089382782117518,
+    "realised_pnl": -5.067490644775754
+  },
+  {
+    "timestamp": 1775994980,
+    "equity": 10024.601203752129,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 24.601203752128484
+  },
+  {
+    "timestamp": 1775995104,
+    "equity": 24.62189025791342,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 24.62189025791342
+  },
+  {
+    "timestamp": 1775995602,
+    "equity": 10022.892591615277,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 22.892591615276903
+  },
+  {
+    "timestamp": 1775995722,
+    "equity": 23.130439037182416,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775995914,
+    "equity": 10022.87873113477,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 22.892591615276903
+  },
+  {
+    "timestamp": 1775996031,
+    "equity": 23.116578556674746,
+    "cash": 0.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996223,
+    "equity": 10022.87873113477,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 22.892591615276903
+  },
+  {
+    "timestamp": 1775996340,
+    "equity": 23.116578556674746,
+    "cash": 0.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996365,
+    "equity": 10023.116578556675,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996383,
+    "equity": 23.116578556674746,
+    "cash": 0.0,
+    "unrealised_pnl": -0.013860480507670875,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996674,
+    "equity": 10023.138537671286,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.008098634104449828,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996691,
+    "equity": 23.130150443278055,
+    "cash": 0.0,
+    "unrealised_pnl": -0.0002885939043600983,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775996985,
+    "equity": 10023.124660285648,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.005778751534205649,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997003,
+    "equity": 23.130150443278055,
+    "cash": 0.0,
+    "unrealised_pnl": -0.0002885939043600983,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997295,
+    "equity": 10023.142701857618,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.01226282043511845,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997318,
+    "equity": 23.15120088455197,
+    "cash": 0.0,
+    "unrealised_pnl": 0.020761847369553218,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997604,
+    "equity": 10023.142701857618,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.01226282043511845,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997627,
+    "equity": 23.17428214668025,
+    "cash": 0.0,
+    "unrealised_pnl": 0.043843109497835625,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997913,
+    "equity": 10023.165780668278,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.03534163109625683,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775997937,
+    "equity": 23.17428214668025,
+    "cash": 0.0,
+    "unrealised_pnl": 0.043843109497835625,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998221,
+    "equity": 10023.165780668278,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.03534163109625683,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998246,
+    "equity": 23.196718108661468,
+    "cash": 0.0,
+    "unrealised_pnl": 0.06627907147905067,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998530,
+    "equity": 10023.188214723707,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.05777568652490178,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998556,
+    "equity": 23.196718108661468,
+    "cash": 0.0,
+    "unrealised_pnl": 0.06627907147905067,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998839,
+    "equity": 10022.694944576857,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.435494460324969,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775998865,
+    "equity": 22.658590650243667,
+    "cash": 0.0,
+    "unrealised_pnl": -0.4718483869387498,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775999148,
+    "equity": 10022.694944576857,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.435494460324969,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775999179,
+    "equity": 22.658590650243667,
+    "cash": 0.0,
+    "unrealised_pnl": -0.4718483869387498,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775999456,
+    "equity": 10022.583554078134,
+    "cash": 10000.0,
+    "unrealised_pnl": -0.54688495904901,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775999487,
+    "equity": 22.5386341055906,
+    "cash": 0.0,
+    "unrealised_pnl": -0.5918049315918162,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1775999543,
+    "equity": 22.5386341055906,
+    "cash": 0.0,
+    "unrealised_pnl": -0.5918049315918162,
+    "realised_pnl": 23.130439037182416
+  },
+  {
+    "timestamp": 1776010359,
+    "equity": 10051.54340631085,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 51.54340631084912
+  },
+  {
+    "timestamp": 1776010979,
+    "equity": 10049.753036573067,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 49.753036573067995
+  },
+  {
+    "timestamp": 1776011391,
+    "equity": 10051.600150456215,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 51.60015045621558
+  },
+  {
+    "timestamp": 1776011756,
+    "equity": 10053.71562780055,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 53.71562780054908
+  },
+  {
+    "timestamp": 1776012065,
+    "equity": 10053.71562780055,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 53.71562780054908
+  },
+  {
+    "timestamp": 1776012701,
+    "equity": 10057.398426076776,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 57.39842607677621
+  },
+  {
+    "timestamp": 1776013327,
+    "equity": 10055.610192120816,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 55.61019212081552
+  },
+  {
+    "timestamp": 1776013768,
+    "equity": 10057.460925441768,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 57.46092544176908
+  },
+  {
+    "timestamp": 1776013921,
+    "equity": 57.46092544176908,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 57.46092544176908
+  },
+  {
+    "timestamp": 1776014392,
+    "equity": 10055.65681879106,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776014551,
+    "equity": 55.905118752969855,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776014704,
+    "equity": 10055.66304097633,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.006222185269832088,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776014867,
+    "equity": 55.91272218965587,
+    "cash": 0.0,
+    "unrealised_pnl": 0.007603436686011605,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776015015,
+    "equity": 10055.660309005985,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.003490214925456818,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776015180,
+    "equity": 55.907228954381885,
+    "cash": 0.0,
+    "unrealised_pnl": 0.002110201412029303,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776015326,
+    "equity": 10055.675446471241,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.01862768018178873,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776015494,
+    "equity": 55.91386242254006,
+    "cash": 0.0,
+    "unrealised_pnl": 0.008743669570206412,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776015639,
+    "equity": 10055.675446471241,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.01862768018178873,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776015805,
+    "equity": 55.925199331134316,
+    "cash": 0.0,
+    "unrealised_pnl": 0.020080578164461002,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776015950,
+    "equity": 10055.67874344141,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.02192465034960598,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776016126,
+    "equity": 55.89483058806148,
+    "cash": 0.0,
+    "unrealised_pnl": -0.010288164908371516,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776016262,
+    "equity": 10055.716011489987,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.05919269892792398,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776016437,
+    "equity": 55.91502527255542,
+    "cash": 0.0,
+    "unrealised_pnl": 0.009906519585561388,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776016573,
+    "equity": 10055.793691615621,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.13687282456147165,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776016752,
+    "equity": 56.09657723497621,
+    "cash": 0.0,
+    "unrealised_pnl": 0.19145848200635104,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776016883,
+    "equity": 10055.835722249793,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.17890345873261243,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776017062,
+    "equity": 56.09657723497621,
+    "cash": 0.0,
+    "unrealised_pnl": 0.19145848200635104,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776017192,
+    "equity": 10055.742939167128,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.08612037606789218,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776017372,
+    "equity": 56.003781234725245,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0986624817553929,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776017507,
+    "equity": 10055.742939167128,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.08612037606789218,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776017682,
+    "equity": 56.003781234725245,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0986624817553929,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776017817,
+    "equity": 10055.819582785696,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1627639946357805,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776017992,
+    "equity": 56.08043358529642,
+    "cash": 0.0,
+    "unrealised_pnl": 0.17531483232656253,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776018126,
+    "equity": 10055.819582785696,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1627639946357805,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776018305,
+    "equity": 56.08043358529642,
+    "cash": 0.0,
+    "unrealised_pnl": 0.17531483232656253,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776018444,
+    "equity": 10055.709828899184,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.053010108124758815,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776018627,
+    "equity": 55.970669115856964,
+    "cash": 0.0,
+    "unrealised_pnl": 0.06555036288711141,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776018755,
+    "equity": 10055.709828899184,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.053010108124758815,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776018938,
+    "equity": 56.05725685677675,
+    "cash": 0.0,
+    "unrealised_pnl": 0.15213810380689882,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776019066,
+    "equity": 10055.790226943642,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1334081525825529,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776019249,
+    "equity": 56.05725685677675,
+    "cash": 0.0,
+    "unrealised_pnl": 0.15213810380689882,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776019376,
+    "equity": 10055.790226943642,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1334081525825529,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776019561,
+    "equity": 56.07238346078086,
+    "cash": 0.0,
+    "unrealised_pnl": 0.16726470781101005,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776019685,
+    "equity": 10055.80440726393,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1475884728692525,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776019874,
+    "equity": 56.07238346078086,
+    "cash": 0.0,
+    "unrealised_pnl": 0.16726470781101005,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776019994,
+    "equity": 10055.80440726393,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1475884728692525,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776020184,
+    "equity": 56.089785319794004,
+    "cash": 0.0,
+    "unrealised_pnl": 0.1846665668241458,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776020305,
+    "equity": 10055.82084135006,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.16402255899933704,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776020496,
+    "equity": 56.138889165395206,
+    "cash": 0.0,
+    "unrealised_pnl": 0.233770412425351,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776020614,
+    "equity": 10055.82084135006,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.16402255899933704,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776020810,
+    "equity": 56.12279929078771,
+    "cash": 0.0,
+    "unrealised_pnl": 0.21768053781785335,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776020924,
+    "equity": 10055.85465520475,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1978364136903166,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776021127,
+    "equity": 56.12279929078771,
+    "cash": 0.0,
+    "unrealised_pnl": 0.21768053781785335,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776021233,
+    "equity": 10055.85465520475,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1978364136903166,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776021438,
+    "equity": 56.12255020999813,
+    "cash": 0.0,
+    "unrealised_pnl": 0.21743145702827685,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776021544,
+    "equity": 10055.891396524776,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.23457773371563612,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776021747,
+    "equity": 56.16305127204289,
+    "cash": 0.0,
+    "unrealised_pnl": 0.2579325190730367,
+    "realised_pnl": 55.905118752969855
+  },
+  {
+    "timestamp": 1776021853,
+    "equity": 10055.891396524776,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.23457773371563612,
+    "realised_pnl": 55.65681879106044
+  },
+  {
+    "timestamp": 1776022465,
+    "equity": 99.49398205088359,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 99.49398205088359
+  },
+  {
+    "timestamp": 1776022566,
+    "equity": 10097.414598052714,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 97.41459805271427
+  },
+  {
+    "timestamp": 1776023090,
+    "equity": 97.96521831169605,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 97.96521831169605
+  },
+  {
+    "timestamp": 1776023185,
+    "equity": 10095.597176218474,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 95.59717621847493
+  },
+  {
+    "timestamp": 1776023402,
+    "equity": 97.9592166714192,
+    "cash": 0.0,
+    "unrealised_pnl": -0.006001640276845646,
+    "realised_pnl": 97.96521831169605
+  },
+  {
+    "timestamp": 1776023712,
+    "equity": 97.9592166714192,
+    "cash": 0.0,
+    "unrealised_pnl": -0.006001640276845646,
+    "realised_pnl": 97.96521831169605
+  },
+  {
+    "timestamp": 1776024342,
+    "equity": 103.39335366857563,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 103.39335366857563
+  },
+  {
+    "timestamp": 1776024965,
+    "equity": 101.85445849034667,
+    "cash": 0.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776025275,
+    "equity": 101.84318714893583,
+    "cash": 0.0,
+    "unrealised_pnl": -0.011271341410850575,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776025589,
+    "equity": 101.84318714893583,
+    "cash": 0.0,
+    "unrealised_pnl": -0.011271341410850575,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776027254,
+    "equity": 10101.966402223692,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1119437333463445,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776027561,
+    "equity": 10101.968571938762,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1141134484159326,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776027868,
+    "equity": 10101.968571938762,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.1141134484159326,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776028175,
+    "equity": 10101.968729935585,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.11427144523767585,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776028482,
+    "equity": 10101.968729935585,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.11427144523767585,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776028789,
+    "equity": 10102.003165038119,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.14870654777133846,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776029097,
+    "equity": 10102.003165038119,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.14870654777133846,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776029166,
+    "equity": 10102.003165038119,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.14870654777133846,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776029370,
+    "equity": 10101.977511501756,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.12305301140927703,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776029676,
+    "equity": 10101.977511501756,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.12305301140927703,
+    "realised_pnl": 101.85445849034667
+  },
+  {
+    "timestamp": 1776030308,
+    "equity": 10089.53596361502,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 89.53596361501982
+  },
+  {
+    "timestamp": 1776030925,
+    "equity": 10087.750505912221,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 87.75050591222154
+  },
+  {
+    "timestamp": 1776031539,
+    "equity": 10089.266221574075,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.0,
+    "realised_pnl": 89.26622157407537
+  },
+  {
+    "timestamp": 1776031846,
+    "equity": 10089.31768883442,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.051467260345672575,
+    "realised_pnl": 89.26622157407537
+  },
+  {
+    "timestamp": 1776032153,
+    "equity": 10089.31768883442,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.051467260345672575,
+    "realised_pnl": 89.26622157407537
+  },
+  {
+    "timestamp": 1776032459,
+    "equity": 10089.37795437496,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.11173280088546125,
+    "realised_pnl": 89.26622157407537
+  },
+  {
+    "timestamp": 1776033052,
+    "equity": 10089.37795437496,
+    "cash": 10000.0,
+    "unrealised_pnl": 0.11173280088546125,
+    "realised_pnl": 89.26622157407537
+  }
+]

@@ -1,0 +1,30 @@
+#!/bin/bash
+# Add these aliases to your ~/.zshrc for quick access to NEXUS commands
+
+# Open ~/.zshrc and add these lines at the end:
+
+# ===== NEXUS Trading Aliases =====
+alias nexus_live='cd /Users/thapelodipela/Desktop/nexus-trading-ai && ./run_live.sh --verbose'
+alias nexus_test='cd /Users/thapelodipela/Desktop/nexus-trading-ai && ./run_live.sh --dry-run --verbose'
+alias nexus_log='tail -f /Users/thapelodipela/Desktop/nexus-trading-ai/nexus_debug.log'
+alias nexus_equity='watch -n 5 "tail -10 /Users/thapelodipela/Desktop/nexus-trading-ai/nexus_equity_curve.json | jq \".[] | {timestamp, equity, cash, realised_pnl}\""'
+alias nexus_positions='watch -n 5 "cat /Users/thapelodipela/Desktop/nexus-trading-ai/nexus_positions.json | jq \".[] | select(.status==\\\"open\\\") | {trade_id, direction, entry_price, unrealised_pnl: (.pnl_usd)}\""'
+alias nexus_weights='watch -n 5 "cat /Users/thapelodipela/Desktop/nexus-trading-ai/nexus_weights.json | jq \".[] | {agent_id, weight, pnl_total, wins, losses}\""'
+alias nexus_cd='cd /Users/thapelodipela/Desktop/nexus-trading-ai'
+# ================================
+
+# To install these aliases:
+# 1. Save this file as: ~/.nexus_aliases
+# 2. Open ~/.zshrc: nano ~/.zshrc
+# 3. Add this line at the end: source ~/.nexus_aliases
+# 4. Reload shell: source ~/.zshrc
+
+# Then you can use:
+# nexus_live      - Start live trading
+# nexus_test      - Start dry-run testing
+# nexus_log       - Watch logs
+# nexus_equity    - Monitor equity curve
+# nexus_positions - Watch open positions
+# nexus_weights   - Watch agent learning
+# nexus_cd        - Go to NEXUS directory
+

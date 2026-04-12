@@ -1,0 +1,1039 @@
+[
+  {
+    "cycle_number": 1,
+    "timestamp": 1776027254,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23528232703290547,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776027254,
+        "signature": "0xa2dec98fe215f61363c35b1286f49b20ddecbf03a0cc44ffeb5278407ba7c4595d441b4937eded7f25ab95748f7c84d908c102d1f7668f28de941eb38b1af2d11c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5783342332834072,
+        "cycle": 1,
+        "timestamp": 1776027254,
+        "signature": "0x59c9d2f40be1d7e7705eaff155dadcb654345d400c3cc4808151006b04067e3c2356afb1bc254ab6ace38db39cdd1849fc3ed4699236749a89d31873a630dd341b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 1,
+        "timestamp": 1776027254,
+        "signature": "0x42771517043ce16e79770ef2a1c9aa32badf2ddf24875efe511c14bb4a78ad102b82a30079e58c7727bdb6b801bda5a53018856ffbb24d7e6769ce3c22f85b9c1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776027254,
+        "signature": "0x9a2043f316b1e81656c25c6e3f941ba684d6d5988b1e76c0a7782eab0b87659273e1d4f1bc933d35610ca503e5170703484888fe50541fea72c217ae74eb73491c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 1,
+        "timestamp": 1776027254,
+        "signature": "0x201253c94a7db5b137c0310e7fbac9b14a61c1e2da2c990869b90cb59c023340775231d975a1ee2e3b196e011e64cefc02dc62bc6ba7719a43fcfe89412b6a9a1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 2,
+    "timestamp": 1776027561,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23261288613281142,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776027561,
+        "signature": "0xf3e69b5abf0bb66f01bb4ebe1b3c7873dc17be17aa7a302f92944683b36776804667b967fb7ced105275c628d87b1190342fe63556818c9969d53e25debc21541b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5650370975571518,
+        "cycle": 2,
+        "timestamp": 1776027561,
+        "signature": "0x9c6767e673da19995abd7dd48466607edcae40d63e8d50c1aae39b4f739397595ef861b92b76b0cdcc1db10b3afdd73057b3285e9074e62939c4d90348199dda1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 2,
+        "timestamp": 1776027561,
+        "signature": "0xba7ea136440a9554ff264f661ba2fecaf578e5c238bc42de6ffebc62d90c82a06b6037e83b54610761632d50a0c0a0b8f641b9b472d0b7f2fc228822b07114011b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776027561,
+        "signature": "0xf189dfdc2af90e94a9039cb6950370a2d77bba2215dd969596a121b90155823023e46e6c3d0e9b6255a2f525263d1805df8bbe711a11da7d04d44bd4e96691951b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 2,
+        "timestamp": 1776027561,
+        "signature": "0x17742d94ca5045c93c7f118b9b5ecb3c17fd74ae2ef5360d75c82612b421991731e9080b4038ff8749d32881443044492d7f9cda979a7c1aeae0518f1f8741181c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 3,
+    "timestamp": 1776027868,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.22585908607454458,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 3,
+        "timestamp": 1776027868,
+        "signature": "0x8d5cb2e0b869d365537119b9d62dbfae8dcdbe7f2094816edcf27965d3eb662a469c6f72f1b4cdf07e23f6c33352a03bde2d81b88504ba11a0d490b3fe947cb91b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5313947734136948,
+        "cycle": 3,
+        "timestamp": 1776027868,
+        "signature": "0xcc7fad1ca7af918b7abab287872cfd3884fe8c558ef8add23248bdd89fae8ae35bcc50cd01e91d5c9d10a5c5cc81910c4bff400f76802a3dc5b1b1eee05f5b2b1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 3,
+        "timestamp": 1776027868,
+        "signature": "0x72239c8996c341396f984faed1fc9a2d19951d1295458d2c2e940b0df68ec85961b3fe07c1142c59a9132445b04562ac413feecc0fad08e8f0b85a84cefe183d1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 3,
+        "timestamp": 1776027868,
+        "signature": "0x698a2e63a5f71e1b1e820c6f22d83cc9ad8819d9c0a9fe7ef10deb9e174cffd927fcff05d13cac63b7659392d8bf07c2156deb1770cf56648f9ce20a651de2231c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 3,
+        "timestamp": 1776027868,
+        "signature": "0x9d4fd4734e1803426ced37a93ce7ee706793a2eb4b6c636581ecdd61acdb5adf146a2d6869b8d7faeb573cb4c5e5ad3481c12534716e233fffb452329e11c9b21b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 4,
+    "timestamp": 1776028175,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.17232415711535923,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "HOLD",
+        "confidence": 0.95,
+        "cycle": 4,
+        "timestamp": 1776028175,
+        "signature": "0x9beb9e7e0ac6223ed0669f59fd3bed5987a5e22f52bf1bf2ace304cbe3d07d752132ebafe672113b32498ff4804f49576dab0e9ff2b3a93b316841f15631da8c1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5611552619352012,
+        "cycle": 4,
+        "timestamp": 1776028175,
+        "signature": "0x3683339afea7f5649fd262d095460a95305f56d3a7618c683a0178c3e0aa47d0455b40c6900d9d8cb989c29e6a9df62db5781951a6faf3a193f589a706fb10181c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 4,
+        "timestamp": 1776028175,
+        "signature": "0xc119378feb9db260ab7722be46a4d4c2de6c96407adb2c5c98481979916c6d2472dc8aeebf9d6940e69d2cbbc4854c824576f0255438f602890ae4f6f1b660b21c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 4,
+        "timestamp": 1776028175,
+        "signature": "0x408f67b864f0e2850c561a585b5945cee3a7dfb2bbf44d29462da523aec6a6c162cdb2999ba77dd4499ff2351d7a9fccab3334744b4856c55aa2457e5463927e1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 4,
+        "timestamp": 1776028175,
+        "signature": "0x6a36945b86a84e4260dbac3f6c8aae39560b1c012006d28467681ad478b9284a36c154124eea98082c423b0f6915de775b84ae4d1e502fa6bf1930b7847560761c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 5,
+    "timestamp": 1776028483,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.1812634977305997,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "HOLD",
+        "confidence": 0.95,
+        "cycle": 5,
+        "timestamp": 1776028482,
+        "signature": "0x55489f80b7ac8e0f071f19fabfbb29579d1e3aa9cf58113178f90acc2b88e51e5960f298f64e1d1f45c2bed73a2014f10d47cb6c66376e189d9c7ce9698483b51c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.6056842962584156,
+        "cycle": 5,
+        "timestamp": 1776028482,
+        "signature": "0xe2f0446e0c88e6bb79d52482b34bb3ad6d2d210175fae309d0fb0343b1c359ec4e55dd83b3d4a804e2738ec0ac2f60646b5e86f1e2686a445c5525db9f7fb8a91c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 5,
+        "timestamp": 1776028482,
+        "signature": "0x8921ab234e10fdb7c25a786dc80592243681469e1999a57f3e90c41b36a1b2f06439fe87ad22870df2963f3f58aaa003d89b12bd5dffc41ee8559338d60d7b8c1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 5,
+        "timestamp": 1776028482,
+        "signature": "0x463d518c6138cc3b7bdc0ffd298de32358671bbd09153a62f3b947932a6960bd5278c956fe7b93978adf6786f44396eb3a47fe1cf703051a39fd46448ac3a5961c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 5,
+        "timestamp": 1776028483,
+        "signature": "0xad7686cd6dde7fa3fec28c32e6a8960fa59da0420dd1f69baeb31b621d3471f66a1547ee97616695c06daf9d7f527e38bb2867f2324588197e5fb8ed2b1a86931c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 6,
+    "timestamp": 1776028789,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.2337236996966065,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 6,
+        "timestamp": 1776028789,
+        "signature": "0x4b44f995dd7119e6532e6903f6d9ea116d0abb3cd13eeb322b4f01b0eebb6ee15fc42fae0342cd6c73ed26327e6769e6d6137eaea611d4cc86987f29369109301c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.570570330648706,
+        "cycle": 6,
+        "timestamp": 1776028789,
+        "signature": "0x4f47c5bf0c43959df2656377def5e1ca9400297f14cb30d3d5de0dec72ab5029235bd4deb6beac4cb42eda35500a1e35a282b20961e458d96790f3fd76775c751b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 6,
+        "timestamp": 1776028789,
+        "signature": "0xaa4a08ec6fae67e910214f8c7da73ab98c8b21db8ec3cf22dba47e69a54e958d2e29a39216e008fb3a9d016ec3a3efb00f87d804ae635f40fb22caa03125b8a81b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 6,
+        "timestamp": 1776028789,
+        "signature": "0x3892e118792df4e89fcad4f21859881812ee37ad7375f3ebc8c1351f33486db313d6e712467da0d9251ca8b093ebd78ee28dfeb9a7522ac5ca60b0a98ee8468c1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 6,
+        "timestamp": 1776028789,
+        "signature": "0xce059dc1d0045a1f7d2994d0c10fb79517b4aaa8117369cdf26222df86c4d2a70f80d76bc932ac089b6d6e3ff3ba03c3d080ee31329ce5ce0f9360b9824e6bca1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 7,
+    "timestamp": 1776029097,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23425836939446973,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 7,
+        "timestamp": 1776029097,
+        "signature": "0x4ae4e49c32a50b3bf8d1d711e431085cf4d514cfe5ed07060141f6c1032b88245ff86dc74ed0854aae2c54eb9b6fdf3dab59590cc36120a61153250042e9e9621b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5732336507248136,
+        "cycle": 7,
+        "timestamp": 1776029097,
+        "signature": "0x46e2feb4a8803984b0583c7ab8ddb1e4097f55910bfbebfe49804a9d558b5709313fa6ea9f27cd785dad5aecb437d0fb232531329bd5609d20d4f0a2f296b03a1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 7,
+        "timestamp": 1776029097,
+        "signature": "0x238f18a9ea29272ab4ae7d91d1fa94c2138ac83208f4e7af60a3e5f9f78b5b8e0dc678521bd6ec968428fd3ca1d1a4ad088ef695e5b6904d394f95c51fadc29a1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 7,
+        "timestamp": 1776029097,
+        "signature": "0x57dba9f6c410b82970d85b2a7cc1022e611c7a21fc52d6b752ec2300d35bad1d3e06cd13e43c61c0f4334408764aa00934d2eae9e8664835481f362cca32624b1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 7,
+        "timestamp": 1776029097,
+        "signature": "0xb1beec7a658d6181e4607de2d0c01eafb694c7ac558205a58870f3a806734ecc673a33b69cf6db9d1af3ab6fa77ba21bf9ff845fe74b0f9b2feeaf87181340d01c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 1,
+    "timestamp": 1776029166,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23398184162519373,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776029166,
+        "signature": "0x430df7f0bf239acd41c4251b8abfcccfa8fb1e6a4c8174c36087d29b336f2aa521e33b3feebac8e6387c56e1518bf0af7fa157a2c38db85d54c8f2f47776efbb1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5718561985100027,
+        "cycle": 1,
+        "timestamp": 1776029166,
+        "signature": "0xe6b49136cfe4321caab366311c35696fe329c415e6e6bf568241e01c7e658a6a4445b375db1d61077f1ee72dd09436a2593a3fc050a4a15890b18d81832f34d41c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 1,
+        "timestamp": 1776029166,
+        "signature": "0xd9319a28002d7fad3b54482a28baf11273aae047df0fb70ccf0a3a54680f99943c4c617f230f08eaa4b70108e774a4b51fb7c877f5b9265e617e4f8939eae41e1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776029166,
+        "signature": "0x5876399d51ebf0f588e1cbd39ba5642f35aa12cf9e6f96f8f64949a582f66e10045766f893ffd85a6771c8d91f7d7956c83225b04e27781210107ce54ef91ecb1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 1,
+        "timestamp": 1776029166,
+        "signature": "0xa8ac8a5560d2cd8536728eb4082274aedda325953297d552215ca22ed69d69f2226b951e51417967302f21c888df8cfed5eb8830471fa3fb2a0610b27521c8211c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 1,
+    "timestamp": 1776029370,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23296125408682503,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776029370,
+        "signature": "0x595ae88f985f5acfb540dbb3ff7bee1506ab581e18a69d99a1e97e6f90f9f0f340999c57e36efcacf4cdf570949984edf7b5f1f376b4e7e3634f3eb921d193f91b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5667724032412123,
+        "cycle": 1,
+        "timestamp": 1776029370,
+        "signature": "0xfe61452ea9b57c6b27eb6570d59544621b6d4a6b5fce60c0a4f147b634a4ab605ff51eb3a1dfd77c9527695c98c5ea6977e9f4dca593273989622993767138741c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 1,
+        "timestamp": 1776029370,
+        "signature": "0xfd63c1f1f1ceaef13549f4b6d2633616cc230e3a4f40815705f9bc4eb7da96eb41d7677a0c98debc7ed189526e00dc226f55939aecf43b46b2d9cd900e93203b1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776029370,
+        "signature": "0x95d4d89eac22c9fc1f129bcbacbe345681b827269acf835d5046d7bec73138c260db07509132eeba3ca4aae673617987daf72852cc308204ec6db7f5eba6fda41c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 1,
+        "timestamp": 1776029370,
+        "signature": "0x17341c4369438bff428ca5b41985bbb5b1145c7c7dfc09e90a1239d6ded93851513e67e899a56c800f1f9e270226eeb491085132e474cc679991f9cba2d572ec1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 2,
+    "timestamp": 1776029676,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23677871870016529,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776029676,
+        "signature": "0x825635a89f0ee576d07a9225eb1ef7f7e4a1a606930b10d8a4d6ec37ea7655a837df11d29997f0cb969c46cfd62d852e8d09e7702e185b9b82421918b0a6b2fe1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5857881248823897,
+        "cycle": 2,
+        "timestamp": 1776029676,
+        "signature": "0xdf7ddc016b485dad1ea14e6c0ad5b9a1250fec60e1973a636ee6784d7d9dc109358071474c9c6040bce5a022485d8d43008bb955aafc704f4b4f5eba47bd50c61b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 2,
+        "timestamp": 1776029676,
+        "signature": "0xe0c4d78388cd6503fbc5d44098221d1bbf78478891835859ee6413a559379bb51789dca55704b4c22009695d09ed80bc86329651fe268cbcc7be23e2aa7979731b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776029676,
+        "signature": "0x99f82110f2e4558de77f05639e5b4f60d5e410cbe8911851877c2a23d8c0ad6a2afe1c22298a8d4d04681b26675e56de86e96723e51625a8568d00ec57d236df1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 2,
+        "timestamp": 1776029676,
+        "signature": "0x9c031ae617afbfda5d17d8af2a87d7ea1b972a00caf4439d1711f3a8659a67cc3f4157616ab718510b6a42a8e0a09e2aee258a87b8829a0132493f23012750f01b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 4,
+    "timestamp": 1776030308,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.23223939579718794,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 4,
+        "timestamp": 1776030308,
+        "signature": "0xb3d6994c2a7faa1e41b2c62cad40ed96a0e4693c8b2c2970ce21adfa326b275103e9a5f709d6ca63ccf2e85fed2fac1085a05db67eed77d818c10bc5347f96c21c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.5629796324507242,
+        "cycle": 4,
+        "timestamp": 1776030308,
+        "signature": "0xa9dd4b250697e77b14d01d767231ea280c2a9a59c798fc3c94a1fc688ce935f645735417755cf854f5f8423eb43f1e71c05d7aa0fddfd1c002347a932432e38d1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 4,
+        "timestamp": 1776030308,
+        "signature": "0x7a5a92e75d098ede3d0e333bb385d4ab7d1035fb199f81f22de6fa2c5a99511d62d2e9aeb3eb8ebdd8a3aa295ed0215eefd0afffedb4b667b47e4bbe4a594bde1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 4,
+        "timestamp": 1776030308,
+        "signature": "0x0ad4fb09a96f6c9fef6863a417ee9c4577d33e1fae76ac63d876c8c8d32ed1653858bb0f1ee97f805dddeac1f6044a8083d018c991fc88e470c8abbc8fe784a01b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 4,
+        "timestamp": 1776030308,
+        "signature": "0xc41488be7032ae6bb459da817c998531e0c25e1e313f6a0761bb24a4ca141c92677817d0415778c1d467bde679b4c3d0f21d5b2eff01bf6edac4df8a8d6344be1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 6,
+    "timestamp": 1776030925,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.2330100184313102,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "BUY",
+        "confidence": 0.3,
+        "cycle": 6,
+        "timestamp": 1776030925,
+        "signature": "0xa0b2846a5f8901381760d4d1dac9c10e162478339dc8fa8adab950e553f14ec4371a7fbfc6cd0220d306d91abc110776b4ac4d36a66239cd7b1f816ec86d18f11b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "BUY",
+        "confidence": 0.5954047500574948,
+        "cycle": 6,
+        "timestamp": 1776030925,
+        "signature": "0xbceaab72c893db8d3f7aa068224f8ce1c2f0c230860954dc1f18f0c794ead9883270e4a18213e3bde7672fbee83a5b9bdd7ba593e62692a747bf7fcc64f7f2851b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "SELL",
+        "confidence": 0.18,
+        "cycle": 6,
+        "timestamp": 1776030925,
+        "signature": "0x7855fe74365a78436c525346cad0fbcdca27b43578a326ebd7e5ea41c923f9fe28bb0c1341d0acc5dd6d191c9d0496b001b28a1d1901c64593a9368dbf353ab81b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 6,
+        "timestamp": 1776030925,
+        "signature": "0x4572dc0e0fda1c17806a8ee3a1e611fa6d89f840c40df829e15c7f3d983c11ed650a80ef9ad2d96a656ddfdeec41ac0be781604e0058bde4d10efad133a4d2701c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "SELL",
+        "confidence": 0.6871972716658727,
+        "cycle": 6,
+        "timestamp": 1776030925,
+        "signature": "0x2ae4d182cab265c0f98bde586f1ab73046c805fa39bb48ca2436ef00f2830cf51f49a1d6faa66a510d0a857058a271da3f8fe67fa8a7c0bedd3905792b5af8641b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 8,
+    "timestamp": 1776031539,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.26336745555382574,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 8,
+        "timestamp": 1776031539,
+        "signature": "0xe8fcab5b22a6cecffb4876380589ec25b54c22f5e0e73d0ecee815ee5a667c06205809c5f274747942c6672ba0628a16f77c18dfa23bb85c4cef0bd4b81a93ac1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.7179821859195893,
+        "cycle": 8,
+        "timestamp": 1776031539,
+        "signature": "0x84d3b6a830c32be42758db78e37d7bcd78755a4a4fe979b8071bc03f879dd6383123966ae195729e9758ab2652309770522c02d6c4a1d427cbc0ae40dc5c86b91b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 8,
+        "timestamp": 1776031539,
+        "signature": "0x4184f03367cca7ca4fbb5c156a69ff58103acb2b8615157bb238a86847169e1377109f47aa4e82b84276368d6219fe97e074915bf89d208161310d11b088cdff1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 8,
+        "timestamp": 1776031539,
+        "signature": "0xcceb152fe114bde9c5b3baed29aa376c3fc85116c732a57732461da1bf5094b342068f39d3b2a980e1533edb2f6dca16262a42d4373e5b11edd626e0ef825c9e1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 8,
+        "timestamp": 1776031539,
+        "signature": "0xf0fa76fa6d3e14ea6ee89285f6ffaf6d307d54d2e17651b27e47d85e5b2fe6302627e76075bcb4af88ae0202d9af83e836bd7dae41c1ea9aea9ecc86150660ef1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 9,
+    "timestamp": 1776031846,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.26036413472788333,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 9,
+        "timestamp": 1776031846,
+        "signature": "0xfcaca55160f38a8ba74fa994f639611f18e2b11f286f97f94d2ae1591d987dda6d09ac9060b4570ea8d1ce147e82a144003d55c8f5095b398ae3e978fdd36f211c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.7030305149871058,
+        "cycle": 9,
+        "timestamp": 1776031846,
+        "signature": "0xff4a60b36396f54083d5d677f681d4e1c7dd7e36d741275796510ccd9c916b810c1a78af855e7d900ee86d99d9a80ebfb7ef6e702c5712ecf31c1c9efe2444901c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 9,
+        "timestamp": 1776031846,
+        "signature": "0xcfc44140f6884b2f59cde846b8786285d2664731f08dc34ffab7d9906f57e08072ef0fc3398547d4fe0e3ddb526ab34f516134ed6fc38c35581c63105b5ad7c31c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 9,
+        "timestamp": 1776031846,
+        "signature": "0xf64ada7112f0977f3fc3a36b46c644c8789de3cf06363bdc9c5adc735467bce04a3b3f5b500c361cb894907d7099cc65c65b4dcb3cadc5a6aacc728b966d74b71b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 9,
+        "timestamp": 1776031846,
+        "signature": "0x16a01ed242a717b15b9f5c33d7697bf2531e2f75eac074cb79c2516f67c3e2c91e43989224ffbbe37e412cda6fc58fdc7fe7e80e5c02fceefc0030a55ab3330e1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 10,
+    "timestamp": 1776032153,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.25941864322078545,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 10,
+        "timestamp": 1776032153,
+        "signature": "0x260a55f654e16bf0a6fc3e8d1089618234c4e44874154f88f22b9d790ba4844e121964133f2b01f4f7c9f6bc21d7f13e730dbd1c1d7095309bec2529e761a2141c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.6983234994190474,
+        "cycle": 10,
+        "timestamp": 1776032153,
+        "signature": "0xe5750610f145605a97a44b1803bd4ec00a048a765f4fb3076d57acfde30f04352e679ab6824b4cd3866ed20c921dcd550b9c061573c9c910338663f3adb964d51c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 10,
+        "timestamp": 1776032153,
+        "signature": "0x9e2901bb9344f2c684469c973e5a54751ebf6db400d918fc4010996c0cbe3ed975e4b5848a5836072c1305b3c9a8b2e8aa018a6401c745ae49a2587be02d06431b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 10,
+        "timestamp": 1776032153,
+        "signature": "0x5d15aec780dd47df95c5d86a5e202314b3f087c9e8f5a9a2fb6b591aeeee6091024c5bb261501a81c8656d5487fc23ee64ae9c75f34bffacece5667ef59f720b1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 10,
+        "timestamp": 1776032153,
+        "signature": "0x1dd0559cb1b991645adf2f866052e1917d07b92a445360420f562525b04011b328a2117c72dcf12bcf4721e01840cc4cbc07dcf1d1bff3e53dab53b63a3c9b111b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 11,
+    "timestamp": 1776032459,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.26965925857127726,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 11,
+        "timestamp": 1776032459,
+        "signature": "0x838e055b670e44377030e2a658a9d3f53c67a3b1c4e403020a69366e7f617a6d5e8022caef526aa69b704e1588d21b38b90a6fb7a2174c2ad5143a3fdc0491101c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.7493051692906458,
+        "cycle": 11,
+        "timestamp": 1776032459,
+        "signature": "0xa3ba206fb97f821cdd7aa45904d740749dfd4d4e0da76d893c3b64fd5847fc783d0e4d19f2ed5c8fb239202cd0e736aa658d835e5d1e58bd8e1c61e92c0223341b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 11,
+        "timestamp": 1776032459,
+        "signature": "0xb9ede8b315b9813fb9c00ce3927d8405e443ba450005a51003a75805ae3d39160632afca6ec6f4290097fb89d7bf398f42f235c6050676fd2dc4da38f46b17f31c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 11,
+        "timestamp": 1776032459,
+        "signature": "0xc0a59298d42e79b79ce27d7ece9ed016b884efb08e521d05e0cec7bd28712d040e2b5b5ac36f37b039929636d51ed14aa2310cea7a9d1eb57d60b288d7123a2e1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 11,
+        "timestamp": 1776032459,
+        "signature": "0x72a50abfec6097c2b06858a502911c48f4053d3641fd345365bef26d0772af1c572835cf4436f8d82f7083a5cf75bc930ec9b9ec0e8478115e575c3cbb4a4c611c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  },
+  {
+    "cycle_number": 1,
+    "timestamp": 1776033052,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.2759210675978039,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776033052,
+        "signature": "0xccda9d59aef781f3916037e2ecc89722ee54c5f0e70fd747b8c275bfed02c97b214682cf564887501fcdd1ef59bd5df55b018dc6666758b212989dbe4cb4bf2c1b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.7804788311911529,
+        "cycle": 1,
+        "timestamp": 1776033052,
+        "signature": "0xb84dff954c687a31807aadd45af84e2507e0df42b10b7606b3faee167e42d97233d7224f95b7b1290b891f61e9db79607a1237622fb90ac1d49b5ac911012c051b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 1,
+        "timestamp": 1776033052,
+        "signature": "0xccfb6fdbfe6eea491d9a843deed922cc95485af3ed1cc42c0f3893485d9cbe893ea379efb7ce8b5297bef6fbd82807e2fa3c07a694f71a12c01a17baca2658cb1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 1,
+        "timestamp": 1776033052,
+        "signature": "0x7f52008b5f0aa68d102c6a3e393910f753c45900fb023bf3c1559b960f1adbd87c62c27d15db5dc722cb76cb012ee74fb79eaf22e1363963f7080949fab333371c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 1,
+        "timestamp": 1776033052,
+        "signature": "0xe452a435bf753e30aa0dac3801756cea3d4d28abb730485b630db273d2de02540be3ffd61f0b25de3e9d30f68517b2fd3a7b0cecb6631b7adf48ad9834210a231c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
+  }
+]

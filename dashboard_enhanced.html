@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Trading AI — OpenClaw Quantum Board</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Claude AI Platform Theme */
+            --primary: #1a1a1a;
+            --secondary: #2d2d2d;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #d1d5db;
+            --border: #404040;
+            --bg-light: #262626;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.8);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header h1::before {
+            content: "⚡";
+            font-size: 1.8rem;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: #10b981;
+        }
+
+        .status-badge::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Container */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        /* Panel Styling */
+        .panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .panel:hover {
+            border-color: var(--accent);
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .panel-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title::before {
+            content: "";
+            width: 3px;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Quantum Board Section */
+        .quantum-board {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Director Card */
+        .director-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .director-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            background: rgba(14, 165, 233, 0.08);
+        }
+
+        .director-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .director-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .director-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .director-icon {
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .director-role {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .vote-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .vote-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .vote-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .vote-value.buy {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .vote-value.sell {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .vote-value.hold {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .confidence-meter {
+            margin: 1rem 0;
+        }
+
+        .confidence-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #06b6d4);
+            transition: width 0.5s ease;
+        }
+
+        .director-reasoning {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 2px solid var(--accent);
+            border-radius: 0.375rem;
+        }
+
+        /* Consensus Panel */
+        .consensus-panel {
+            grid-column: 1 / -1;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .consensus-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .consensus-item {
+            text-align: center;
+        }
+
+        .consensus-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .consensus-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .consensus-sublabel {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .metric-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Sentiment Section */
+        .sentiment-section {
+            grid-column: 1 / 3;
+        }
+
+        .sentiment-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .sentiment-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sentiment-label {
+            font-size: 0.875rem;
+            min-width: 80px;
+            color: var(--text-secondary);
+        }
+
+        .sentiment-bar-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .sentiment-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #06b6d4);
+            transition: width 0.5s ease;
+        }
+
+        .sentiment-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            min-width: 45px;
+            text-align: right;
+            color: var(--text-primary);
+        }
+
+        /* Risk Parameters */
+        .risk-parameters {
+            grid-column: 3 / -1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .risk-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .risk-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .risk-value.high {
+            color: var(--danger);
+            border-left-color: var(--danger);
+        }
+
+        /* Execution Packet */
+        .execution-packet {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(6, 182, 212, 0.05));
+            border: 1px solid var(--accent);
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            color: var(--accent);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+            overflow-x: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .refresh-button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: 1px solid var(--accent);
+            border-radius: 0.5rem;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .refresh-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .refresh-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quantum-board {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sentiment-section {
+                grid-column: 1 / 2;
+            }
+
+            .risk-parameters {
+                grid-column: 2 / 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .quantum-board {
+                grid-template-columns: 1fr;
+            }
+
+            .consensus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sentiment-section,
+            .risk-parameters {
+                grid-column: 1 / -1;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>NEXUS Trading AI</h1>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <span class="status-badge">System Online</span>
+            <button class="refresh-button" onclick="refreshDashboard()">⟳ Refresh</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Quantum Board Title -->
+        <div style="grid-column: 1 / -1; margin-bottom: 1rem;">
+            <div class="panel-title" style="margin-bottom: 1.5rem; font-size: 1.1rem;">🧠 Quantum Board of Directors</div>
+        </div>
+
+        <!-- Directors -->
+        <div class="quantum-board">
+            <!-- Director Alpha -->
+            <div class="director-card">
+                <div class="director-header">
+                    <div>
+                        <div class="director-name">Alpha</div>
+                        <div class="director-role">The Quant</div>
+                    </div>
+                    <div class="director-icon">📊</div>
+                </div>
+                <div class="director-role" style="margin-bottom: 1rem;">Technical Analysis</div>
+                <div class="vote-display">
+                    <span class="vote-label">Vote:</span>
+                    <span class="vote-value buy" id="alpha-vote">BUY</span>
+                </div>
+                <div class="confidence-meter">
+                    <div class="confidence-label">
+                        <span>Confidence</span>
+                        <span id="alpha-conf">75%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="alpha-conf-bar" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="director-reasoning">
+                    RSI oversold, MACD bullish crossover, strong technical setup
+                </div>
+            </div>
+
+            <!-- Director Beta -->
+            <div class="director-card">
+                <div class="director-header">
+                    <div>
+                        <div class="director-name">Beta</div>
+                        <div class="director-role">Sentiment Scout</div>
+                    </div>
+                    <div class="director-icon">📱</div>
+                </div>
+                <div class="director-role" style="margin-bottom: 1rem;">Social Sentiment</div>
+                <div class="vote-display">
+                    <span class="vote-label">Vote:</span>
+                    <span class="vote-value buy" id="beta-vote">BUY</span>
+                </div>
+                <div class="confidence-meter">
+                    <div class="confidence-label">
+                        <span>Confidence</span>
+                        <span id="beta-conf">70%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="beta-conf-bar" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="director-reasoning">
+                    Reddit sentiment 75%, positive news flow, strong social momentum
+                </div>
+            </div>
+
+            <!-- Director Gamma -->
+            <div class="director-card">
+                <div class="director-header">
+                    <div>
+                        <div class="director-name">Gamma</div>
+                        <div class="director-role">Risk Officer</div>
+                    </div>
+                    <div class="director-icon">🛡️</div>
+                </div>
+                <div class="director-role" style="margin-bottom: 1rem;">Risk Management</div>
+                <div class="vote-display">
+                    <span class="vote-label">Vote:</span>
+                    <span class="vote-value buy" id="gamma-vote">BUY</span>
+                </div>
+                <div class="confidence-meter">
+                    <div class="confidence-label">
+                        <span>Confidence</span>
+                        <span id="gamma-conf">90%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="gamma-conf-bar" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="director-reasoning">
+                    Drawdown 0.5%, leverage 1x, low risk profile — safe to proceed
+                </div>
+            </div>
+
+            <!-- Director Delta -->
+            <div class="director-card">
+                <div class="director-header">
+                    <div>
+                        <div class="director-name">Delta</div>
+                        <div class="director-role">Flow Opportunist</div>
+                    </div>
+                    <div class="director-icon">⚡</div>
+                </div>
+                <div class="director-role" style="margin-bottom: 1rem;">Capital Rotation</div>
+                <div class="vote-display">
+                    <span class="vote-label">Vote:</span>
+                    <span class="vote-value buy" id="delta-vote">BUY</span>
+                </div>
+                <div class="confidence-meter">
+                    <div class="confidence-label">
+                        <span>Confidence</span>
+                        <span id="delta-conf">60%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="delta-conf-bar" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="director-reasoning">
+                    Capital flowing from BTC to altcoins, early rotation detected
+                </div>
+            </div>
+        </div>
+
+        <!-- Board Consensus -->
+        <div class="consensus-panel">
+            <div class="panel-title" style="margin-bottom: 2rem;">Board Consensus</div>
+            <div class="consensus-grid">
+                <div class="consensus-item">
+                    <div class="consensus-label">Board Vote</div>
+                    <div class="consensus-value" id="board-vote">BUY</div>
+                    <div class="consensus-sublabel">4/4 Directors Agree</div>
+                </div>
+                <div class="consensus-item">
+                    <div class="consensus-label">Leverage</div>
+                    <div class="consensus-value" id="board-leverage">4.0x</div>
+                    <div class="consensus-sublabel">Unanimous Strength</div>
+                </div>
+                <div class="consensus-item">
+                    <div class="consensus-label">Exit Target</div>
+                    <div class="consensus-value" id="board-exit">25%</div>
+                    <div class="consensus-sublabel">Standard ROI</div>
+                </div>
+                <div class="consensus-item">
+                    <div class="consensus-label">Risk Level</div>
+                    <div class="consensus-value" id="board-risk" style="color: #10b981;">LOW</div>
+                    <div class="consensus-sublabel">Circuit Breaker Safe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentiment Analysis -->
+        <div class="panel sentiment-section">
+            <div class="panel-title">Sentiment Analysis</div>
+            <div class="sentiment-bars">
+                <div class="sentiment-bar-item">
+                    <span class="sentiment-label">Reddit</span>
+                    <div class="sentiment-bar-container">
+                        <div class="sentiment-bar" id="reddit-bar" style="width: 75%;"></div>
+                    </div>
+                    <span class="sentiment-value" id="reddit-value">75%</span>
+                </div>
+                <div class="sentiment-bar-item">
+                    <span class="sentiment-label">News</span>
+                    <div class="sentiment-bar-container">
+                        <div class="sentiment-bar" id="news-bar" style="width: 70%;"></div>
+                    </div>
+                    <span class="sentiment-value" id="news-value">70%</span>
+                </div>
+                <div class="sentiment-bar-item">
+                    <span class="sentiment-label">Social</span>
+                    <div class="sentiment-bar-container">
+                        <div class="sentiment-bar" id="social-bar" style="width: 68%;"></div>
+                    </div>
+                    <span class="sentiment-value" id="social-value">68%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Parameters -->
+        <div class="panel risk-parameters">
+            <div class="panel-title">Risk Parameters</div>
+            <div class="risk-item">
+                <div class="risk-label">Portfolio Drawdown</div>
+                <div class="risk-value">0.5%</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-label">Current Leverage</div>
+                <div class="risk-value">1.0x</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-label">Max Daily Trades</div>
+                <div class="risk-value">3/10</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-label">Circuit Breaker</div>
+                <div class="risk-value" style="color: #10b981;">INACTIVE</div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="panel metric-box">
+                <div class="panel-title">Win Rate</div>
+                <div class="metric-value">67.8%</div>
+                <div class="metric-label">Last 30 trades</div>
+            </div>
+            <div class="panel metric-box">
+                <div class="panel-title">Sharpe Ratio</div>
+                <div class="metric-value">2.34</div>
+                <div class="metric-label">Risk-adjusted returns</div>
+            </div>
+            <div class="panel metric-box">
+                <div class="panel-title">Max Drawdown</div>
+                <div class="metric-value">4.2%</div>
+                <div class="metric-label">Historical peak</div>
+            </div>
+            <div class="panel metric-box">
+                <div class="panel-title">Avg Hold Time</div>
+                <div class="metric-value">4.5h</div>
+                <div class="metric-label">Position duration</div>
+            </div>
+        </div>
+
+        <!-- Execution Packet -->
+        <div class="execution-packet" id="execution-packet">[BOARD VOTE]           BUY
+[CONSENSUS LEVEL]      4/4 Directors Agree
+[SENTIMENT SCORE]      Reddit: 75% | News: 70%
+[RISK PARAMETERS]      Leverage: 4.0x | Exit: 25% ROI
+[RATIONALE]            Capital flowing into altcoins, bullish technical setup
+
+[INDIVIDUAL VOTES]
+  Alpha (Quant):       BUY (conf: 75%)
+  Beta (Sentiment):    BUY (conf: 70%)
+  Gamma (Risk):        BUY (conf: 90%)
+  Delta (Flow):        BUY (conf: 60%)</div>
+    </div>
+
+    <script>
+        // Demo data update function
+        async function refreshDashboard() {
+            try {
+                // Fetch real data from nexus_cycle_log.json
+                const response = await fetch('nexus_cycle_log.json');
+                const data = await response.json();
+                
+                if (data.length > 0) {
+                    const latestCycle = data[data.length - 1];
+                    updateBoardDisplay(latestCycle);
+                }
+            } catch (error) {
+                console.log('Using demo data:', error.message);
+                updateDemoData();
+            }
+        }
+
+        function updateBoardDisplay(cycleData) {
+            // Update director votes
+            const votes = cycleData.signed_votes || [];
+            
+            votes.forEach(vote => {
+                const dir = vote.agent_id.toLowerCase();
+                if (dir.includes('alpha')) updateDirector('alpha', vote);
+                if (dir.includes('beta')) updateDirector('beta', vote);
+                if (dir.includes('gamma')) updateDirector('gamma', vote);
+                if (dir.includes('delta')) updateDirector('delta', vote);
+            });
+
+            // Update sentiment
+            if (cycleData.orderflow) {
+                document.getElementById('reddit-value').textContent = Math.round(cycleData.orderflow.reddit_sentiment || 75) + '%';
+                document.getElementById('reddit-bar').style.width = (cycleData.orderflow.reddit_sentiment || 75) + '%';
+            }
+
+            // Update consensus
+            if (cycleData.consensus_direction) {
+                document.getElementById('board-vote').textContent = cycleData.consensus_direction;
+                document.getElementById('board-vote').className = 'consensus-value vote-value ' + cycleData.consensus_direction.toLowerCase();
+            }
+        }
+
+        function updateDirector(name, vote) {
+            const voteEl = document.getElementById(name + '-vote');
+            const confEl = document.getElementById(name + '-conf');
+            const barEl = document.getElementById(name + '-conf-bar');
+
+            if (voteEl) {
+                voteEl.textContent = vote.direction || 'HOLD';
+                voteEl.className = 'vote-value ' + (vote.direction || 'HOLD').toLowerCase();
+            }
+
+            const conf = Math.round((vote.confidence || 0.5) * 100);
+            if (confEl) confEl.textContent = conf + '%';
+            if (barEl) barEl.style.width = conf + '%';
+        }
+
+        function updateDemoData() {
+            // Demo update function
+            const demoScenarios = [
+                {
+                    alpha: { direction: 'BUY', confidence: 0.75 },
+                    beta: { direction: 'BUY', confidence: 0.70 },
+                    gamma: { direction: 'BUY', confidence: 0.90 },
+                    delta: { direction: 'BUY', confidence: 0.60 }
+                }
+            ];
+
+            const scenario = demoScenarios[0];
+            Object.keys(scenario).forEach(dir => {
+                updateDirector(dir, scenario[dir]);
+            });
+        }
+
+        // Initial load
+        window.addEventListener('load', () => {
+            refreshDashboard();
+            // Auto-refresh every 30 seconds
+            setInterval(refreshDashboard, 30000);
+        });
+
+        // Polling function for live updates
+        async function pollCycleLog() {
+            try {
+                const response = await fetch('nexus_cycle_log.json?t=' + Date.now());
+                const cycles = await response.json();
+                if (cycles.length > 0) {
+                    updateBoardDisplay(cycles[cycles.length - 1]);
+                }
+            } catch (error) {
+                console.debug('Poll error (expected):', error.message);
+            }
+        }
+
+        // Poll every 5 seconds when system is running
+        setInterval(pollCycleLog, 5000);
+    </script>
+</body>
+</html>

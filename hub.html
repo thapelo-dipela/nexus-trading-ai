@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Trading AI - Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --prism-dark: #0A0E27;
+            --prism-dark-secondary: #141829;
+            --prism-blue: #2E5BFF;
+            --prism-cyan: #00D9FF;
+            --prism-green: #00FF88;
+            --prism-orange: #FF6B35;
+            --prism-red: #FF3333;
+            --prism-purple: #9D4EDD;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--prism-dark) 0%, var(--prism-dark-secondary) 100%);
+            color: #FFFFFF;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--prism-cyan) 0%, var(--prism-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #8B92A9;
+            margin-bottom: 30px;
+        }
+
+        /* Cards Grid */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(46, 91, 255, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border: 2px solid #2A3544;
+            border-radius: 12px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover {
+            border-color: var(--prism-cyan);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--prism-cyan);
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #8B92A9;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            font-size: 12px;
+            color: #5B6A7A;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .card-features li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--prism-green);
+            font-weight: bold;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--prism-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card-button:hover {
+            background: var(--prism-cyan);
+            color: var(--prism-dark);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Status Section */
+        .status-section {
+            background: linear-gradient(135deg, rgba(46, 91, 255, 0.1) 0%, rgba(157, 78, 221, 0.05) 100%);
+            border: 2px solid #2A3544;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .status-title {
+            color: var(--prism-cyan);
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .status-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #2A3544;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .status-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--prism-green);
+            margin-bottom: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            color: #8B92A9;
+        }
+
+        /* Info Cards */
+        .info-section {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(0, 255, 136, 0.02) 100%);
+            border: 2px solid #2A3544;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-title {
+            color: var(--prism-cyan);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-icon {
+            font-size: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            color: var(--prism-green);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .info-content p {
+            color: #8B92A9;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border: 2px solid #2A3544;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .quick-links h3 {
+            color: var(--prism-cyan);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 12px 16px;
+            background: rgba(46, 91, 255, 0.2);
+            border: 1px solid var(--prism-blue);
+            border-radius: 6px;
+            color: var(--prism-cyan);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .link-button:hover {
+            background: var(--prism-blue);
+            color: white;
+            box-shadow: 0 0 20px rgba(46, 91, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 2px solid #2A3544;
+            padding-top: 30px;
+            text-align: center;
+            color: #8B92A9;
+            font-size: 12px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--prism-green);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .hub-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🤖 NEXUS Trading AI</h1>
+            <p class="tagline">Real-time Performance Testing & Visualization Hub</p>
+        </header>
+
+        <!-- Main Cards -->
+        <div class="hub-grid">
+            <!-- Dashboard Card -->
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Live Dashboard</h3>
+                <p>Real-time performance visualization with MetaTrader5-style interface and Prism colors.</p>
+                <ul class="card-features">
+                    <li>Live BTC price chart</li>
+                    <li>Agent performance tracking</li>
+                    <li>Equity curve & drawdown</li>
+                    <li>Sentiment analysis (4 sources)</li>
+                    <li>Risk metrics from PRISM</li>
+                </ul>
+                <button class="card-button" onclick="window.location.href='dashboard.html'">Open Dashboard</button>
+            </div>
+
+            <!-- API Documentation Card -->
+            <div class="card">
+                <div class="card-icon">📡</div>
+                <h3>API Endpoints</h3>
+                <p>RESTful API for accessing real-time market and bot performance data.</p>
+                <ul class="card-features">
+                    <li>/api/market → Live prices</li>
+                    <li>/api/agents → Agent stats</li>
+                    <li>/api/sentiment → Sentiment blend</li>
+                    <li>/api/positions → Open trades</li>
+                    <li>/api/performance → Aggregated PnL</li>
+                </ul>
+                <button class="card-button" onclick="showAPIDoc()">View API Docs</button>
+            </div>
+
+            <!-- Training Monitor Card -->
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Training Monitor</h3>
+                <p>Monitor live training cycles, agent voting, and weight adjustments.</p>
+                <ul class="card-features">
+                    <li>Real-time cycle tracking</li>
+                    <li>Agent vote visualization</li>
+                    <li>Market regime detection</li>
+                    <li>Risk veto logging</li>
+                    <li>Weight update history</li>
+                </ul>
+                <button class="card-button" onclick="window.location.href='training_monitor.py'">Launch Monitor</button>
+            </div>
+
+            <!-- Market Data Card -->
+            <div class="card">
+                <div class="card-icon">💹</div>
+                <h3>Market Data</h3>
+                <p>Real-time cryptocurrency market data and technical analysis.</p>
+                <ul class="card-features">
+                    <li>BTC/USD price feeds</li>
+                    <li>1h, 4h chart analysis</li>
+                    <li>PRISM signals (bullish/bearish)</li>
+                    <li>Fear & Greed Index</li>
+                    <li>Volume & volatility</li>
+                </ul>
+                <button class="card-button" onclick="alert('Available via /api/market and /api/sentiment endpoints')">View Data</button>
+            </div>
+
+            <!-- Agent Performance Card -->
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>Agent Analytics</h3>
+                <p>Detailed performance metrics for each trading agent.</p>
+                <ul class="card-features">
+                    <li>Momentum agent tracking</li>
+                    <li>Sentiment agent analysis</li>
+                    <li>Risk Guardian metrics</li>
+                    <li>Mean Reversion performance</li>
+                    <li>Weight evolution charts</li>
+                </ul>
+                <button class="card-button" onclick="alert('Available in Live Dashboard and /api/agents endpoint')">View Agents</button>
+            </div>
+
+            <!-- Configuration Card -->
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Configuration</h3>
+                <p>View and manage NEXUS system configuration and settings.</p>
+                <ul class="card-features">
+                    <li>API keys & endpoints</li>
+                    <li>Risk parameters</li>
+                    <li>Position sizing rules</li>
+                    <li>Agent weights & thresholds</li>
+                    <li>Market regimes</li>
+                </ul>
+                <button class="card-button" onclick="showConfig()">Edit Config</button>
+            </div>
+        </div>
+
+        <!-- Status Section -->
+        <div class="status-section">
+            <div class="status-title">
+                <span class="loading"></span>
+                System Status
+            </div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-value">✅</div>
+                    <div class="status-label">API Ready</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">✅</div>
+                    <div class="status-label">PRISM Connected</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">✅</div>
+                    <div class="status-label">Agents Active</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">✅</div>
+                    <div class="status-label">Market Live</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="quick-links">
+            <h3>🚀 Quick Start</h3>
+            <div class="links-grid">
+                <a href="#" class="link-button" onclick="copyCommand('python3 dashboard_server.py'); return false;">Start API Server</a>
+                <a href="dashboard.html" class="link-button">Open Dashboard</a>
+                <a href="DASHBOARD_GUIDE.md" class="link-button">Dashboard Guide</a>
+                <a href="#" class="link-button" onclick="copyCommand('python3 main.py --dry-run -v'); return false;">Run Training</a>
+                <a href="#" class="link-button" onclick="copyCommand('python3 training_monitor.py'); return false;">Launch Monitor</a>
+                <a href="#" class="link-button" onclick="showCommandReference()">Commands</a>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="info-section">
+            <div class="info-title">🎨 Key Features</div>
+            <div class="info-list">
+                <div class="info-item">
+                    <div class="info-icon">🎯</div>
+                    <div class="info-content">
+                        <h4>Real-time Monitoring</h4>
+                        <p>Live updates every 15 seconds with market data and agent performance</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📊</div>
+                    <div class="info-content">
+                        <h4>MetaTrader5 UI</h4>
+                        <p>Professional trading platform interface for familiar user experience</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🌈</div>
+                    <div class="info-content">
+                        <h4>Prism Colors</h4>
+                        <p>Distinctive color palette for intuitive signal recognition</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📈</div>
+                    <div class="info-content">
+                        <h4>Performance Tracking</h4>
+                        <p>Track agent weights, trades, PnL, and win rates in real-time</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">😊</div>
+                    <div class="info-content">
+                        <h4>Sentiment Analysis</h4>
+                        <p>4-source blended sentiment: Fear & Greed, Trending, Community, Momentum</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">⚠️</div>
+                    <div class="info-content">
+                        <h4>Risk Management</h4>
+                        <p>Real-time risk metrics: risk score, drawdown, Sharpe, volatility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>NEXUS Trading AI Dashboard v1.0 | Built with ❤️ using Prism Analytics</p>
+            <p style="margin-top: 10px; font-size: 11px;">© 2026 | Real-time Testing Hub for AI Trading Bots</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCommand(cmd) {
+            navigator.clipboard.writeText(cmd);
+            alert(`Copied to clipboard:\n\n${cmd}`);
+        }
+
+        function showAPIDoc() {
+            alert(`NEXUS API Endpoints:
+
+GET /                     → Dashboard HTML
+GET /api/market          → Real-time market data
+GET /api/agents          → Agent performance
+GET /api/sentiment       → Sentiment analysis
+GET /api/positions       → Current positions
+GET /api/equity          → Equity curve
+GET /api/risk            → Risk metrics
+GET /api/performance     → Aggregated stats
+GET /api/health          → Health check
+
+Server: http://localhost:5000`);
+        }
+
+        function showConfig() {
+            alert(`Configuration file: config.py
+
+Key settings:
+- PRISM_API_KEY: Your PRISM API key
+- PRISM_SYMBOL: BTC (default)
+- CONFIDENCE_THRESHOLD: 0.55
+- MAX_LEVERAGE: 3.0
+- TAKE_PROFIT_PCT: 5.0%
+- STOP_LOSS_PCT: 2.0%
+
+Edit config.py to customize behavior`);
+        }
+
+        function showCommandReference() {
+            alert(`NEXUS Command Reference:
+
+Start training loop:
+  python3 main.py --dry-run -v
+
+Test connectivity:
+  python3 main.py --ping
+
+Start dashboard server:
+  python3 dashboard_server.py
+
+Launch training monitor:
+  python3 training_monitor.py
+
+View system status:
+  python3 main.py --status
+
+Run tests:
+  bash run_tests.sh`);
+        }
+    </script>
+</body>
+</html>
