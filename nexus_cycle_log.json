@@ -1035,5 +1035,66 @@
         "signed": true
       }
     ]
+  },
+  {
+    "cycle_number": 2,
+    "timestamp": 1776033359,
+    "consensus_direction": "SELL",
+    "consensus_confidence": 0.2663848749924669,
+    "strategy": "algorithmic_quant",
+    "llm_rationale": "",
+    "orderflow": {},
+    "signed_votes": [
+      {
+        "agent_id": "orderflow",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776033359,
+        "signature": "0x60d0f75a02ba4c9a65c095483c8f39eea222fe4ab5f4c266f79bbc1f999e5243563f32cfda2de40090ac73193ebc11aeff554230b58418ddbe9a906ac9948e661c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "momentum",
+        "direction": "SELL",
+        "confidence": 0.7330040450969834,
+        "cycle": 2,
+        "timestamp": 1776033359,
+        "signature": "0x29205042c705091c5d4502ad972239bc190f3770b1959baf766af02ed3997df8025d0f8d1af5e81d3ac52af9503b5f3a0be75bfce4fc275119516338d6c520631b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "sentiment",
+        "direction": "BUY",
+        "confidence": 0.32,
+        "cycle": 2,
+        "timestamp": 1776033359,
+        "signature": "0xfd20a0b83766a8046eb45de45a7ff3c3318c9816e1204328a22c0c140882014c04fc0753ba5792ad3b1b9be1dfc39d05350b8aa7fec6739a9814c89d19d5e7e01b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "risk_guardian",
+        "direction": "SELL",
+        "confidence": 0.3,
+        "cycle": 2,
+        "timestamp": 1776033359,
+        "signature": "0x0860f034e8176c0ed9667818f2ae78fcacc506e438813ebf749ee8810f7efe566e49f17b31d4b7c8d1c6821cfd38dd1f94b71e3a711d7af374836fcbd091485f1c",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      },
+      {
+        "agent_id": "mean_reversion",
+        "direction": "HOLD",
+        "confidence": 0.1,
+        "cycle": 2,
+        "timestamp": 1776033359,
+        "signature": "0xe517990c19bcd6b369eda857ade19ec26a85dc8c13714b76a2a68312e763321a3281b11451494091b56eea5c450f0c6e7368ebcccba7d1aabf7f7c08d0dafb371b",
+        "signer": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+        "signed": true
+      }
+    ]
   }
 ]

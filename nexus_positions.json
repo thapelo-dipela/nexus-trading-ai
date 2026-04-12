@@ -70,6 +70,20 @@
     "entry_confidence": 0.2759210675978039
   },
   {
+    "trade_id": "nexus_1776033359_sell",
+    "direction": "SELL",
+    "entry_price": 70658.2839,
+    "volume": 0.0001415262223768783,
+    "entry_timestamp": 1776033359,
+    "exit_price": null,
+    "exit_timestamp": null,
+    "exit_reason": null,
+    "pnl_usd": 0.0,
+    "pnl_pct": 0.0,
+    "status": "open",
+    "entry_confidence": 0.2663848749924669
+  },
+  {
     "trade_id": "nexus_1775988542_buy",
     "direction": "BUY",
     "entry_price": 84022.4174,
