@@ -1,330 +1,527 @@
 """
-NEXUS Unified Trading Intelligence — Streamlit Demo Dashboard
+NEXUS Trading AI — Streamlit Demo Dashboard
+Reads live data from: nexus_live_decisions.json, nexus_positions.json,
+                       nexus_equity_curve.json, nexus_weights.json
 """
-import streamlit as st
-import requests
 import json
+import os
 import time
 from datetime import datetime
 from pathlib import Path
 
+import plotly.graph_objects as go
+import plotly.express as px
+import streamlit as st
+
+# ─── Page Config ─────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="NEXUS Unified Trading Intelligence",
+    page_title="NEXUS Trading AI",
     page_icon="⬡",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
 )
 
-# ── Styling ────────────────────────────────────────────────────────────────────
+# ─── Custom CSS ──────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-  .stApp { background: #080a0f; color: #e2e8f4; }
-  .metric-card { background: #0d0f16; border: 1px solid #1c2030; border-radius: 8px; padding: 14px; margin-bottom: 8px; }
-  .agent-vote { background: #0d0f16; border: 1px solid #1c2030; border-radius: 6px; padding: 10px; margin-bottom: 6px; }
-  .buy-color { color: #10b981; }
-  .sell-color { color: #ef4444; }
-  .hold-color { color: #6b7280; }
-  .gold-color { color: #f59e0b; }
-  .cyan-color { color: #06b6d4; }
-  .purple-color { color: #8b5cf6; }
-  div[data-testid="stMetricValue"] { font-size: 1.4rem; font-weight: 800; }
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #060a0f;
+    color: #e2e8f0;
+}
+
+/* Header */
+.nexus-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 28px 0 8px 0;
+    border-bottom: 1px solid #1a2535;
+    margin-bottom: 28px;
+}
+.nexus-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00d4ff;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+.nexus-sub {
+    font-size: 0.78rem;
+    color: #4a6080;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* Metric cards */
+.metric-card {
+    background: linear-gradient(135deg, #0d1520 0%, #0a1018 100%);
+    border: 1px solid #1a2535;
+    border-radius: 12px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+}
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: #00d4ff;
+    border-radius: 3px 0 0 3px;
+}
+.metric-label {
+    font-size: 0.72rem;
+    color: #4a6080;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.metric-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    line-height: 1;
+}
+.metric-value.positive { color: #00e676; }
+.metric-value.negative { color: #ff4757; }
+.metric-value.accent   { color: #00d4ff; }
+
+/* Section headers */
+.section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: #00d4ff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    margin-top: 4px;
+}
+
+/* Agent cards */
+.agent-card {
+    background: #0d1520;
+    border: 1px solid #1a2535;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+.agent-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: #00d4ff;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.badge-buy  { background: rgba(0,230,118,0.15); color: #00e676; border: 1px solid rgba(0,230,118,0.3); }
+.badge-sell { background: rgba(255,71,87,0.15);  color: #ff4757; border: 1px solid rgba(255,71,87,0.3); }
+.badge-hold { background: rgba(255,193,7,0.15);  color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
+
+/* Status dot */
+.status-live {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #00e676;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+@keyframes pulse {
+    0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,230,118,0.4); }
+    50%      { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0,230,118,0); }
+}
+
+/* Consensus box */
+.consensus-box {
+    background: linear-gradient(135deg, #0d1520, #091018);
+    border: 1px solid #1a2535;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+}
+.consensus-direction {
+    font-family: 'Space Mono', monospace;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+.dir-buy  { color: #00e676; }
+.dir-sell { color: #ff4757; }
+.dir-hold { color: #ffc107; }
+
+/* Positions table */
+.pos-row {
+    background: #0d1520;
+    border: 1px solid #1a2535;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Dividers */
+hr.nexus-divider {
+    border: none;
+    border-top: 1px solid #1a2535;
+    margin: 24px 0;
+}
+
+/* Plotly chart bg */
+.js-plotly-plot .plotly .bg { fill: transparent !important; }
+
+/* Streamlit overrides */
+.stApp { background-color: #060a0f; }
+div[data-testid="stVerticalBlock"] > div { background: transparent; }
+.stMetric { background: transparent; }
+header[data-testid="stHeader"] { background: transparent; }
 </style>
 """, unsafe_allow_html=True)
 
-# ── Config ─────────────────────────────────────────────────────────────────────
-CHECKPOINTS_FILE = Path("/Users/thapelodipela/Desktop/nexus-trading-ai/ai-trading-agent-template/checkpoints.jsonl")
-NEXUS_URL = "http://localhost:5000"
-AGENT_ID = "75"
-WALLET = "0x29070e2221630DcF69f548796abc64ad5F953e20"
-ETHERSCAN = f"https://sepolia.etherscan.io/address/{WALLET}"
 
-# ── Data loaders ───────────────────────────────────────────────────────────────
-@st.cache_data(ttl=5)
-def load_checkpoints():
-    if not CHECKPOINTS_FILE.exists():
-        return []
-    lines = CHECKPOINTS_FILE.read_text().strip().split("\n")
-    cps = []
-    for l in lines:
-        try:
-            cps.append(json.loads(l))
-        except:
-            pass
-    return list(reversed(cps))
-
-@st.cache_data(ttl=5)
-def load_nexus(endpoint):
+# ─── Data Loaders ────────────────────────────────────────────────────────────
+def load_json(filename: str, default=None):
     try:
-        r = requests.get(f"{NEXUS_URL}/api/{endpoint}", timeout=3)
-        return r.json()
-    except:
-        return {"success": False}
+        with open(filename, "r") as f:
+            return json.load(f)
+    except Exception:
+        return default
 
-def parse_votes(reasoning):
-    import re
-    votes = []
-    m = re.search(r'Consensus: (.+?) →', reasoning or '')
-    if m:
-        for part in m.group(1).split(' | '):
-            vm = re.match(r'(\w+)→(\w+)\((\d+)%\)', part)
-            if vm:
-                votes.append({"agent": vm.group(1), "action": vm.group(2), "conf": int(vm.group(3))})
-    return votes
 
-def action_color(action):
-    return {"BUY": "#10b981", "SELL": "#ef4444", "HOLD": "#6b7280"}.get(action, "#6b7280")
+def load_live_decisions():
+    return load_json("nexus_live_decisions.json", {})
 
-# ══════════════════════════════════════════════════════════════════════════════
-# HEADER
-# ══════════════════════════════════════════════════════════════════════════════
-col_logo, col_links = st.columns([3, 1])
-with col_logo:
-    st.markdown("# ⬡ NEXUS Unified Trading Intelligence")
-    st.markdown(f"**Agent ID:** `{AGENT_ID}` &nbsp;|&nbsp; **Wallet:** `{WALLET[:10]}...{WALLET[-4:]}`")
-with col_links:
-    st.markdown(f"[🔗 View on Etherscan]({ETHERSCAN})", unsafe_allow_html=False)
-    st.markdown(f"[🔗 Sepolia Transactions]({ETHERSCAN}#internaltx)")
 
-st.divider()
+def load_equity_curve():
+    return load_json("nexus_equity_curve.json", [])
 
-# Load data
-cps = load_checkpoints()
-latest = cps[0] if cps else {}
-market = load_nexus("market")
-risk = load_nexus("risk")
-agents = load_nexus("agents")
-sentiment = load_nexus("sentiment")
-performance = load_nexus("performance")
 
-# ══════════════════════════════════════════════════════════════════════════════
-# TOP METRICS ROW
-# ══════════════════════════════════════════════════════════════════════════════
-m1, m2, m3, m4, m5, m6 = st.columns(6)
+def load_weights():
+    return load_json("nexus_weights.json", {})
 
-price = latest.get("priceUsd", 0)
-action = latest.get("action", "HOLD")
-conf = int((latest.get("confidence", 0.5)) * 100)
 
-with m1:
-    st.metric("BTC Price", f"${price:,.2f}" if price else "—")
-with m2:
-    color = action_color(action)
-    st.markdown(f"**Last Decision**")
-    st.markdown(f"<h2 style='color:{color};margin:0'>{action}</h2>", unsafe_allow_html=True)
-with m3:
-    st.metric("Confidence", f"{conf}%")
-with m4:
-    st.metric("Checkpoints", len(cps))
-with m5:
-    risk_score = market.get("risk_score", "—")
-    st.metric("Risk Score", f"{risk_score:.1f}" if isinstance(risk_score, float) else "—")
-with m6:
-    fg = sentiment.get("fear_greed", "—") if sentiment.get("success") else "—"
-    st.metric("Fear & Greed", fg)
+def load_positions():
+    return load_json("nexus_positions.json", {})
 
-st.divider()
 
-# ══════════════════════════════════════════════════════════════════════════════
-# MAIN LAYOUT: LEFT = CONSENSUS | RIGHT = MARKET
-# ══════════════════════════════════════════════════════════════════════════════
-left, right = st.columns([3, 2])
+# ─── Helpers ─────────────────────────────────────────────────────────────────
+def direction_badge(direction: str) -> str:
+    d = direction.upper()
+    cls = {"BUY": "badge-buy", "SELL": "badge-sell"}.get(d, "badge-hold")
+    return f'<span class="badge {cls}">{d}</span>'
+
+
+def color_val(val: float, fmt: str = "+.2f") -> str:
+    cls = "positive" if val >= 0 else "negative"
+    return f'<span class="metric-value {cls}">{val:{fmt}}</span>'
+
+
+def conf_bar(conf: float) -> str:
+    pct = int(conf * 100)
+    color = "#00e676" if pct >= 60 else "#ffc107" if pct >= 30 else "#ff4757"
+    return f"""
+    <div style="background:#1a2535;border-radius:4px;height:6px;width:100%;margin-top:6px">
+      <div style="background:{color};border-radius:4px;height:6px;width:{pct}%"></div>
+    </div>
+    <div style="font-size:0.7rem;color:#4a6080;margin-top:3px">{pct}% confidence</div>
+    """
+
+
+# ─── Header ──────────────────────────────────────────────────────────────────
+st.markdown("""
+<div class="nexus-header">
+  <div>
+    <div class="nexus-logo">⬡ NEXUS</div>
+    <div class="nexus-sub">Multi-Agent Crypto Trading System</div>
+  </div>
+  <div style="margin-left:auto;font-size:0.75rem;color:#4a6080;font-family:'Space Mono',monospace">
+    <span class="status-live"></span>LIVE ENGINE
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+# ─── Auto-refresh ─────────────────────────────────────────────────────────────
+refresh_rate = st.sidebar.selectbox("Auto-refresh (seconds)", [10, 30, 60, 120], index=1)
+st.sidebar.markdown("---")
+st.sidebar.markdown("**Data Files**")
+for f in ["nexus_live_decisions.json", "nexus_equity_curve.json", "nexus_weights.json", "nexus_positions.json"]:
+    exists = "✅" if Path(f).exists() else "❌"
+    st.sidebar.markdown(f"{exists} `{f}`")
+
+# Load all data
+decisions   = load_live_decisions()
+equity_data = load_equity_curve()
+weights     = load_weights()
+positions   = load_positions()
+
+# ─── Top KPI Row ─────────────────────────────────────────────────────────────
+agents_list  = decisions.get("agent_decisions", [])
+consensus    = decisions.get("consensus_decision", {})
+c_direction  = consensus.get("direction", "—")
+c_confidence = float(consensus.get("confidence", 0.0))
+timestamp    = decisions.get("timestamp", "")
+cycle_num    = decisions.get("latest_cycle", "—")
+
+# Equity stats
+equity_vals = [e.get("equity", e) if isinstance(e, dict) else e for e in equity_data]
+portfolio_val = equity_vals[-1] if equity_vals else 0.0
+start_val     = equity_vals[0]  if equity_vals else portfolio_val
+pnl_pct       = ((portfolio_val - start_val) / start_val * 100) if start_val else 0.0
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col1:
+    dir_color = {"BUY": "#00e676", "SELL": "#ff4757"}.get(c_direction.upper(), "#ffc107")
+    st.markdown(f"""
+    <div class="metric-card">
+      <div class="metric-label">Consensus</div>
+      <div class="metric-value" style="color:{dir_color};font-family:'Space Mono',monospace">{c_direction}</div>
+    </div>""", unsafe_allow_html=True)
+
+with col2:
+    st.markdown(f"""
+    <div class="metric-card">
+      <div class="metric-label">Confidence</div>
+      <div class="metric-value accent">{c_confidence:.1%}</div>
+    </div>""", unsafe_allow_html=True)
+
+with col3:
+    pnl_cls = "positive" if pnl_pct >= 0 else "negative"
+    st.markdown(f"""
+    <div class="metric-card">
+      <div class="metric-label">Total PnL</div>
+      <div class="metric-value {pnl_cls}">{pnl_pct:+.2f}%</div>
+    </div>""", unsafe_allow_html=True)
+
+with col4:
+    st.markdown(f"""
+    <div class="metric-card">
+      <div class="metric-label">Portfolio Value</div>
+      <div class="metric-value">${portfolio_val:,.0f}</div>
+    </div>""", unsafe_allow_html=True)
+
+with col5:
+    agent_count = len(agents_list)
+    st.markdown(f"""
+    <div class="metric-card">
+      <div class="metric-label">Active Agents</div>
+      <div class="metric-value accent">{agent_count}</div>
+    </div>""", unsafe_allow_html=True)
+
+st.markdown("<hr class='nexus-divider'>", unsafe_allow_html=True)
+
+# ─── Main Content ─────────────────────────────────────────────────────────────
+left, right = st.columns([3, 2], gap="large")
 
 with left:
-    # ── Live Agent Consensus ──────────────────────────────────────────────────
-    st.subheader("🤖 Live Agent Consensus")
-    
-    reasoning = latest.get("reasoning", "")
-    votes = parse_votes(reasoning)
-    is_veto = "[RISK VETO]" in reasoning
-    
-    if is_veto:
-        st.error(f"⚠️ RISK GUARDIAN VETO — {reasoning.replace('[RISK VETO] VETO: ', '')}")
-    elif votes:
-        st.markdown(f"**Weighted consensus: {conf}%** → Final decision: **{action}**")
-        for v in votes:
-            col_name, col_act, col_bar, col_pct = st.columns([2, 1, 4, 1])
-            colors = {"MOMENTUM": "#60a5fa", "SENTIMENT": "#8b5cf6", "RISK_GUARDIAN": "#f59e0b", "MEAN_REVERSION": "#06b6d4"}
-            c = colors.get(v["agent"], "#6b7280")
-            with col_name:
-                st.markdown(f"<span style='color:{c};font-weight:700;font-size:11px'>{v['agent'].replace('_',' ')}</span>", unsafe_allow_html=True)
-            with col_act:
-                ac = action_color(v["action"])
-                st.markdown(f"<span style='color:{ac};font-weight:700'>{v['action']}</span>", unsafe_allow_html=True)
-            with col_bar:
-                st.progress(v["conf"] / 100)
-            with col_pct:
-                st.markdown(f"**{v['conf']}%**")
+    # ── Equity Curve ────────────────────────────────────────────────────────
+    st.markdown('<div class="section-title">Equity Curve</div>', unsafe_allow_html=True)
+
+    if equity_vals and len(equity_vals) > 1:
+        timestamps = []
+        for i, e in enumerate(equity_data):
+            if isinstance(e, dict) and "timestamp" in e:
+                try:
+                    timestamps.append(datetime.fromtimestamp(e["timestamp"]))
+                except Exception:
+                    timestamps.append(i)
+            else:
+                timestamps.append(i)
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=timestamps,
+            y=equity_vals,
+            mode="lines",
+            line=dict(color="#00d4ff", width=2),
+            fill="tozeroy",
+            fillcolor="rgba(0,212,255,0.06)",
+            name="Portfolio Value",
+            hovertemplate="$%{y:,.2f}<extra></extra>",
+        ))
+        fig.update_layout(
+            height=280,
+            margin=dict(l=0, r=0, t=8, b=0),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(13,21,32,0.5)",
+            font=dict(family="Space Mono", color="#4a6080", size=10),
+            xaxis=dict(showgrid=False, showline=False, color="#4a6080"),
+            yaxis=dict(showgrid=True, gridcolor="#1a2535", gridwidth=1, color="#4a6080", tickprefix="$"),
+            showlegend=False,
+        )
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
     else:
-        st.info("Warming up — waiting for 3 price samples...")
-    
-    if reasoning and not is_veto:
-        with st.expander("Full reasoning"):
-            st.code(reasoning)
+        st.markdown("""
+        <div style="background:#0d1520;border:1px dashed #1a2535;border-radius:10px;
+                    padding:48px;text-align:center;color:#4a6080;font-size:0.8rem;">
+          No equity curve data yet — start the trading engine to populate this chart.
+        </div>""", unsafe_allow_html=True)
 
-    st.divider()
+    st.markdown("<br>", unsafe_allow_html=True)
 
-    # ── Checkpoint Feed ───────────────────────────────────────────────────────
-    st.subheader("📋 Recent Checkpoints")
-    
-    for cp in cps[:15]:
-        action_c = action_color(cp.get("action", "HOLD"))
-        conf_c = int((cp.get("confidence", 0.5)) * 100)
-        ts = cp.get("timestamp", 0)
-        t = datetime.fromtimestamp(ts if ts > 1e10 else ts).strftime("%H:%M:%S")
-        rea = cp.get("reasoning", "—")
-        is_consensus = "Consensus:" in rea
-        is_veto_cp = "RISK VETO" in rea
-        
-        with st.container():
-            c1, c2, c3, c4 = st.columns([1, 2, 4, 1])
-            with c1:
-                st.markdown(f"<span style='color:{action_c};font-weight:800;font-size:14px'>{cp.get('action','?')}</span>", unsafe_allow_html=True)
-                st.caption(t)
-            with c2:
-                st.markdown(f"**${cp.get('priceUsd',0):,.2f}**")
-            with c3:
-                if is_veto_cp:
-                    st.markdown(f"<span style='color:#f59e0b;font-size:10px'>{rea[:80]}...</span>", unsafe_allow_html=True)
-                elif is_consensus:
-                    st.markdown(f"<span style='color:#60a5fa;font-size:10px'>{rea[:80]}...</span>", unsafe_allow_html=True)
-                else:
-                    st.caption(rea[:80])
-            with c4:
-                st.markdown(f"**{conf_c}%**")
-        st.divider()
+    # ── Agent Weight Bar Chart ───────────────────────────────────────────────
+    st.markdown('<div class="section-title">Agent Weights</div>', unsafe_allow_html=True)
+
+    if weights:
+        agent_ids = list(weights.keys())
+        w_vals    = [float(weights[a]) if isinstance(weights[a], (int, float))
+                     else float(weights[a].get("weight", 1.0)) if isinstance(weights[a], dict)
+                     else 1.0 for a in agent_ids]
+        colors = ["#00d4ff" if w >= max(w_vals) else "#1a4060" for w in w_vals]
+        fig2 = go.Figure(go.Bar(
+            x=w_vals, y=agent_ids,
+            orientation="h",
+            marker_color=colors,
+            hovertemplate="%{y}: %{x:.3f}<extra></extra>",
+        ))
+        fig2.update_layout(
+            height=max(160, len(agent_ids) * 36),
+            margin=dict(l=0, r=0, t=4, b=0),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(13,21,32,0.5)",
+            font=dict(family="Space Mono", color="#4a6080", size=10),
+            xaxis=dict(showgrid=True, gridcolor="#1a2535", color="#4a6080"),
+            yaxis=dict(showgrid=False, color="#8090a0"),
+            showlegend=False,
+        )
+        st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
+    else:
+        st.markdown("""
+        <div style="background:#0d1520;border:1px dashed #1a2535;border-radius:10px;
+                    padding:24px;text-align:center;color:#4a6080;font-size:0.8rem;">
+          No weight data yet.
+        </div>""", unsafe_allow_html=True)
+
 
 with right:
-    # ── Market Intelligence ───────────────────────────────────────────────────
-    st.subheader("📊 PRISM Market Intelligence")
-    
-    if market.get("success"):
-        r1, r2 = st.columns(2)
-        with r1:
-            sig1 = market.get("signal_1h", "neutral")
-            color1 = "#10b981" if sig1 == "bullish" else "#ef4444" if sig1 == "bearish" else "#6b7280"
-            st.markdown(f"**1H Signal:** <span style='color:{color1};font-weight:800'>{sig1.upper()}</span>", unsafe_allow_html=True)
-        with r2:
-            sig4 = market.get("signal_4h", "neutral")
-            color4 = "#10b981" if sig4 == "bullish" else "#ef4444" if sig4 == "bearish" else "#6b7280"
-            st.markdown(f"**4H Signal:** <span style='color:{color4};font-weight:800'>{sig4.upper()}</span>", unsafe_allow_html=True)
-    else:
-        st.warning("NEXUS server offline — restart `python3 dashboard_server.py`")
+    # ── Consensus Decision ───────────────────────────────────────────────────
+    st.markdown('<div class="section-title">Current Decision</div>', unsafe_allow_html=True)
+    dir_cls = {"BUY": "dir-buy", "SELL": "dir-sell"}.get(c_direction.upper(), "dir-hold")
+    conf_pct = int(c_confidence * 100)
+    conf_color = "#00e676" if conf_pct >= 60 else "#ffc107" if conf_pct >= 30 else "#ff4757"
+    ts_display = timestamp[:19].replace("T", " ") if timestamp else "—"
 
-    st.divider()
-
-    # ── Risk Metrics ──────────────────────────────────────────────────────────
-    st.subheader("⚠️ Risk Metrics")
-    if risk.get("success"):
-        r1, r2 = st.columns(2)
-        with r1:
-            st.metric("Max Drawdown", f"{risk.get('max_drawdown_30d', 0):.1f}%")
-            st.metric("Volatility", f"{risk.get('volatility_30d', 0):.1f}%")
-        with r2:
-            st.metric("Sharpe Ratio", f"{risk.get('sharpe_ratio', 0):.2f}")
-            st.metric("Risk Score", f"{market.get('risk_score', 0):.1f}" if market.get("success") else "—")
-    else:
-        st.warning("Risk data unavailable")
-
-    st.divider()
-
-    # ── Agent Voting Power ────────────────────────────────────────────────────
-    st.subheader("⚖️ Agent Voting Power")
-    if agents.get("success") and agents.get("agents"):
-        total_w = sum(a.get("weight", 1) for a in agents["agents"])
-        for a in agents["agents"]:
-            w = a.get("weight", 1)
-            pct = (w / total_w) * 100
-            pnl = a.get("pnl_total", 0)
-            name = (a.get("agent_id") or a.get("name") or "AGENT").upper()
-            colors = {"MOMENTUM": "#60a5fa", "SENTIMENT": "#8b5cf6", "RISK_GUARDIAN": "#f59e0b", "MEAN_REVERSION": "#06b6d4"}
-            c = colors.get(name, "#06b6d4")
-            st.markdown(f"<span style='color:{c};font-weight:700'>{name}</span> — **{pct:.1f}%** vote | W: {w:.4f} | PnL: {'+'if pnl>=0 else ''}${pnl:.2f}", unsafe_allow_html=True)
-            st.progress(pct / 100)
-    else:
-        st.warning("Agent data unavailable — is NEXUS server running?")
-
-    st.divider()
-
-    # ── Sentiment ─────────────────────────────────────────────────────────────
-    st.subheader("💭 Sentiment Analysis")
-    if sentiment.get("success"):
-        fg = sentiment.get("fear_greed", 50)
-        st.metric("Fear & Greed Index", fg, help="0=Extreme Fear, 100=Extreme Greed")
-        st.progress(fg / 100)
-        comp = sentiment.get("composite", {})
-        if comp:
-            s1, s2, s3 = st.columns(3)
-            with s1:
-                st.metric("Trending", f"{int(comp.get('trending',0)*100)}%")
-            with s2:
-                st.metric("Community", f"{int(comp.get('community',0)*100)}%")
-            with s3:
-                st.metric("Momentum", f"{int(comp.get('momentum',0)*100)}%")
-    else:
-        st.warning("Sentiment data unavailable")
-
-    st.divider()
-
-    # ── On-chain proof ────────────────────────────────────────────────────────
-    st.subheader("⛓️ On-Chain Proof of Work")
     st.markdown(f"""
-    | Contract | Status |
-    |---|---|
-    | AgentRegistry | ✅ Registered (ID: 75) |
-    | HackathonVault | ✅ 0.05 ETH allocated |
-    | RiskRouter | ✅ Trade intents live |
-    | ValidationRegistry | ✅ Checkpoints on-chain |
-    | ReputationRegistry | ✅ Accumulating |
-    """)
-    st.markdown(f"[🔗 View all transactions on Sepolia Etherscan →]({ETHERSCAN})")
+    <div class="consensus-box">
+      <div style="font-size:0.7rem;color:#4a6080;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">
+        Cycle #{cycle_num}
+      </div>
+      <div class="consensus-direction {dir_cls}">{c_direction}</div>
+      <div style="margin:16px 0 8px 0">
+        <div style="background:#1a2535;border-radius:6px;height:8px;width:100%">
+          <div style="background:{conf_color};border-radius:6px;height:8px;width:{conf_pct}%;
+                      transition:width 0.5s ease"></div>
+        </div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:1.1rem;color:{conf_color};margin-bottom:4px">
+        {conf_pct}% confidence
+      </div>
+      <div style="font-size:0.72rem;color:#4a6080;margin-top:10px">{ts_display}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
-# PRICE CHART
-# ══════════════════════════════════════════════════════════════════════════════
-st.divider()
-st.subheader("📈 BTC Price — Live from Checkpoints")
+    st.markdown("<br>", unsafe_allow_html=True)
 
-if len(cps) >= 2:
-    import plotly.graph_objects as go
-    
-    chart_data = list(reversed(cps[:50]))
-    prices = [cp.get("priceUsd", 0) for cp in chart_data]
-    times = [datetime.fromtimestamp(cp["timestamp"] if cp["timestamp"] > 1e10 else cp["timestamp"]).strftime("%H:%M:%S") for cp in chart_data]
-    actions_list = [cp.get("action", "HOLD") for cp in chart_data]
-    
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=times, y=prices,
-        mode='lines+markers',
-        line=dict(color='#3b82f6', width=2),
-        marker=dict(
-            color=['#10b981' if a=='BUY' else '#ef4444' if a=='SELL' else '#6b7280' for a in actions_list],
-            size=8
-        ),
-        name='BTC Price',
-        hovertemplate='%{x}<br>$%{y:,.2f}<extra></extra>'
-    ))
-    fig.update_layout(
-        paper_bgcolor='#080a0f',
-        plot_bgcolor='#0d0f16',
-        font=dict(color='#e2e8f4'),
-        height=300,
-        margin=dict(l=0, r=0, t=10, b=0),
-        xaxis=dict(gridcolor='#1c2030', showgrid=True),
-        yaxis=dict(gridcolor='#1c2030', showgrid=True, tickformat='$,.0f'),
-        showlegend=False
-    )
-    st.plotly_chart(fig, use_container_width=True)
-    st.caption("🟢 Green dots = BUY signal &nbsp; 🔴 Red dots = SELL signal &nbsp; ⚫ Grey = HOLD")
+    # ── Agent Votes ──────────────────────────────────────────────────────────
+    st.markdown('<div class="section-title">Agent Votes</div>', unsafe_allow_html=True)
+
+    if agents_list:
+        for agent in agents_list:
+            a_id   = agent.get("agent_id", "unknown")
+            a_dir  = agent.get("direction", "HOLD")
+            a_conf = float(agent.get("confidence", 0))
+            a_mult = float(agent.get("regime_multiplier", 1.0))
+            badge  = direction_badge(a_dir)
+            st.markdown(f"""
+            <div class="agent-card">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div class="agent-name">{a_id}</div>
+                {badge}
+              </div>
+              {conf_bar(a_conf)}
+              <div style="font-size:0.68rem;color:#4a6080;margin-top:4px">
+                regime ×{a_mult:.2f}
+              </div>
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <div style="background:#0d1520;border:1px dashed #1a2535;border-radius:10px;
+                    padding:32px;text-align:center;color:#4a6080;font-size:0.8rem;">
+          No agent votes yet — engine not running.
+        </div>""", unsafe_allow_html=True)
+
+st.markdown("<hr class='nexus-divider'>", unsafe_allow_html=True)
+
+# ─── Open Positions ───────────────────────────────────────────────────────────
+st.markdown('<div class="section-title">Open Positions</div>', unsafe_allow_html=True)
+
+pos_list = decisions.get("positions", [])
+if not pos_list and isinstance(positions, dict):
+    pos_list = positions.get("open_positions", [])
+if not pos_list and isinstance(positions, list):
+    pos_list = positions
+
+if pos_list:
+    cols = st.columns(len(pos_list) if len(pos_list) <= 4 else 4)
+    for i, pos in enumerate(pos_list[:4]):
+        direction   = pos.get("direction", "—")
+        entry       = float(pos.get("entry_price", 0))
+        current     = float(pos.get("current_price", 0))
+        upnl_pct    = float(pos.get("unrealised_pnl_pct", 0))
+        size        = float(pos.get("size", pos.get("size_usd", 0)))
+        dir_color   = "#00e676" if direction == "BUY" else "#ff4757"
+        pnl_color   = "#00e676" if upnl_pct >= 0 else "#ff4757"
+        with cols[i % 4]:
+            st.markdown(f"""
+            <div class="metric-card" style="border-left-color:{dir_color}">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="font-family:'Space Mono',monospace;font-size:0.75rem;color:{dir_color};font-weight:700">{direction}</span>
+                <span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:#4a6080">${size:,.0f}</span>
+              </div>
+              <div style="font-size:0.7rem;color:#4a6080;margin-bottom:2px">Entry</div>
+              <div style="font-family:'Space Mono',monospace;font-size:0.9rem;color:#e2e8f0">${entry:,.2f}</div>
+              <div style="font-size:0.7rem;color:#4a6080;margin-top:8px;margin-bottom:2px">Unrealised PnL</div>
+              <div style="font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:{pnl_color}">{upnl_pct:+.2f}%</div>
+            </div>
+            """, unsafe_allow_html=True)
 else:
-    st.info("Waiting for price data...")
+    st.markdown("""
+    <div style="background:#0d1520;border:1px dashed #1a2535;border-radius:10px;
+                padding:28px;text-align:center;color:#4a6080;font-size:0.8rem;">
+      No open positions.
+    </div>""", unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
-# FOOTER
-# ══════════════════════════════════════════════════════════════════════════════
-st.divider()
-st.caption(f"NEXUS Unified Trading Intelligence | Agent ID: {AGENT_ID} | Last updated: {datetime.now().strftime('%H:%M:%S')} | Auto-refresh every 5s")
+# ─── Footer ───────────────────────────────────────────────────────────────────
+st.markdown(f"""
+<div style="margin-top:40px;padding-top:16px;border-top:1px solid #1a2535;
+            display:flex;justify-content:space-between;align-items:center;
+            font-size:0.68rem;color:#2a3a50;font-family:'Space Mono',monospace;">
+  <span>NEXUS TRADING AI</span>
+  <span>PRISM · KRAKEN · ERC-8004</span>
+  <span>Auto-refresh: {refresh_rate}s</span>
+</div>
+""", unsafe_allow_html=True)
 
-# Auto-refresh
-time.sleep(5)
+# ─── Auto-refresh ─────────────────────────────────────────────────────────────
+time.sleep(refresh_rate)
 st.rerun()
