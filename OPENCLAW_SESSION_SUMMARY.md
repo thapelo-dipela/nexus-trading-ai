@@ -25,7 +25,7 @@ You requested a migration from Anthropic Claude to **Groq + Llama 3.3 70B** with
    - Fully backward compatible
 
 3. **Enhanced Configuration** (`config.py`)
-   - GROQ_API_KEY: `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`
+   - GROQ_API_KEY: `GROQ_API_KEY_HERE`
    - Board director weights, leverage rules, exit targets
    - Sentiment thresholds and keyword detection
 
@@ -188,7 +188,7 @@ LLMReasonerAgent Vote Output
 
 ### Environment Variables
 ```bash
-GROQ_API_KEY=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
+GROQ_API_KEY=GROQ_API_KEY_HERE
 OPENCLAW_ENABLED=true
 ```
 
@@ -233,7 +233,7 @@ pip install -r requirements.txt
 
 ### 2. Configure Groq API
 ```bash
-export GROQ_API_KEY="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"
+export GROQ_API_KEY="GROQ_API_KEY_HERE"
 export OPENCLAW_ENABLED=true
 ```
 
@@ -338,5 +338,5 @@ The **OpenClaw Quantum Board of Directors** is now the core decision engine of N
 ---
 
 **Generated**: April 12, 2026  
-**Groq API**: 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  
+**Groq API**: GROQ_API_KEY_HERE  
 **Test Suite**: test_openclaw.py ✅ ALL TESTS PASSED
