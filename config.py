@@ -86,7 +86,7 @@ EQUITY_CURVE_FILE = "nexus_equity_curve.json"
 CYCLE_LOG_FILE = "nexus_cycle_log.json"
 
 # LLM Reasoner Configuration (Task B) — UPDATED FOR GROQ + OPENCLAW
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "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")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "GROQ_API_KEY_HERE")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")  # DEPRECATED, kept for compatibility
 LLM_REASONER_TIMEOUT = int(os.getenv("LLM_REASONER_TIMEOUT", "15"))
 LLM_REASONER_WEIGHT = float(os.getenv("LLM_REASONER_WEIGHT", "2.0"))  # 6th highest voting weight

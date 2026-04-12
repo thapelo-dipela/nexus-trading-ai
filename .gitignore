@@ -6,3 +6,4 @@ __pycache__/
 nexus_weights.json
 nexus_positions.json
 nexus_equity_curve.json
+.env

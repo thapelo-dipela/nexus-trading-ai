@@ -270,7 +270,7 @@ Add to `config.py`:
 ```python
 # OpenClaw Configuration
 OPENCLAW_ENABLED = True
-GROQ_API_KEY = "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"
+GROQ_API_KEY = "GROQ_API_KEY_HERE"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 GROQ_TIMEOUT = 2.0  # seconds
 
@@ -438,7 +438,7 @@ OPENCLAW_ENABLED = True  # Default: True
 
 **Step 2: Add Groq API key (optional)**
 ```bash
-export GROQ_API_KEY="gsk_..."
+export GROQ_API_KEY="GROQ_API_KEY_HERE..."
 ```
 
 **Step 3: Run system**

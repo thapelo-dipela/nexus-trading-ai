@@ -23,7 +23,7 @@ This session successfully migrated NEXUS Trading AI from **Anthropic Claude** to
    - Optional Groq-powered sentiment enhancement
 
 3. ✅ **Configuration System** (`config.py`)
-   - GROQ_API_KEY: `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`
+   - GROQ_API_KEY: `GROQ_API_KEY_HERE`
    - Board director weights (Alpha 1.2x, Beta 1.1x, Gamma 1.4x, Delta 1.0x)
    - Leverage rules (4x/2.5x/1.5x/1x)
    - Exit target rules (25% standard, 50% risk-off)
@@ -202,7 +202,7 @@ vote = agent.vote_with_context(
 
 ### Core Settings (`.env`)
 ```bash
-GROQ_API_KEY=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
+GROQ_API_KEY=GROQ_API_KEY_HERE
 OPENCLAW_ENABLED=true
 ```
 
@@ -318,7 +318,7 @@ vote = self._synthesize_final_vote(board_decision, groq_enhancement, ...)
 
 **Groq API Key** (provided):
 ```
-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
+GROQ_API_KEY_HERE
 ```
 
 **Status**: ✅ Verified and active in `config.py`
