@@ -6,21 +6,21 @@
       "direction": "SELL",
       "confidence": 0.3,
       "regime_multiplier": 1.0,
-      "reasoning": "cvd_momentum=+0.0000 | vwap_dev=-2.00% | imbalance=+0.00 | signal=-0.3000"
+      "reasoning": "cvd_momentum=+0.0000 | vwap_dev=-1.67% | imbalance=+0.00 | signal=-0.3000"
     },
     {
       "agent_id": "momentum",
       "direction": "SELL",
-      "confidence": 0.7330040450969834,
+      "confidence": 0.43007154664748937,
       "regime_multiplier": 1.5,
-      "reasoning": "Momentum composite: -0.733"
+      "reasoning": "Momentum composite: -0.430"
     },
     {
       "agent_id": "sentiment",
       "direction": "BUY",
-      "confidence": 0.32,
+      "confidence": 0.21999999999999997,
       "regime_multiplier": 0.8,
-      "reasoning": "composite=0.320 | fear_greed=0.200 | prism=1.000 | price_mom=0.000 | news=0.000 | social=0.000"
+      "reasoning": "composite=0.220 | fear_greed=0.200 | prism=0.600 | price_mom=0.000 | news=0.000 | social=0.000"
     },
     {
       "agent_id": "risk_guardian",
@@ -34,12 +34,12 @@
       "direction": "HOLD",
       "confidence": 0.1,
       "regime_multiplier": 0.5,
-      "reasoning": "MeanReversion: rsi=0.000 bb=0.015 sma=0.000 composite=0.005"
+      "reasoning": "MeanReversion: rsi=0.000 bb=0.000 sma=0.000 composite=0.000"
     }
   ],
   "consensus_decision": {
     "direction": "SELL",
-    "confidence": 0.2663848749924669
+    "confidence": 0.205535255872538
   },
   "positions": [],
   "recent_closes": [
@@ -74,5 +74,5 @@
       "trades_closed": 15
     }
   ],
-  "timestamp": "2026-04-13T00:35:59.495267"
+  "timestamp": "2026-04-13T00:41:40.512200"
 }

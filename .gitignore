@@ -1,0 +1,8 @@
+.env
+*.jsonl
+node_modules/
+__pycache__/
+*.pyc
+nexus_weights.json
+nexus_positions.json
+nexus_equity_curve.json
