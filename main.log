@@ -16203,3 +16203,140 @@ number, not 'NoneType'[/yellow]
   mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
 [yellow]HOLD (confidence=0.207)[/yellow]                                        
 [dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1096[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.51, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1097[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.51, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1098[/bold]                                                        
+[yellow]PRISM rate limit hit on /risk/BTC — waiting 5s[/yellow]                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.51, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1099[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+$AMS.JO: possibly delisted; no price data found  (period=35d) (Yahoo error = "No
+data found, symbol may be delisted")                                            
+$NHM.JO: possibly delisted; no price data found  (period=35d) (Yahoo error = "No
+data found, symbol may be delisted")                                            
+$ARM.JO: possibly delisted; no price data found  (period=35d) (Yahoo error = "No
+data found, symbol may be delisted")                                            
+$MTX.JO: possibly delisted; no price data found  (period=35d) (Yahoo error = "No
+data found, symbol may be delisted")                                            
+$BHP.JO: possibly delisted; no price data found  (period=35d) (Yahoo error = "No
+data found, symbol may be delisted")                                            
+                                                                                
+5 Failed downloads:                                                             
+['AMS.JO', 'NHM.JO', 'ARM.JO', 'MTX.JO', 'BHP.JO']: possibly delisted; no price 
+data found  (period=35d) (Yahoo error = "No data found, symbol may be delisted")
+BTC Correlation: BTC 30d: +0.0% | JSE basket 30d: -1.5% | Relative strength:    
+-1.5% | 6/20 stocks beat BTC | Signal: HOLD (conf=30%)                          
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.52, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1100[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.52, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[bold green]📊 Periodic leaderboard submission (cycle 1100)[/bold green]        
+[red]Kraken API error: ['EAPI:Invalid key'][/red]                               
+[yellow]No trade history available[/yellow]                                     
+[yellow]No trades found for metrics calculation[/yellow]                        
+[red]Could not prepare submission[/red]                                         
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1101[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.51, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1102[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.55, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1103[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: HOLD (conf=0.90, regime_mult=1.0)                                  
+  momentum: BUY (conf=0.55, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1104[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: BUY (conf=0.23, regime_mult=1.0)                                   
+  momentum: BUY (conf=0.55, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     

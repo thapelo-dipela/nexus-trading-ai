@@ -1,5 +1,5 @@
 {
-  "last_transfer": "2026-04-27T13:06:01.723402",
+  "last_transfer": "2026-04-27T13:14:23.408924",
   "transfers": [
     {
       "action_count": 2,
@@ -12609,6 +12609,3165 @@
       },
       "scheduled": true,
       "timestamp": "2026-04-27T13:06:01.723402"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288187.062893-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288187.06292-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288187.062926-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288187.062931-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288187.062893-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x57065817adb22051da6e38526c0d23d507cd4c348ce88de26ec027b911cb5a41",
+              "blockNumber": 39289079,
+              "timestamp": "2026-04-27T11:09:53.258Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288187.06292-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x605053888129a3a18b7930f009e895973d32d9f16cdc23b511f655fe0d66efb2",
+              "blockNumber": 39289079,
+              "timestamp": "2026-04-27T11:09:53.258Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288187.062926-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xe35e241c1ea32f15dece4da5e78eee04bfc547c26d31e1ae5b06f4a18b48826e",
+              "blockNumber": 39289079,
+              "timestamp": "2026-04-27T11:09:53.258Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288187.062931-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x65f4164bc93b87ff96e178740fd8bf75adf19c7ce0395b7cdc6875c0e9a2a402",
+              "blockNumber": 39289079,
+              "timestamp": "2026-04-27T11:09:53.258Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:09:53.268717"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288194.40341-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288194.403429-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288194.403434-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288194.403437-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288194.40341-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xd57b708c5acb91bcca672e08acfdc93aa0417f82ded1351ae20b406dee27ec3e",
+              "blockNumber": 39289094,
+              "timestamp": "2026-04-27T11:09:56.361Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288194.403429-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xe87363f34b56f49c648ba3a003b7ae87de2fa61a5f59019be3c5f05aa9a2c4c0",
+              "blockNumber": 39289094,
+              "timestamp": "2026-04-27T11:09:56.361Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288194.403434-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x9796eed41eda0fd71381af9935ed21f63eef2d0076a78b55c0eb6ca49b90409c",
+              "blockNumber": 39289094,
+              "timestamp": "2026-04-27T11:09:56.361Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288194.403437-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x9de4c31db3036104356be92c1107eae1077462d7d9fd7a63ffa54c681452e16e",
+              "blockNumber": 39289094,
+              "timestamp": "2026-04-27T11:09:56.361Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:09:56.367697"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288206.731755-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288206.731767-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288206.73177-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288206.731772-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288206.731755-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x344110b267530adb0097a46423f278cda9a09dbf8a6d1b9459eb022beef06f62",
+              "blockNumber": 39289119,
+              "timestamp": "2026-04-27T11:10:12.982Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288206.731767-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xf6295b5cd1b6480565f4d125feedf25a420611b0c05c83cb63a703635b2e8fa0",
+              "blockNumber": 39289119,
+              "timestamp": "2026-04-27T11:10:12.982Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288206.73177-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x3ffa9da836b7efe7428529420dd6525413632e11ab1de5db7df28f389ba7a85d",
+              "blockNumber": 39289119,
+              "timestamp": "2026-04-27T11:10:12.982Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288206.731772-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x11b650ea398ea7a32ac21beddbf564db34102d2c8084fc7b298b968a7573e599",
+              "blockNumber": 39289119,
+              "timestamp": "2026-04-27T11:10:12.982Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:12.991374"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288209.734478-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288209.734503-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288209.734512-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288209.73452-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288209.734478-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x01c6808b610a7cc586a864c0fa8493eb755a47a3bc29a499cbcc854be4b0a29b",
+              "blockNumber": 39289125,
+              "timestamp": "2026-04-27T11:10:16.473Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288209.734503-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xcb6b9402fbbba2147889f200e51939134468d882fc44df5789025b3a39ef31e8",
+              "blockNumber": 39289125,
+              "timestamp": "2026-04-27T11:10:16.473Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288209.734512-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x56d608775ed86dddffae167cf124db4c82cbb5af13933f55d5f38e9e1e324110",
+              "blockNumber": 39289125,
+              "timestamp": "2026-04-27T11:10:16.473Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288209.73452-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xa6d760bfe36bc904492b4d7fbd7f568d8f8d3e3317ebbb6ebd339c8266679adc",
+              "blockNumber": 39289125,
+              "timestamp": "2026-04-27T11:10:16.473Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:16.479877"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288217.062308-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288217.062314-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288217.062316-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288217.062317-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288217.062308-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x4a02101bc79fc88272889c3e2a918ae4bf9bb4c16b3453e0fb86b940f8ce6ded",
+              "blockNumber": 39289139,
+              "timestamp": "2026-04-27T11:10:23.369Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288217.062314-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xbb73f52839c2c9bd46e813647d8c569d8940a5456981e92a7a4397f0aee989ea",
+              "blockNumber": 39289139,
+              "timestamp": "2026-04-27T11:10:23.369Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288217.062316-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x8eb6a27019cd3242c5e2899a2a50ca829acaba78c1e75118ba8a8e52ea1b2d17",
+              "blockNumber": 39289139,
+              "timestamp": "2026-04-27T11:10:23.369Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288217.062317-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x6484b9d27310f29fa9fbc1ef0ed544cb001de88f338d117bb445f4acedd3a94e",
+              "blockNumber": 39289139,
+              "timestamp": "2026-04-27T11:10:23.369Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:23.380870"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288224.405847-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288224.405881-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288224.405887-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288224.405891-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288224.405847-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x60640bc7d0378058a2a38e1095acb559c69a021a32d94e01695a7f8b8394da3e",
+              "blockNumber": 39289154,
+              "timestamp": "2026-04-27T11:10:31.028Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288224.405881-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x0892f6f3f2c0b23da476d565f3027cdbcf9d370171efcb82d490346acf301171",
+              "blockNumber": 39289154,
+              "timestamp": "2026-04-27T11:10:31.028Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288224.405887-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x4c945389ee5a374320428c83be83c225c13e97b3c5eb4551945150d2ace17e01",
+              "blockNumber": 39289154,
+              "timestamp": "2026-04-27T11:10:31.028Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288224.405891-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xba4793280f98968b4a108e89aa9c408dd8ad2359dde3d8a9066f279cf6d185d4",
+              "blockNumber": 39289154,
+              "timestamp": "2026-04-27T11:10:31.028Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:31.035661"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288225.852757-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288225.852762-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288225.852764-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288225.852765-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288225.852757-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x9495e1760cf9e23f06e05f4a5399184b8b9c04e80279239155b0d1f45fb45bc9",
+              "blockNumber": 39289157,
+              "timestamp": "2026-04-27T11:10:32.076Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288225.852762-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x6313739239ec55bf4beab75b2ab12bfda613e8d30e0b1ee5fa0b88fcef759c27",
+              "blockNumber": 39289157,
+              "timestamp": "2026-04-27T11:10:32.076Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288225.852764-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x1a2d46c15fcea2f6c8a546b8c237cb4c76ed0aede8c45ec65264cd03b26ffb5e",
+              "blockNumber": 39289157,
+              "timestamp": "2026-04-27T11:10:32.076Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288225.852765-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x3359c4d3f37cc7baf606953046d9ba66c81687a51042667ec9f0658506914ad9",
+              "blockNumber": 39289157,
+              "timestamp": "2026-04-27T11:10:32.076Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:32.083453"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288236.740705-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288236.740878-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288236.740885-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288236.74089-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288236.740705-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xe750bd9df1b4591f4190c6501f8d450ad5a7aede15f301254707769c3cd17f51",
+              "blockNumber": 39289179,
+              "timestamp": "2026-04-27T11:10:42.962Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288236.740878-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x226b1243992b919b918040bbe899976150feeba73921c83413dc8b6ea747aba2",
+              "blockNumber": 39289179,
+              "timestamp": "2026-04-27T11:10:42.962Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288236.740885-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x222bbedd67834218a3dfddde3a883e57891858a71ec4f21f3ebf13f34ec1a168",
+              "blockNumber": 39289179,
+              "timestamp": "2026-04-27T11:10:42.962Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288236.74089-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x0edc2e3cd405240aa9f641f04b2e00b34e81f7a765bed8fc9c672bda133da304",
+              "blockNumber": 39289179,
+              "timestamp": "2026-04-27T11:10:42.962Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:42.965831"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288239.735198-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288239.735226-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288239.735232-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288239.735237-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288239.735198-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xd1b966dd834d83599fd58ca5af1060110f0d89a670cd41a44d4f4e869eebd5cd",
+              "blockNumber": 39289184,
+              "timestamp": "2026-04-27T11:10:45.899Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288239.735226-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x6cc365ecbdfacfcec3e09cb38ed4abc93012b2698741f98f50f75237eaa92d8e",
+              "blockNumber": 39289184,
+              "timestamp": "2026-04-27T11:10:45.899Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288239.735232-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xbc58ff09093649a6fcea001c7fd997b9f9c40553689ee7f74ea489daa278c2c1",
+              "blockNumber": 39289184,
+              "timestamp": "2026-04-27T11:10:45.899Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288239.735237-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x8eaec2424a602650c15046e62f58a85ba627614277b1e418db2df3415911d4dc",
+              "blockNumber": 39289184,
+              "timestamp": "2026-04-27T11:10:45.899Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:45.902274"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288247.063951-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288247.06399-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288247.063997-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288247.064001-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288247.063951-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x30f7fbd985ef1d573ab95ceb51df6d1f25ddd59fb5da9906e45834656294e9fa",
+              "blockNumber": 39289199,
+              "timestamp": "2026-04-27T11:10:53.368Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288247.06399-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xf01885c938b487c3c1976b8f32fb6c1a8c31affc8a4ca72b5cbbb648d4af60a5",
+              "blockNumber": 39289199,
+              "timestamp": "2026-04-27T11:10:53.368Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288247.063997-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x8b60827b63ececad1e06bb4536e27657e044d68407b933bf0fdd4b655993d339",
+              "blockNumber": 39289199,
+              "timestamp": "2026-04-27T11:10:53.368Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288247.064001-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xb5340c331a63c36c796a905959b9a79baf6c6c404c4e066c8d908c510689590e",
+              "blockNumber": 39289199,
+              "timestamp": "2026-04-27T11:10:53.368Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:53.375066"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288254.402667-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288254.402698-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288254.402703-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288254.402708-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288254.402667-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x766868ee441fdc0ee87428f541a03b4b29b1247bcd150fb2640aaa7ddeb1ca3f",
+              "blockNumber": 39289213,
+              "timestamp": "2026-04-27T11:10:56.704Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288254.402698-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x24e49ec1e773fd105da60fbe955b2569ded58184b9448e82fface6cddf27ec15",
+              "blockNumber": 39289213,
+              "timestamp": "2026-04-27T11:10:56.705Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288254.402703-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x89ff5a007006d37c0adcdaeab9df0e7e2054f11d9381e3f1fabd985cb295d82a",
+              "blockNumber": 39289213,
+              "timestamp": "2026-04-27T11:10:56.705Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288254.402708-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x3d8ba7b92139b548a6c771a255c39bed583e86e708271fc62cb862dfa7a3f137",
+              "blockNumber": 39289213,
+              "timestamp": "2026-04-27T11:10:56.705Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:10:56.706792"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288255.196194-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.196212-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.19622-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.196227-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288255.196194-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x4392cdda36e95afc24f41131bd2dcb9066121dc8044f8d930809b37425475a2c",
+              "blockNumber": 39289215,
+              "timestamp": "2026-04-27T11:11:01.763Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.196212-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xddb9713b6708d457debaf40029e7fab3768f4a522029df9e460c42c786355baf",
+              "blockNumber": 39289215,
+              "timestamp": "2026-04-27T11:11:01.763Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.19622-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x1123b8c65cd61c82a925a3b67e662376473ed62c9ec20dac1b7bebd3edaed76c",
+              "blockNumber": 39289215,
+              "timestamp": "2026-04-27T11:11:01.763Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.196227-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xa7ef15b1db15185b5b4a0255250b2777f12a74300d2763de0d14d62f59b598c2",
+              "blockNumber": 39289215,
+              "timestamp": "2026-04-27T11:11:01.763Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:11:01.771930"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288255.850371-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.850387-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.85039-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288255.850393-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288255.850371-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x79f1b11cdd05238756084281fe8382e873bfedd72a6839107b93c186b16c8d8b",
+              "blockNumber": 39289217,
+              "timestamp": "2026-04-27T11:11:02.487Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.850387-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x3c103ae57785776f8984a4cad5f8db0cf609874f543a0741a533c86ab7b766a2",
+              "blockNumber": 39289217,
+              "timestamp": "2026-04-27T11:11:02.487Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.85039-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xa670019a6405b556abe0b5f4c3c14dfca42153716255b217cd93c6f0ba2bc49a",
+              "blockNumber": 39289217,
+              "timestamp": "2026-04-27T11:11:02.487Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288255.850393-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xedf158493b46e7216c68e08d4d118b7d5f4aa03f05c60748dd6051491f4d019a",
+              "blockNumber": 39289217,
+              "timestamp": "2026-04-27T11:11:02.487Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:11:02.493609"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288269.780993-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288269.781225-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288269.781237-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288269.78124-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288269.780993-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xb35e21d8cb3a0e04dd399117865639b4d660f1aaec51fb13235817e0bf6a9b28",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:11:58.071Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288269.781225-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xdcfded82bf929f832bf655ef37428199215a00905102d34dc283deab74d5c9d0",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:11:58.071Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288269.781237-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x0c22bef985d97acf1ad957c76431abfdc3f1c549c429e4af51f3b1e767ed5c76",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:11:58.071Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288269.78124-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x2eb16287d1258da88cedc508cf3db8b67db6192e4a80363dfff917ad9072485f",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:11:58.071Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:11:58.079123"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288277.064489-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288277.06451-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288277.064516-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288277.064521-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288277.064489-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xb35e21d8cb3a0e04dd399117865639b4d660f1aaec51fb13235817e0bf6a9b28",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:12:01.213Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288277.06451-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xdcfded82bf929f832bf655ef37428199215a00905102d34dc283deab74d5c9d0",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:12:01.213Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288277.064516-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x0c22bef985d97acf1ad957c76431abfdc3f1c549c429e4af51f3b1e767ed5c76",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:12:01.213Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288277.064521-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x2eb16287d1258da88cedc508cf3db8b67db6192e4a80363dfff917ad9072485f",
+              "blockNumber": 39289333,
+              "timestamp": "2026-04-27T11:12:01.213Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:01.219772"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288329.731484-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288329.73153-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288329.731534-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288329.731537-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288329.731484-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xbaaff0e05cb020170cca4c3fc8dafcb5f20cc0f93bd2f5c53e95d3556ed86f3b",
+              "blockNumber": 39289361,
+              "timestamp": "2026-04-27T11:12:15.999Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288329.73153-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xc3411b76ab56b36409a41d1e99346b9faaf1b10553230ecdeda2f6b25016e235",
+              "blockNumber": 39289361,
+              "timestamp": "2026-04-27T11:12:15.999Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288329.731534-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x020690ef335c46361e759b27b33c9ab1be4d0d8d6ed8905a616ddd1cc90da5fb",
+              "blockNumber": 39289361,
+              "timestamp": "2026-04-27T11:12:15.999Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288329.731537-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x464d9cad28936b4c70a99ba34ec69a1c7d18e97a33913381dbf40ed34fb3d458",
+              "blockNumber": 39289361,
+              "timestamp": "2026-04-27T11:12:15.999Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:16.010113"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288337.058297-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288337.058309-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288337.058311-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288337.058312-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288337.058297-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x5bd05b953755262199398df66843c79be0fca375400c72a622418b82674ca1ba",
+              "blockNumber": 39289375,
+              "timestamp": "2026-04-27T11:12:23.340Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288337.058309-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x825ea3d79b2d495815a81e65eda6cc6768270d4b094b5b2158d8340e0056f9cd",
+              "blockNumber": 39289375,
+              "timestamp": "2026-04-27T11:12:23.340Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288337.058311-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x3cb95f27d2e92206ddeea04ca3876795c01caabd315a2c62f10cc1db52dbe9ba",
+              "blockNumber": 39289375,
+              "timestamp": "2026-04-27T11:12:23.340Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288337.058312-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xe750bb1deb4e264d9533f3189e4632f0e88529afc65776dd3f6b228656c86751",
+              "blockNumber": 39289375,
+              "timestamp": "2026-04-27T11:12:23.340Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:23.349655"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288344.403564-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288344.403587-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288344.40359-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288344.403594-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288344.403564-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x3e1f96549bd2a433bef9150f2da6efe16d3e98dd0d14d083dbc82a1525fc6630",
+              "blockNumber": 39289390,
+              "timestamp": "2026-04-27T11:12:30.682Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288344.403587-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x334600f77d8ed5252a2dfcf2461dc8b084c881ebd2c6da451a00d5557d89e316",
+              "blockNumber": 39289390,
+              "timestamp": "2026-04-27T11:12:30.682Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288344.40359-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x360b794ed83607ecaa813f1295060c6f14da3386d6b6aa4093b408408176d002",
+              "blockNumber": 39289390,
+              "timestamp": "2026-04-27T11:12:30.682Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288344.403594-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x0e8a85ce5419462ab996c4fde352dded297ae57ea7843cb54c368d4f81cf434c",
+              "blockNumber": 39289390,
+              "timestamp": "2026-04-27T11:12:30.682Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:30.687641"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288345.19578-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288345.195811-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288345.195819-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288345.195827-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288345.19578-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xacd6e45d93aa25e1ccfefffe93eecc1b7b886257d30a644347524a6c3a430d02",
+              "blockNumber": 39289392,
+              "timestamp": "2026-04-27T11:12:31.728Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288345.195811-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x7e518283652f67e3759528c7f6daaadc23265616d2288ae1ca550d773aefe546",
+              "blockNumber": 39289392,
+              "timestamp": "2026-04-27T11:12:31.728Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288345.195819-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x48ced06ba5a0970a69d6674897a6e5196b543e347bb8df7af4611953685cd492",
+              "blockNumber": 39289392,
+              "timestamp": "2026-04-27T11:12:31.728Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288345.195827-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xecf2cddb09b7c78b3629b681255a293b9dd8db7eedcaae76c26e8a1a0e1d26a1",
+              "blockNumber": 39289392,
+              "timestamp": "2026-04-27T11:12:31.728Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:31.734515"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288356.750611-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288356.750642-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288356.750652-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288356.750656-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288356.750611-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xcce6b16ba7a6f4a72292ad2b0bd4a0f7c2dd2d471955b47c99b56acbf2be7e5d",
+              "blockNumber": 39289415,
+              "timestamp": "2026-04-27T11:12:43.348Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288356.750642-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xe3512eefce4fb150765392ae35c9b009d91e3dc65e0de897cc3f088a8654f6fc",
+              "blockNumber": 39289415,
+              "timestamp": "2026-04-27T11:12:43.348Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288356.750652-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x74c53a9c595593a8c775abf57945485953ba3f43c12552b38568a6e294d7136d",
+              "blockNumber": 39289415,
+              "timestamp": "2026-04-27T11:12:43.348Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288356.750656-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x73a555093ad4b6820171f9530467c18e5c44d00ab3ad5b0c3019b8ddcba074e9",
+              "blockNumber": 39289415,
+              "timestamp": "2026-04-27T11:12:43.348Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:43.357243"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288359.736294-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288359.736346-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288359.736352-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288359.736356-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288359.736294-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xdcc75585f78505f8a946d626dbcb9be534984b73417e95fbcee2ce8128b0f1c4",
+              "blockNumber": 39289418,
+              "timestamp": "2026-04-27T11:12:45.933Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288359.736346-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x9dd9f7a9df603172173ad8a1666ad30fc9084bceb42b4f9f7866c0f12df0f58c",
+              "blockNumber": 39289418,
+              "timestamp": "2026-04-27T11:12:45.933Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288359.736352-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x7754a6e8d01646c7948c82faf4b38eb7562eb96b0ab9119dc08387a61d0da6ba",
+              "blockNumber": 39289418,
+              "timestamp": "2026-04-27T11:12:45.933Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288359.736356-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x69fb5eaf1dc2507ea765032b650b0668fbf69cc1898d210d242cc0249d73adf5",
+              "blockNumber": 39289418,
+              "timestamp": "2026-04-27T11:12:45.933Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:45.942792"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288367.062771-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288367.062792-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288367.062796-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288367.062799-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288367.062771-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x4bcd768ddfa2c31f8daf67fa6c1e4b468c347dc60a3f40044733e3ee664b4fb3",
+              "blockNumber": 39289433,
+              "timestamp": "2026-04-27T11:12:53.301Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288367.062792-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x4d67877ddbbf51e23422ae3c5948319a1bbb3fc4ea6def83357f3c0703364072",
+              "blockNumber": 39289433,
+              "timestamp": "2026-04-27T11:12:53.301Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288367.062796-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xaa1e5cc8e8b7c3da729ac3eb23600a8043ba51ea8137334185ad7c663b0b296d",
+              "blockNumber": 39289433,
+              "timestamp": "2026-04-27T11:12:53.301Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288367.062799-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x41e3c43008c0e6bef5b017ffc8fb60cdd9af14aaca706f8d1705c6719f7c8241",
+              "blockNumber": 39289433,
+              "timestamp": "2026-04-27T11:12:53.301Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:53.319640"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288375.85241-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288375.852415-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288375.852417-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288375.852418-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288375.85241-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xbaee5e0b82c50b9185d37b52475fce7c7006598c93c4680f908ddf69fbf60b41",
+              "blockNumber": 39289450,
+              "timestamp": "2026-04-27T11:12:57.808Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288375.852415-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x357e3f50fc5ac890f41ed4158f61cc2c0472df5b90c2fcf1119bde28e22e36bc",
+              "blockNumber": 39289450,
+              "timestamp": "2026-04-27T11:12:57.808Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288375.852417-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x3eabc301185448d962d5a6f28489a002f2518a30108a7348e57416f77d74bc3e",
+              "blockNumber": 39289450,
+              "timestamp": "2026-04-27T11:12:57.808Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288375.852418-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xfca3d9d9d5320be676176340981cb3d65fdc87bbe18c3df562f2064c01fdf29b",
+              "blockNumber": 39289450,
+              "timestamp": "2026-04-27T11:12:57.808Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:12:57.810965"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288374.4021-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288374.402109-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288374.402111-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288374.402112-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288374.4021-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x46ce8222f2a04866e1d26375d80989a89bfc9068a17ef11603822d4a3bb2268c",
+              "blockNumber": 39289449,
+              "timestamp": "2026-04-27T11:13:01.087Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288374.402109-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x3594006717bfad5377b7e0930a6fe2a1187a79e19f4b1cebd4cfe612faf6556a",
+              "blockNumber": 39289449,
+              "timestamp": "2026-04-27T11:13:01.087Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288374.402111-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x6fab451899bbd139305caacb15fd9feac1bdfaf61bda5d12011204a5a7d92261",
+              "blockNumber": 39289449,
+              "timestamp": "2026-04-27T11:13:01.087Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288374.402112-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x1c811bb53bfdd47d6d9ad610635bf77848538d7e40a977b731193d30f00a8fcb",
+              "blockNumber": 39289449,
+              "timestamp": "2026-04-27T11:13:01.087Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:01.093471"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288386.735828-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288386.735875-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288386.735879-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288386.735882-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288386.735828-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x3ea3e803eae7bbd9f105a158f0a0989d349d372d401f1d8ec4a72b7eb6d1d75d",
+              "blockNumber": 39289472,
+              "timestamp": "2026-04-27T11:13:13.052Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288386.735875-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x9f0611ced38531694d2af0e3851b642c0d1dbba6a6eb36a2e24e517dfecaeb3b",
+              "blockNumber": 39289472,
+              "timestamp": "2026-04-27T11:13:13.052Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288386.735879-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x308ce699b2de1fbf874f5360bb56ebee37afe16bdbdbbb56b43d68c8ff8343fb",
+              "blockNumber": 39289472,
+              "timestamp": "2026-04-27T11:13:13.052Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288386.735882-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x4b99894ade7fe009c02e5c2e51cea0e57566c6eeecc9fe8c556dabb22b8dae00",
+              "blockNumber": 39289472,
+              "timestamp": "2026-04-27T11:13:13.052Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:13.061770"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288389.734932-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288389.734967-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288389.734971-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288389.734974-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288389.734932-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xe21a9d5d47d028b921a7b259337b4f71dda9d0980d6be79a0c0b4162ec643858",
+              "blockNumber": 39289479,
+              "timestamp": "2026-04-27T11:13:16.199Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288389.734967-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x66afd39ad6ec25330719fd5170de70ad5252757ce0589b687c930ae20356f052",
+              "blockNumber": 39289479,
+              "timestamp": "2026-04-27T11:13:16.199Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288389.734971-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x22dc0d6bfffbc7d9fee8b752e626597e67c96893f51a745a6a1fc3cd7f230633",
+              "blockNumber": 39289479,
+              "timestamp": "2026-04-27T11:13:16.199Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288389.734974-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x82b7d0b9c39d2d190367a9206b6ebaded870bb939cd497210b247980c9ffce64",
+              "blockNumber": 39289479,
+              "timestamp": "2026-04-27T11:13:16.199Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:16.207815"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288397.063066-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288397.063083-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288397.063087-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288397.063091-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288397.063066-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xae5f901c207e718b1a7441ecb7a285241e3c1bdf683c1cf8526b7edf03b6d3c6",
+              "blockNumber": 39289493,
+              "timestamp": "2026-04-27T11:13:23.376Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288397.063083-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x34e95913d0da832608ab54ff5a7952bfb4e0ee26e5dc469944c34d89c8ee43c5",
+              "blockNumber": 39289493,
+              "timestamp": "2026-04-27T11:13:23.376Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288397.063087-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x13cc5f78e9d5c4e6ce44640a059720beb6620dfd89cae32f9d394bb6d480d871",
+              "blockNumber": 39289493,
+              "timestamp": "2026-04-27T11:13:23.376Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288397.063091-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x6533b854afd57659c22b5e55ebc2bc22e5c6ceab6c1b255a397114f31302786d",
+              "blockNumber": 39289493,
+              "timestamp": "2026-04-27T11:13:23.376Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:23.390999"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288404.405734-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288404.405763-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288404.405769-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288404.405773-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288404.405734-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xa27cc89aa4023b232109a4fc3dac01280145bd01a6724c96767d3fe5bd01551b",
+              "blockNumber": 39289506,
+              "timestamp": "2026-04-27T11:13:30.849Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288404.405763-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xbc1647652038a416ef8749da08f3317b4adca04c85348f55bed374de1dd11c66",
+              "blockNumber": 39289506,
+              "timestamp": "2026-04-27T11:13:30.849Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288404.405769-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x542dc526a6ee7c4b0b5994ef0a1a577c09ff9e7a1b9eb664d2ac55c7dc9769eb",
+              "blockNumber": 39289506,
+              "timestamp": "2026-04-27T11:13:30.849Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288404.405773-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x98e0eee2e1f409ae0200130fb9f2fe5e0ac5e1a62119738b67cf3858c461b430",
+              "blockNumber": 39289506,
+              "timestamp": "2026-04-27T11:13:30.849Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:30.858234"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288405.198177-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.198205-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.198214-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.198222-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288405.198177-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xeb9c22f74688526fb6d9f6f2ae2302a1e46f9e15fcf54f9623f2c5b60fa71bcb",
+              "blockNumber": 39289507,
+              "timestamp": "2026-04-27T11:13:31.497Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.198205-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x004986cfda4afafbd8ff252d45b647c3b740a7fb1917a4c1d9bf61827196e5d9",
+              "blockNumber": 39289507,
+              "timestamp": "2026-04-27T11:13:31.497Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.198214-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x092976dba96dbdcd44700ee6cf385eb888ba58fb07a9e0ef762899d6ed2e7680",
+              "blockNumber": 39289507,
+              "timestamp": "2026-04-27T11:13:31.497Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.198222-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x3e20612cfe1dc9b89d6476ba98c7fed5e7e758de282322d8699692dc4ca91b6c",
+              "blockNumber": 39289507,
+              "timestamp": "2026-04-27T11:13:31.497Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:31.503345"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288405.852666-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.852671-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.852673-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288405.852674-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288405.852666-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xca2df13a9555d8b0392baa76bf57350e55b43383acbdbf0e42130d6915969570",
+              "blockNumber": 39289509,
+              "timestamp": "2026-04-27T11:13:32.098Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.852671-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xea9f39b8f81587ce2c84bf69d2cec7c20ddf30d93c9cc617df27a0484c6e1b45",
+              "blockNumber": 39289509,
+              "timestamp": "2026-04-27T11:13:32.098Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.852673-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xf0f3eee6bc7edb610f084c92fab5d01d1c7f4eb4fffafc1e8fe18bcc3aeac999",
+              "blockNumber": 39289509,
+              "timestamp": "2026-04-27T11:13:32.098Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288405.852674-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x16212d7c4a5b16642656ce045842ad3bf69ac3e59c10efd275b0cd178c01c8cc",
+              "blockNumber": 39289509,
+              "timestamp": "2026-04-27T11:13:32.098Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:32.104832"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288416.739987-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288416.740058-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288416.740066-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288416.74007-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288416.739987-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xe241707e71279fdfb9eb2bef51acdf666cdd60fdef9f9f670f2dfa7aeadd1f79",
+              "blockNumber": 39289530,
+              "timestamp": "2026-04-27T11:13:38.705Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288416.740058-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x17358909f66edc7699652557438e5e7451b7e246e5fdf9efafef6ba55aaecf37",
+              "blockNumber": 39289530,
+              "timestamp": "2026-04-27T11:13:38.705Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288416.740066-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x97aed3fffcbe795cdcc55d9af5db816a8954a6cacfda7186564e5868bc99b69c",
+              "blockNumber": 39289530,
+              "timestamp": "2026-04-27T11:13:38.705Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288416.74007-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xb57a5128dc72aa920f25e4e83a73af940d771d130ed8453a095ff040ee54faa5",
+              "blockNumber": 39289530,
+              "timestamp": "2026-04-27T11:13:38.705Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:38.716309"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288419.737943-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288419.737949-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288419.73795-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288419.737952-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288419.737943-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xf11d56f1b2c9dcdf2c8b050d66405cef00c9984bc8b2b36673f6a8f568a29cc0",
+              "blockNumber": 39289537,
+              "timestamp": "2026-04-27T11:13:46.060Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288419.737949-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xbaf7f9a389258bae077bf47e824506eb9ecdc2652dabe00550013d37bed40396",
+              "blockNumber": 39289537,
+              "timestamp": "2026-04-27T11:13:46.060Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288419.73795-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x472f0d7cfb61083e8aa3ff17f2bf6efd20a075bf1aed0d329ffdf09659bb26fd",
+              "blockNumber": 39289537,
+              "timestamp": "2026-04-27T11:13:46.060Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288419.737952-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xde9eae68cc84af80ee133431717faa90874a679f3110022b9a22f0a9aff203e1",
+              "blockNumber": 39289537,
+              "timestamp": "2026-04-27T11:13:46.060Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:46.076551"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288427.0623-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288427.06231-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288427.062312-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288427.062314-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288427.0623-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xb919a337b4390f6ad7da35c9df6247c37aa59cd36083c47d3ee7649ea5c73955",
+              "blockNumber": 39289551,
+              "timestamp": "2026-04-27T11:13:53.518Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288427.06231-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xa1cbcca75381e700bf667265156b1e4bdb1e1d81e56066181cf3701803931bd7",
+              "blockNumber": 39289551,
+              "timestamp": "2026-04-27T11:13:53.518Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288427.062312-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xf5426a92ae73970106730912c6af39fb64b2f81228dd59a2abeafe5ab556212b",
+              "blockNumber": 39289551,
+              "timestamp": "2026-04-27T11:13:53.518Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288427.062314-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x2da80b43c11bf69419410a281402fa1f182aab367d1b931e3b51e3189df27c48",
+              "blockNumber": 39289551,
+              "timestamp": "2026-04-27T11:13:53.518Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:13:53.522291"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288434.407866-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288434.407881-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288434.407884-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288434.407887-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288434.407866-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x8cc2893d32798775388b70c6f60985a4797a70886d7330656b949c86a50b1c7a",
+              "blockNumber": 39289565,
+              "timestamp": "2026-04-27T11:14:00.598Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288434.407881-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x76d6b7bd8c323638b3ef7ceba2f8a92ff4a5cf8a1b2d2b768366d4f9d7e6badf",
+              "blockNumber": 39289565,
+              "timestamp": "2026-04-27T11:14:00.598Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288434.407884-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xe3dd9b2240c865a40b376d4cebc2d2d1b886597c7ed95eaef07c85720436c74a",
+              "blockNumber": 39289565,
+              "timestamp": "2026-04-27T11:14:00.598Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288434.407887-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x4e8b79cbf3bc0cda3857995b7c95a3e2e62c57b4db706bdea8b29c56a8454597",
+              "blockNumber": 39289565,
+              "timestamp": "2026-04-27T11:14:00.598Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:00.601388"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288435.200571-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.200598-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.200607-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.200615-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288435.200571-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x12f3d17b1c6419fe0d5ab766438f9661c2f90b86b5ee7ae0a81af56c9a2caf4e",
+              "blockNumber": 39289567,
+              "timestamp": "2026-04-27T11:14:01.399Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.200598-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0xc63d44eb336cb9bbc4e0c6a6d74ef6e587fa0fe93751239a21606d8bade52522",
+              "blockNumber": 39289567,
+              "timestamp": "2026-04-27T11:14:01.399Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.200607-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0xd0b34806d54883506118f9c0d771ab519151f656d095a4fbc6b8f87f91e4886b",
+              "blockNumber": 39289567,
+              "timestamp": "2026-04-27T11:14:01.399Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.200615-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x731bb482e6383fc59f6aa7f6c68246280e2fae8f57f40c6c7fa0b210ae83cb61",
+              "blockNumber": 39289567,
+              "timestamp": "2026-04-27T11:14:01.399Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:01.401278"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288435.857694-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.8577-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.857702-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288435.857703-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288435.857694-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0xd698874db2af4c47059b614f7187ee8d076734c7cd720b8f7c8d7d8f9a17df0f",
+              "blockNumber": 39289569,
+              "timestamp": "2026-04-27T11:14:02.284Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.8577-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x585aa04efebe43ff1cb87a4e63b0ceb45148ec4df341c31ee798be6b020fbde6",
+              "blockNumber": 39289569,
+              "timestamp": "2026-04-27T11:14:02.284Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.857702-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x53cc8391599ff31a0ba590d06b824b924590de4ef86d5ce84f1b067ea0418acc",
+              "blockNumber": 39289569,
+              "timestamp": "2026-04-27T11:14:02.284Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288435.857703-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x6f5d9ba7ccb6a19b8e4942f584280ed4695f0a1e46e8cad5f28b1fad26412f34",
+              "blockNumber": 39289569,
+              "timestamp": "2026-04-27T11:14:02.284Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:02.305625"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288446.7391-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288446.739202-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288446.739209-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288446.739281-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288446.7391-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x0f54a4b1a5d94e2db2767e60d141076523be7181bd0e4edf282c3ffd17263c3a",
+              "blockNumber": 39289590,
+              "timestamp": "2026-04-27T11:14:13.114Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288446.739202-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x1e92632d199e8f61dfc7d9eed997e9531cbc255052bebf376df73ce24c48b02f",
+              "blockNumber": 39289590,
+              "timestamp": "2026-04-27T11:14:13.114Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288446.739209-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x6504c7269db28c21a25ddda5908b3aae6553dcb4421b42f7c05c820affbff70d",
+              "blockNumber": 39289590,
+              "timestamp": "2026-04-27T11:14:13.114Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288446.739281-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0xbb4c315f8e8c3335a89a98461f4cd0e69b0724f24550af4042810fb8fc593b2a",
+              "blockNumber": 39289590,
+              "timestamp": "2026-04-27T11:14:13.114Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:13.125676"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288449.739965-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288449.739999-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288449.740004-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288449.740009-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288449.739965-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x75f91c2583c92091a39a8e476d74b3a04bc7bfa56cd3ba4657686900caf8d112",
+              "blockNumber": 39289596,
+              "timestamp": "2026-04-27T11:14:16.059Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288449.739999-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x9369b93509ebc0b89d8a1dfe6a2f0de34aa1f28892ced9114ad682fb08e06b27",
+              "blockNumber": 39289596,
+              "timestamp": "2026-04-27T11:14:16.059Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288449.740004-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x1b25cec6c2fa0d178487842286844b6e97251d09b05171e2e2d879304a261489",
+              "blockNumber": 39289596,
+              "timestamp": "2026-04-27T11:14:16.059Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288449.740009-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x81ec4485ae2fc99fb80d71481d4423d5008edc7e4b2527e29f21ebcc822167aa",
+              "blockNumber": 39289596,
+              "timestamp": "2026-04-27T11:14:16.059Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:16.068061"
+    },
+    {
+      "action_count": 4,
+      "amount_per_action": 0.1,
+      "total_amount": 0.4,
+      "actions": [
+        {
+          "channelId": "continuous-transfer-1777288457.068649-0",
+          "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288457.068676-1",
+          "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+          "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288457.068687-2",
+          "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+          "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "amountUSDC": 0.1
+        },
+        {
+          "channelId": "continuous-transfer-1777288457.068695-3",
+          "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+          "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+          "amountUSDC": 0.1
+        }
+      ],
+      "result": {
+        "success": true,
+        "result": {
+          "receipts": [
+            {
+              "channelId": "continuous-transfer-1777288457.068649-0",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+              "txHash": "0x584aac14c6f7591341e95b362e6cfeaf023f4cff905a492d9065d0317bda2ea4",
+              "blockNumber": 39289611,
+              "timestamp": "2026-04-27T11:14:23.401Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288457.068676-1",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+              "txHash": "0x5dd4b0189e864bdef6a1a3edf4c6c8cde9f02e5141c5584a477e5854d67414ac",
+              "blockNumber": 39289611,
+              "timestamp": "2026-04-27T11:14:23.401Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288457.068687-2",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+              "txHash": "0x6976a7f86fad362403a22bac3cf8a9d5ad06634c33be51fce46c9ba76ee96b1b",
+              "blockNumber": 39289611,
+              "timestamp": "2026-04-27T11:14:23.401Z",
+              "chain": "arc-testnet"
+            },
+            {
+              "channelId": "continuous-transfer-1777288457.068695-3",
+              "amountUSDC": 0.1,
+              "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+              "txHash": "0x57fa8e0ecf5cd32c1c51ea92b5d9e1dbf9080e33be643285f902b790ace306b8",
+              "blockNumber": 39289611,
+              "timestamp": "2026-04-27T11:14:23.401Z",
+              "chain": "arc-testnet"
+            }
+          ],
+          "actionsCount": 4
+        }
+      },
+      "scheduled": true,
+      "timestamp": "2026-04-27T13:14:23.408924"
     }
   ]
 }
