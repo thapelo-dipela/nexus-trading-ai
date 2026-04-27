@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — Agent Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#FAFAF8;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;font-family:'DM Mono',monospace;color:#1A1915;}
+h1{font-size:13px;font-weight:500;color:#6B6B5E;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;border-radius:12px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.06);max-width:100%;}
+#state-bar{margin-top:10px;font-size:11px;color:#9B9B8E;letter-spacing:0.05em;}
+#vote-chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-height:24px;max-width:680px;}
+.vc{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.04em;transition:opacity .3s;}
+.vc-buy{background:rgba(22,163,74,.12);color:#16A34A;}
+.vc-sell{background:rgba(220,38,38,.12);color:#DC2626;}
+.vc-hold{background:rgba(107,107,94,.12);color:#6B6B5E;}
+.vc-dim{opacity:.25;}
+</style>
+</head>
+<body>
+<h1>⬡ NEXUS — Agent Office</h1>
+<canvas id="canvas" width="680" height="500"></canvas>
+<div id="state-bar">Initialising…</div>
+<div id="vote-chips"></div>
+<script>
+const CV=document.getElementById('canvas'),CX=CV.getContext('2d'),W=680,H=500;
+const AGENTS=[
+  {id:'orderflow', label:'Order Flow',short:'OF',body:'#378ADD',hair:'#0C447C',shoe:'#042C53'},
+  {id:'momentum',  label:'Momentum',  short:'MM',body:'#EF9F27',hair:'#854F0B',shoe:'#412402'},
+  {id:'sentiment', label:'Sentiment', short:'SN',body:'#D4537E',hair:'#72243E',shoe:'#4B1528'},
+  {id:'risk_guardian',label:'Risk Guard',short:'RG',body:'#E24B4A',hair:'#791F1F',shoe:'#501313'},
+  {id:'llm_reasoner',label:'LLM',    short:'AI',body:'#7F77DD',hair:'#3C3489',shoe:'#26215C'},
+];
+const DIVIDER=228,TABLE={cx:340,cy:115,rx:128,ry:52},DESK_Y=428,DESK_XS=[72,192,316,440,560];
+function boardPos(i){const a=(i/5)*Math.PI*2-Math.PI/2;return{x:TABLE.cx+Math.cos(a)*(TABLE.rx+32),y:TABLE.cy+Math.sin(a)*(TABLE.ry+36)};}
+const BOARD_POS=AGENTS.map((_,i)=>boardPos(i));
+const DURATIONS={IDLE:6000,ALERT:900,WALK_UP:2400,VOTING:5200,CONSENSUS:2000,WALK_DOWN:2400};
+const NEXT_STATE={IDLE:'ALERT',ALERT:'WALK_UP',WALK_UP:'VOTING',VOTING:'CONSENSUS',CONSENSUS:'WALK_DOWN',WALK_DOWN:'IDLE'};
+let state='IDLE',stateMs=0,cycle=1,lastTs=0;
+const AS=AGENTS.map((_,i)=>({x:DESK_XS[i],y:DESK_Y,action:'sit',walkPh:Math.random()*Math.PI*2,voteShown:false}));
+const MOCK=[
+  [{d:'SELL',c:.34},{d:'SELL',c:.65},{d:'BUY',c:.39},{d:'SELL',c:.30},{d:'HOLD',c:.10}],
+  [{d:'BUY',c:.48},{d:'BUY',c:.72},{d:'BUY',c:.55},{d:'SELL',c:.28},{d:'HOLD',c:.15}],
+  [{d:'SELL',c:.58},{d:'SELL',c:.61},{d:'BUY',c:.42},{d:'SELL',c:.44},{d:'SELL',c:.68}],
+];
+let mockIdx=0,votes=[],consensus=null;
+
+async function fetchVotes(){
+  try{
+    const r=await fetch('http://localhost:3000/api/live-decisions',{signal:AbortSignal.timeout(3000)});
+    const d=await r.json();
+    if(d.success&&d.data.agent_decisions){
+      const decs=d.data.agent_decisions;
+      votes=AGENTS.map(a=>{
+        const dec=decs.find(dd=>dd.agent_id===a.id||a.id.startsWith(dd.agent_id.slice(0,4)));
+        return dec?{direction:dec.direction,confidence:dec.confidence}:null;
+      });
+      if(d.data.consensus_decision)consensus=d.data.consensus_decision;
+      cycle=d.data.latest_cycle||cycle;
+      return;
+    }
+  }catch(e){}
+  const set=MOCK[mockIdx%MOCK.length];mockIdx++;
+  votes=set.map(v=>({direction:v.d,confidence:v.c}));
+  const cnt={};votes.forEach(v=>cnt[v.direction]=(cnt[v.direction]||0)+1);
+  const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+  consensus={direction:top[0],confidence:votes.reduce((s,v)=>s+v.confidence,0)/votes.length};
+}
+
+function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+function roundRect(cx,x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.lineTo(x+w-r,y);cx.quadraticCurveTo(x+w,y,x+w,y+r);cx.lineTo(x+w,y+h-r);cx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);cx.lineTo(x+r,y+h);cx.quadraticCurveTo(x,y+h,x,y+h-r);cx.lineTo(x,y+r);cx.quadraticCurveTo(x,y,x+r,y);cx.closePath();}
+
+function drawPlant(cx,x,y){cx.fillStyle='#B07040';cx.fillRect(x-8,y-18,16,18);cx.fillStyle='#8A5028';cx.fillRect(x-10,y-22,20,6);cx.fillStyle='#2A6A30';cx.beginPath();cx.ellipse(x-7,y-32,9,14,-0.4,0,Math.PI*2);cx.fill();cx.beginPath();cx.ellipse(x+7,y-34,9,14,0.4,0,Math.PI*2);cx.fill();cx.fillStyle='#1A5020';cx.beginPath();cx.ellipse(x,y-38,7,12,0,0,Math.PI*2);cx.fill();}
+
+function drawDesk(cx,x,y,agent,t){
+  cx.fillStyle='#C8B888';cx.fillRect(x-35,y-46,70,7);
+  cx.fillStyle='#B4A070';cx.fillRect(x-33,y-39,66,22);
+  cx.fillStyle='#A08855';cx.fillRect(x-31,y-17,8,17);cx.fillRect(x+23,y-17,8,17);
+  cx.fillStyle='#888878';cx.fillRect(x-2,y-62,4,16);cx.fillRect(x-9,y-48,18,4);
+  cx.fillStyle='#222018';cx.fillRect(x-20,y-90,40,32);
+  const fl=0.88+Math.sin(t*.004+x*.01)*.08;
+  cx.fillStyle=`rgba(18,48,82,${fl})`;cx.fillRect(x-18,y-88,36,28);
+  cx.strokeStyle=`rgba(55,138,221,${fl})`;cx.lineWidth=1.5;cx.beginPath();
+  for(let px=0;px<36;px+=5){const py=14+Math.sin(t*.006+px*.25+x*.008)*7;if(px===0)cx.moveTo(x-18+px,y-88+py);else cx.lineTo(x-18+px,y-88+py);}
+  cx.stroke();
+  cx.fillStyle=`rgba(212,168,60,${fl})`;cx.font='6px monospace';cx.textAlign='center';cx.fillText('BTC',x,y-76);
+  cx.fillStyle='#C8C8B8';cx.fillRect(x-17,y-42,34,9);
+  cx.fillStyle='#AAAAAA';for(let kx=0;kx<5;kx++)for(let ky=0;ky<2;ky++)cx.fillRect(x-13+kx*6,y-41+ky*3,4,2);
+  cx.fillStyle=agent.body;cx.font='bold 8px monospace';cx.textAlign='center';cx.fillText(agent.short,x,y+10);
+}
+
+function drawScene(t){
+  CX.fillStyle='#EDE9E0';CX.fillRect(0,0,W,DIVIDER);
+  CX.fillStyle='#D5CEBD';CX.fillRect(0,DIVIDER-24,W,24);
+  CX.fillStyle='#E4DFCF';CX.fillRect(0,0,36,DIVIDER);CX.fillRect(W-36,0,36,DIVIDER);
+  for(const wx of[120,560]){CX.fillStyle='#B8CDE0';CX.fillRect(wx-28,10,56,70);CX.fillStyle='rgba(255,255,255,0.3)';CX.fillRect(wx-26,12,24,66);CX.fillRect(wx+4,12,24,66);CX.strokeStyle='#8AAFCC';CX.lineWidth=2;CX.strokeRect(wx-28,10,56,70);CX.lineWidth=1;CX.beginPath();CX.moveTo(wx-2,10);CX.lineTo(wx-2,80);CX.stroke();CX.beginPath();CX.moveTo(wx-28,42);CX.lineTo(wx+28,42);CX.stroke();}
+  CX.fillStyle='#1E1C18';CX.fillRect(W/2-72,8,144,58);CX.fillStyle='#0F2644';CX.fillRect(W/2-69,11,138,52);
+  CX.strokeStyle='rgba(55,138,221,0.8)';CX.lineWidth=1.5;CX.beginPath();for(let px=0;px<138;px+=6){const py=30+Math.sin(t*.003+px*.18)*12;if(px===0)CX.moveTo(W/2-69+px,11+py);else CX.lineTo(W/2-69+px,11+py);}CX.stroke();
+  CX.fillStyle='#FAFAF8';CX.font='bold 9px monospace';CX.textAlign='center';CX.fillText('NEXUS BOARDROOM',W/2,25);
+  CX.fillStyle='#D97706';CX.font='8px monospace';CX.fillText('CYCLE #'+cycle,W/2,37);
+  CX.fillStyle='rgba(0,0,0,0.18)';CX.beginPath();CX.ellipse(TABLE.cx+4,TABLE.cy+8,TABLE.rx,TABLE.ry,0,0,Math.PI*2);CX.fill();
+  CX.fillStyle='#7A5820';CX.beginPath();CX.ellipse(TABLE.cx,TABLE.cy,TABLE.rx,TABLE.ry,0,0,Math.PI*2);CX.fill();
+  CX.fillStyle='#9A7232';CX.beginPath();CX.ellipse(TABLE.cx-2,TABLE.cy-3,TABLE.rx-6,TABLE.ry-6,0,0,Math.PI*2);CX.fill();
+  CX.fillStyle='rgba(255,220,140,0.2)';CX.beginPath();CX.ellipse(TABLE.cx-25,TABLE.cy-14,TABLE.rx*.55,TABLE.ry*.45,-0.2,0,Math.PI*2);CX.fill();
+  CX.strokeStyle='#4A2E0A';CX.lineWidth=2;CX.beginPath();CX.ellipse(TABLE.cx,TABLE.cy,TABLE.rx,TABLE.ry,0,0,Math.PI*2);CX.stroke();
+  BOARD_POS.forEach((p,i)=>{const a=(i/5)*Math.PI*2-Math.PI/2;CX.fillStyle='#8A7A5A';CX.save();CX.translate(p.x,p.y+6);CX.rotate(a+Math.PI/2);CX.fillRect(-8,-6,16,12);CX.fillStyle='#6A5A3A';CX.fillRect(-6,-8,12,4);CX.restore();});
+  CX.fillStyle='#C0BAA8';CX.fillRect(0,DIVIDER,W,10);
+  for(let s=0;s<6;s++){CX.fillStyle=s%2===0?'#B8B2A0':'#A8A290';CX.fillRect(W/2-50+s*4,DIVIDER+10+s*6,100-s*8,6);}
+  CX.fillStyle='#F4F0E6';CX.fillRect(0,DIVIDER+10,W,H-DIVIDER-10);
+  CX.strokeStyle='rgba(0,0,0,0.04)';CX.lineWidth=1;
+  for(let gx=0;gx<W;gx+=40){CX.beginPath();CX.moveTo(gx,DIVIDER+10);CX.lineTo(gx,H);CX.stroke();}
+  for(let gy=DIVIDER+10;gy<H;gy+=40){CX.beginPath();CX.moveTo(0,gy);CX.lineTo(W,gy);CX.stroke();}
+  CX.fillStyle='#E8E3D6';CX.fillRect(0,DIVIDER+10,W,8);
+  for(const lx of[100,280,460,640]){CX.fillStyle='#D4A040';CX.fillRect(lx-22,DIVIDER+10,44,5);const g=CX.createRadialGradient(lx,DIVIDER+22,4,lx,DIVIDER+50,90);g.addColorStop(0,'rgba(255,210,100,0.14)');g.addColorStop(1,'rgba(255,210,100,0)');CX.fillStyle=g;CX.beginPath();CX.ellipse(lx,DIVIDER+36,90,75,0,0,Math.PI*2);CX.fill();}
+  drawPlant(CX,20,H-28);drawPlant(CX,W-20,H-28);drawPlant(CX,20,DIVIDER+80);drawPlant(CX,W-20,DIVIDER+80);
+  DESK_XS.forEach((dx,i)=>drawDesk(CX,dx,DESK_Y,AGENTS[i],t));
+}
+
+function drawAgent(cx,ax,ay,agent,walkPh,action){
+  cx.save();
+  cx.fillStyle='rgba(0,0,0,0.13)';cx.beginPath();cx.ellipse(ax,ay+2,10,3,0,0,Math.PI*2);cx.fill();
+  const walk=action==='walk',sit=action==='sit',sw=walk?Math.sin(walkPh*10)*5:0;
+  cx.fillStyle=agent.shoe;
+  if(sit){cx.fillRect(ax-7,ay-14,6,12);cx.fillRect(ax+1,ay-14,6,12);cx.fillRect(ax-11,ay-6,10,5);cx.fillRect(ax+1,ay-6,10,5);}
+  else{cx.fillRect(ax-7,ay-14-sw,6,14+sw);cx.fillRect(ax+1,ay-14+sw,6,14-sw);cx.fillRect(ax-9,ay-3-sw,9,4);cx.fillRect(ax+1,ay-3+sw,9,4);}
+  cx.fillStyle=agent.hair;
+  if(!sit){cx.fillRect(ax-7,ay-22-sw,6,8+sw);cx.fillRect(ax+1,ay-22+sw,6,8-sw);}
+  else{cx.fillRect(ax-7,ay-20,6,6);cx.fillRect(ax+1,ay-20,6,6);}
+  cx.fillStyle=agent.body;cx.fillRect(ax-9,ay-32,18,18);
+  const aw=walk?Math.sin(walkPh*10+Math.PI)*5:0;
+  if(sit){cx.fillRect(ax-17,ay-30,8,12);cx.fillRect(ax+9,ay-30,8,12);}
+  else{cx.fillRect(ax-15,ay-30+aw,7,14);cx.fillRect(ax+8,ay-30-aw,7,14);}
+  cx.fillStyle=agent.hair;cx.fillRect(ax-3,ay-34,6,5);
+  cx.fillStyle='#F0BC72';cx.fillRect(ax-3,ay-42,6,8);cx.fillRect(ax-8,ay-56,16,16);
+  cx.fillStyle=agent.hair;cx.fillRect(ax-8,ay-58,16,10);cx.fillRect(ax-8,ay-56,3,12);cx.fillRect(ax+5,ay-56,3,12);
+  cx.fillStyle='#1A1412';cx.fillRect(ax-4,ay-46,3,3);cx.fillRect(ax+1,ay-46,3,3);
+  cx.fillStyle='#C07845';cx.fillRect(ax-3,ay-40,6,2);
+  cx.restore();
+}
+
+function drawVoteBubble(cx,x,y,vote){
+  const C={BUY:['rgba(22,163,74,.18)','#16A34A'],SELL:['rgba(220,38,38,.18)','#DC2626'],HOLD:['rgba(107,107,94,.18)','#6B6B5E']};
+  const[bg,col]=C[vote.direction]||C.HOLD;
+  cx.fillStyle=bg;cx.strokeStyle=col;cx.lineWidth=1.5;roundRect(cx,x-24,y-52,48,26,6);cx.fill();cx.stroke();
+  cx.fillStyle=bg;cx.beginPath();cx.moveTo(x-5,y-26);cx.lineTo(x+5,y-26);cx.lineTo(x,y-16);cx.closePath();cx.fill();
+  cx.fillStyle=col;cx.font='bold 10px monospace';cx.textAlign='center';cx.fillText(vote.direction,x,y-41);
+  cx.fillStyle='rgba(0,0,0,0.1)';cx.fillRect(x-18,y-33,36,4);cx.fillStyle=col;cx.fillRect(x-18,y-33,36*vote.confidence,4);
+  cx.fillStyle='rgba(0,0,0,0.5)';cx.font='7px monospace';cx.fillText(Math.round(vote.confidence*100)+'%',x,y-28);
+}
+
+function drawConsensusBanner(dir,conf){
+  const C={BUY:'#16A34A',SELL:'#DC2626',HOLD:'#6B6B5E'};const col=C[dir]||'#6B6B5E';
+  CX.fillStyle='rgba(20,18,14,0.88)';roundRect(CX,W/2-96,TABLE.cy-22,192,46,8);CX.fill();
+  CX.strokeStyle=col;CX.lineWidth=2;roundRect(CX,W/2-96,TABLE.cy-22,192,46,8);CX.stroke();
+  CX.fillStyle=col;CX.font='bold 20px monospace';CX.textAlign='center';CX.fillText(dir,W/2,TABLE.cy+2);
+  CX.fillStyle='rgba(255,255,255,0.55)';CX.font='9px monospace';CX.fillText('CONSENSUS · '+Math.round(conf*100)+'% CONF',W/2,TABLE.cy+17);
+}
+
+const STATE_LABELS={IDLE:'Working…',ALERT:'Voting cycle initiated!',WALK_UP:'Heading to boardroom',VOTING:'Casting votes',CONSENSUS:'Consensus reached',WALK_DOWN:'Back to work'};
+
+function loop(ts){
+  const dt=Math.min(ts-lastTs,100);lastTs=ts;stateMs+=dt;
+  if(stateMs>=DURATIONS[state]){state=NEXT_STATE[state];stateMs=0;if(state==='IDLE')cycle++;if(state==='WALK_UP')fetchVotes();if(state==='VOTING')AS.forEach((_,i)=>{AS[i].voteShown=false;});}
+  const ep=ease(Math.min(1,stateMs/DURATIONS[state]));
+  AS.forEach((_,i)=>{
+    const desk={x:DESK_XS[i],y:DESK_Y},board=BOARD_POS[i],as=AS[i];
+    if(state==='IDLE'||state==='ALERT'){as.x=desk.x;as.y=desk.y;as.action='sit';}
+    else if(state==='WALK_UP'){as.x=desk.x+(board.x-desk.x)*ep;as.y=desk.y+(board.y-desk.y)*ep;as.action='walk';as.walkPh=ts*.005+i;}
+    else if(state==='VOTING'||state==='CONSENSUS'){as.x=board.x;as.y=board.y;as.action='stand';if(stateMs>i*820)as.voteShown=true;}
+    else if(state==='WALK_DOWN'){as.x=board.x+(desk.x-board.x)*ep;as.y=board.y+(desk.y-board.y)*ep;as.action='walk';as.walkPh=ts*.005+i;}
+  });
+  CX.clearRect(0,0,W,H);
+  drawScene(ts);
+  [...AGENTS.keys()].sort((a,b)=>AS[a].y-AS[b].y).forEach(i=>drawAgent(CX,AS[i].x,AS[i].y,AGENTS[i],AS[i].walkPh,AS[i].action));
+  if(state==='VOTING'||state==='CONSENSUS')AGENTS.forEach((_,i)=>{if(AS[i].voteShown&&votes[i])drawVoteBubble(CX,AS[i].x,AS[i].y,votes[i]);});
+  if(state==='CONSENSUS'&&consensus)drawConsensusBanner(consensus.direction,consensus.confidence);
+  if(state==='ALERT'){const a=Math.abs(Math.sin(ts*.012))*.18;CX.fillStyle=`rgba(217,119,6,${a})`;CX.fillRect(0,0,W,H);CX.fillStyle=`rgba(217,119,6,${.7+a*2})`;CX.font='bold 12px monospace';CX.textAlign='center';CX.fillText('▸ VOTING CYCLE INITIATED',W/2,H*.55);}
+  CX.fillStyle='rgba(26,25,21,0.38)';CX.font='8px monospace';CX.textAlign='left';CX.fillText('▸ '+STATE_LABELS[state]+'  ·  CYCLE #'+cycle,10,H-8);
+  document.getElementById('state-bar').textContent=STATE_LABELS[state]+' · Cycle #'+cycle;
+  const chips=document.getElementById('vote-chips');
+  if(state==='VOTING'||state==='CONSENSUS'){chips.innerHTML=AGENTS.map((a,i)=>{const v=votes[i];const shown=AS[i].voteShown;if(!v||!shown)return`<div class="vc vc-hold vc-dim">${a.short} …</div>`;const cl=v.direction.toLowerCase();return`<div class="vc vc-${cl}">${a.label}: ${v.direction} ${Math.round(v.confidence*100)}%</div>`;}).join('');}
+  else chips.innerHTML='';
+  requestAnimationFrame(loop);
+}
+fetchVotes();
+requestAnimationFrame(ts=>{lastTs=ts;requestAnimationFrame(loop);});
+</script>
+</body>
+</html>

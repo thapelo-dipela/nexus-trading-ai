@@ -23,9 +23,12 @@
     --coral:        #D97706;
     --coral-2:      #B45309;
     --green:        #16A34A;
+    --green-bg:     #F0FDF4;
     --red:          #DC2626;
+    --red-bg:       #FEF2F2;
     --blue:         #2563EB;
     --purple:       #7C3AED;
+    --amber:        #F59E0B;
     --radius:       10px;
     --radius-sm:    6px;
     --shadow:       0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
@@ -146,6 +149,37 @@
     min-height: calc(100vh - 52px);
   }
 
+  /* ── ASSET SELECTOR ─────────────────────────── */
+  .asset-selector {
+    display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .asset-btn {
+    flex: 1; min-width: 120px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    color: var(--text);
+    font-size: 12px; font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .asset-btn:hover { border-color: var(--coral); background: var(--bg-2); }
+  .asset-btn.active {
+    border-color: var(--coral);
+    background: var(--coral);
+    color: white;
+  }
+
+  .asset-info {
+    padding: 12px; margin-bottom: 20px;
+    background: var(--bg-2);
+    border-left: 3px solid var(--coral);
+    border-radius: var(--radius-sm);
+    font-size: 12px; color: var(--text-2);
+  }
+  .asset-info-title { font-weight: 600; color: var(--text); margin-bottom: 4px; }
+
   /* ── TAB PANELS ─────────────────────────────── */
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
@@ -259,6 +293,20 @@
 
   .status-open { color: var(--coral); font-weight: 600; }
   .status-closed { color: var(--text-3); }
+
+  /* ── CLOSE BUTTON ────────────────────────────── */
+  .close-btn {
+    background: rgba(220,38,38,0.1); color: var(--red);
+    border: 1px solid rgba(220,38,38,0.2); border-radius: 4px;
+    padding: 4px 8px; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .close-btn:hover {
+    background: rgba(220,38,38,0.2); border-color: var(--red);
+    transform: scale(1.05);
+  }
+  .close-btn:active { transform: scale(0.95); }
 
   /* ── GAUGE ──────────────────────────────────── */
   .gauge-wrap { position: relative; width: 100px; margin: 0 auto; }
@@ -398,6 +446,7 @@
       <span class="price-symbol">BTC</span>
       <span class="price-val" id="tb-price">—</span>
       <span class="price-chg" id="tb-chg">—</span>
+      <span class="price-trend" id="tb-trend" style="margin-left:12px;padding:3px 8px;background:rgba(22,163,74,0.15);border-radius:4px;font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase">—</span>
     </div>
   </div>
   <div class="topbar-right">
@@ -423,6 +472,21 @@
   </button>
   <button class="nav-item" onclick="showTab('risk', this)">
     <span class="nav-icon">⬡</span><span>Risk</span>
+  </button>
+  <button class="nav-item" onclick="showTab('currencies', this)">
+    <span class="nav-icon">💱</span><span>Currencies</span>
+  </button>
+  <button class="nav-item" onclick="showTab('wallet', this)">
+    <span class="nav-icon">🦊</span><span>Wallet</span>
+  </button>
+  <button class="nav-item" onclick="showTab('nanopay', this)">
+    <span class="nav-icon">⚡</span><span>Nanopay</span>
+  </button>
+  <button class="nav-item" onclick="showTab('settings', this)">
+    <span class="nav-icon">⚙️</span><span>Settings</span>
+  </button>
+  <button class="nav-item" onclick="showTab('office', this)">
+    <span class="nav-icon">🏢</span><span>Office</span>
   </button>
   <button class="nav-item" onclick="showTab('chat', this)">
     <span class="nav-icon">◌</span><span>AI Chat</span>
@@ -554,10 +618,10 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Asset</th><th>Direction</th><th>Size</th><th>Entry</th><th>PnL</th><th>Status</th></tr>
+            <tr><th>Asset</th><th>Direction</th><th>Amount</th><th>Entry Price</th><th>Current Price</th><th>Live P&L</th><th>Live P&L %</th><th>Action</th></tr>
           </thead>
           <tbody id="positions-body">
-            <tr><td colspan="6" class="empty">No open positions</td></tr>
+            <tr><td colspan="8" class="empty">No open positions</td></tr>
           </tbody>
         </table>
       </div>
@@ -567,10 +631,10 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Asset</th><th>Direction</th><th>PnL $</th><th>PnL %</th><th>Strategy</th><th>Closed</th></tr>
+            <tr><th>Asset</th><th>Direction</th><th>PnL $</th><th>PnL %</th><th>Opened</th><th>Closed</th><th>Exit Reason</th></tr>
           </thead>
           <tbody id="trades-body">
-            <tr><td colspan="6" class="empty">No closed trades yet</td></tr>
+            <tr><td colspan="7" class="empty">No closed trades yet</td></tr>
           </tbody>
         </table>
       </div>
@@ -629,6 +693,374 @@
     </div>
   </div>
 
+  <!-- CURRENCIES TAB -->
+  <div id="tab-currencies" class="tab-panel">
+    <div class="page-title" id="currencies-title">💱 Cryptocurrency Markets</div>
+    
+    <!-- Asset Selector -->
+    <div class="asset-selector">
+      <button class="asset-btn active" data-asset="crypto" onclick="selectAsset('crypto')">🪙 Crypto (16)</button>
+      <button class="asset-btn" data-asset="jse" onclick="selectAsset('jse')">📈 JSE (50)</button>
+      <button class="asset-btn" data-asset="us" onclick="selectAsset('us')">🏢 US (20)</button>
+      <button class="asset-btn" data-asset="all" onclick="selectAsset('all')">🌍 All (86)</button>
+    </div>
+
+    <!-- Asset Info -->
+    <div class="asset-info">
+      <div class="asset-info-title" id="asset-info-title">Cryptocurrency Markets</div>
+      <div id="asset-info-desc">Showing 16 major cryptocurrencies from CoinGecko and Binance</div>
+    </div>
+
+    <!-- Currency Selector -->
+    <div class="card">
+      <div style="display: flex; align-items: center; gap: 12px; justify-content: space-between;">
+        <div>
+          <label style="font-size: 12px; color: var(--text-2); display: block; margin-bottom: 6px;">Display Currency</label>
+          <select id="currency-selector" style="width: 200px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: var(--card);" onchange="changeCurrency()">
+            <option value="USD">🇺🇸 USD - US Dollar</option>
+            <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
+            <option value="EUR">🇪🇺 EUR - Euro</option>
+            <option value="GBP">🇬🇧 GBP - British Pound</option>
+            <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+            <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+            <option value="INR">🇮🇳 INR - Indian Rupee</option>
+            <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+            <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+            <option value="SGD">🇸🇬 SGD - Singapore Dollar</option>
+            <option value="HKD">🇭🇰 HKD - Hong Kong Dollar</option>
+            <option value="MXN">🇲🇽 MXN - Mexican Peso</option>
+            <option value="BRL">🇧🇷 BRL - Brazilian Real</option>
+            <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+            <option value="KRW">🇰🇷 KRW - South Korean Won</option>
+          </select>
+        </div>
+        <div id="exchange-rate-info" style="font-size: 12px; color: var(--text-2); padding: 8px; text-align: right;">
+          <div id="exchange-rate" style="margin-top: 20px;">Exchange rate will load...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Market Overview - All Supported Cryptocurrencies</div>
+      <div style="margin-top: 12px; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <th style="text-align: left; padding: 8px; color: var(--text-2);">Symbol</th>
+              <th style="text-align: left; padding: 8px; color: var(--text-2);">Name</th>
+              <th style="text-align: left; padding: 8px; color: var(--text-2);">Category</th>
+              <th style="text-align: right; padding: 8px; color: var(--text-2);">Price</th>
+              <th style="text-align: right; padding: 8px; color: var(--text-2);">24h Change</th>
+            </tr>
+          </thead>
+          <tbody id="currencies-table-body">
+            <tr><td colspan="5" style="text-align: center; padding: 16px; color: var(--text-3);">Loading cryptocurrencies...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 14px;">
+      <div class="card-title">Cryptocurrency Details</div>
+      <div style="margin-top: 12px;">
+        <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 6px;">Select Cryptocurrency:</label>
+        <select id="crypto-select" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px;">
+          <option>Select a cryptocurrency...</option>
+        </select>
+      </div>
+      <div style="margin-top: 12px;" id="crypto-details">
+        <p style="color: var(--text-3);">Select a cryptocurrency to see details</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WALLET TAB -->
+  <div id="tab-wallet" class="tab-panel">
+    <div class="page-title">🦊 MetaMask Wallet Integration</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Connection Status</div>
+        <div style="margin-top: 12px;">
+          <div id="wallet-status" style="padding: 12px; background: var(--bg-3); border-radius: 6px; text-align: center; color: var(--text-2);">
+            ⚠️ Not Connected
+          </div>
+          <button onclick="connectMetaMask()" style="width: 100%; margin-top: 12px; padding: 10px; background: var(--coral); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">
+            🦊 Connect MetaMask
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Portfolio Summary</div>
+        <div id="portfolio-summary" style="margin-top: 12px;">
+          <div class="risk-item"><span class="risk-key">Total Balance</span><span class="risk-val" id="total-balance">—</span></div>
+          <div class="risk-item"><span class="risk-key">ETH Balance</span><span class="risk-val" id="eth-balance">—</span></div>
+          <div class="risk-item"><span class="risk-key">USDC Balance</span><span class="risk-val" id="usdc-balance">—</span></div>
+          <div class="risk-item"><span class="risk-key">24h Change</span><span class="risk-val" id="portfolio-change">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div id="tab-settings" class="tab-panel">
+    <div class="page-title">⚙️ Agent Configuration & Risk Settings</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Risk Management</div>
+        <div style="margin-top: 12px;">
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Risk Per Trade: <span id="risk-display">1%</span></label>
+            <input type="range" id="risk-slider" min="0.1" max="5" step="0.1" value="1" onchange="updateRiskDisplay()" style="width: 100%;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Stop Loss: <span id="sl-display">2%</span></label>
+            <input type="range" id="sl-slider" min="0.5" max="10" step="0.5" value="2" onchange="updateSLDisplay()" style="width: 100%;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Take Profit: <span id="tp-display">5%</span></label>
+            <input type="range" id="tp-slider" min="1" max="20" step="0.5" value="5" onchange="updateTPDisplay()" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Position & Leverage</div>
+        <div style="margin-top: 12px;">
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Max Position Size: <span id="pos-display">20%</span></label>
+            <input type="range" id="pos-slider" min="5" max="100" step="5" value="20" onchange="updatePosDisplay()" style="width: 100%;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Max Leverage: <span id="lev-display">3x</span></label>
+            <input type="range" id="lev-slider" min="1" max="10" step="0.5" value="3" onchange="updateLevDisplay()" style="width: 100%;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Min Trade Size (USD): <span id="min-display">$10</span></label>
+            <input type="range" id="min-slider" min="1" max="100" step="5" value="10" onchange="updateMinDisplay()" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 14px;">
+      <div class="card-title">Price Chart Settings</div>
+      <div style="margin-top: 12px;">
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; font-size: 12px; color: var(--text-2); margin-bottom: 4px;">Chart Period:</label>
+          <select id="chart-period" onchange="updateChartPeriod()" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); color: var(--text); font-size: 12px;">
+            <option value="1h">Last Hour (60 data points)</option>
+            <option value="4h">Last 4 Hours (60 data points)</option>
+            <option value="24h" selected>Last 24 Hours (60 data points)</option>
+            <option value="7d">Last 7 Days (60 data points)</option>
+          </select>
+        </div>
+        <div style="font-size: 11px; color: var(--text-3); background: rgba(0,0,0,0.04); padding: 8px; border-radius: 6px;">
+          📊 Timestamps: <span id="chart-timestamp-range">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 14px;">
+      <div class="card-title">Active Agents</div>
+      <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <div><input type="checkbox" id="agent-momentum" checked> <label for="agent-momentum" style="font-size: 12px;">Momentum</label></div>
+        <div><input type="checkbox" id="agent-mean-rev" checked> <label for="agent-mean-rev" style="font-size: 12px;">Mean Reversion</label></div>
+        <div><input type="checkbox" id="agent-sentiment" checked> <label for="agent-sentiment" style="font-size: 12px;">Sentiment</label></div>
+        <div><input type="checkbox" id="agent-orderflow" checked> <label for="agent-orderflow" style="font-size: 12px;">Orderflow</label></div>
+        <div><input type="checkbox" id="agent-yolo" checked> <label for="agent-yolo" style="font-size: 12px;">YOLO</label></div>
+      </div>
+    </div>
+    <div style="margin-top: 14px; display: flex; gap: 12px;">
+      <button onclick="saveSettings()" style="flex: 1; padding: 10px; background: var(--green); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">💾 Save Settings</button>
+      <button onclick="resetSettings()" style="flex: 1; padding: 10px; background: var(--coral); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">🔄 Reset</button>
+    </div>
+  </div>
+
+  <!-- OFFICE TAB -->
+  
+  <!-- ── NANOPAY TAB ─────────────────────────── -->
+  <div id="tab-nanopay" class="tab-panel">
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="font-size:18px;">⚡</span>
+        <span style="font-family:'Instrument Serif',serif;font-size:18px;">Arc Nanopayments</span>
+        <span id="nanopay-status-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text-3);margin-left:auto;"></span>
+        <span id="nanopay-status-label" style="font-size:11px;color:var(--text-3);">Idle</span>
+      </div>
+
+      <div class="grid-3" style="margin-bottom:16px;">
+        <div>
+          <label style="font-size:11px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Agent Actions (count)</label>
+          <input id="np-count" type="number" min="1" max="20" value="4"
+            style="width:100%;padding:9px 12px;border:1px solid var(--border-2);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text);font-family:'DM Mono',monospace;font-size:14px;outline:none;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Amount per Action (USDC)</label>
+          <input id="np-amount" type="number" min="0.001" max="1" step="0.001" value="0.005"
+            style="width:100%;padding:9px 12px;border:1px solid var(--border-2);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text);font-family:'DM Mono',monospace;font-size:14px;outline:none;">
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <button id="np-execute-btn" onclick="executeNanopayBatch()"
+            style="width:100%;padding:10px 16px;background:var(--coral);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <span id="np-btn-icon">⚡</span>
+            <span id="np-btn-label">Execute Batch</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="np-summary" style="display:none;padding:12px;background:var(--bg-2);border-radius:var(--radius-sm);border-left:3px solid var(--green);margin-bottom:16px;font-size:12px;color:var(--text-2);">
+        <span id="np-summary-text"></span>
+      </div>
+
+      <div id="np-error" style="display:none;padding:12px;background:#fef2f2;border-radius:var(--radius-sm);border-left:3px solid var(--red);margin-bottom:16px;font-size:12px;color:var(--red);">
+        <span id="np-error-text"></span>
+      </div>
+    </div>
+
+    <!-- Batch Results -->
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-weight:600;font-size:13px;">Batch Receipt</span>
+        <span id="np-block-badge" style="font-size:11px;color:var(--text-3);font-family:'DM Mono',monospace;"></span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Channel</th>
+              <th style="text-align:right;padding:8px 10px;color:var(--text-3);font-weight:500;">Amount</th>
+              <th style="text-align:right;padding:8px 10px;color:var(--text-3);font-weight:500;">Fee (USDC)</th>
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Block</th>
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Tx Hash</th>
+            </tr>
+          </thead>
+          <tbody id="np-receipts-body">
+            <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text-3);">No batch executed yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Agent Auto-Transfer -->
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-weight:600;font-size:13px;">🤖 Agent Auto-Transfer</span>
+        <span id="agent-status" style="font-size:11px;color:var(--text-3);">Idle</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">Actions (count)</label>
+          <input id="agent-action-count" type="number" value="4" min="1" max="20" 
+            style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-1);font-size:12px;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">Amount per Action (USDC)</label>
+          <input id="agent-amount" type="number" value="0.005" min="0.001" step="0.001" 
+            style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-1);font-size:12px;box-sizing:border-box;">
+        </div>
+      </div>
+      <button onclick="executeAgentTransfer()" 
+        style="width:100%;padding:10px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-weight:600;font-size:12px;cursor:pointer;transition:background 0.2s;">
+        🚀 Transfer Between Agents
+      </button>
+      <div id="agent-error" style="display:none;padding:12px;background:#fef2f2;border-radius:var(--radius-sm);border-left:3px solid var(--red);margin-top:12px;font-size:12px;color:var(--red);">
+        <span id="agent-error-text"></span>
+      </div>
+    </div>
+
+    <!-- Continuous Transfer Scheduler -->
+    <div class="card" style="margin-bottom:14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-weight:600;font-size:13px;">⏱️ Continuous Scheduler</span>
+        <span id="scheduler-status-badge" style="font-size:11px;padding:4px 8px;background:var(--red-bg);color:var(--red);border-radius:4px;">Disabled</span>
+      </div>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">Interval (seconds)</label>
+          <input id="scheduler-interval" type="number" value="300" min="30" step="30" 
+            style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-1);font-size:12px;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">Actions per Batch</label>
+          <input id="scheduler-actions" type="number" value="4" min="1" max="20" 
+            style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-1);font-size:12px;box-sizing:border-box;">
+        </div>
+      </div>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">Amount per Action (USDC)</label>
+          <input id="scheduler-amount" type="number" value="0.005" min="0.001" step="0.001" 
+            style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-1);font-size:12px;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--text-3);display:block;margin-bottom:6px;">&nbsp;</label>
+          <button id="scheduler-toggle" onclick="toggleScheduler()" 
+            style="width:100%;padding:8px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-weight:600;font-size:12px;cursor:pointer;">
+            Enable Scheduler
+          </button>
+        </div>
+      </div>
+      
+      <div id="scheduler-error" style="display:none;padding:12px;background:#fef2f2;border-radius:var(--radius-sm);border-left:3px solid var(--red);font-size:12px;color:var(--red);">
+        <span id="scheduler-error-text"></span>
+      </div>
+    </div>
+
+    <!-- Transfer Log (Continuous + Manual) -->
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-weight:600;font-size:13px;">⏱️ Transfer Log (Continuous + Manual)</span>
+        <button onclick="loadTransferLog()" style="padding:5px 12px;border:1px solid var(--border-2);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-2);font-size:11px;cursor:pointer;">↻ Refresh</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Time</th>
+              <th style="text-align:center;padding:8px 10px;color:var(--text-3);font-weight:500;">Type</th>
+              <th style="text-align:center;padding:8px 10px;color:var(--text-3);font-weight:500;">Actions</th>
+              <th style="text-align:right;padding:8px 10px;color:var(--text-3);font-weight:500;">Fee (USDC)</th>
+              <th style="text-align:center;padding:8px 10px;color:var(--text-3);font-weight:500;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="transfer-log-body">
+            <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text-3);">Loading transfers…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Wallet Tx History -->
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-weight:600;font-size:13px;">Wallet Transaction History</span>
+        <button onclick="loadWalletTxs()" style="padding:5px 12px;border:1px solid var(--border-2);border-radius:var(--radius-sm);background:var(--bg-2);color:var(--text-2);font-size:11px;cursor:pointer;">↻ Refresh</button>
+      </div>
+      <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;font-family:'DM Mono',monospace;">0xF987B94427bDe78bb67Ef91C722015AC69de55C5</div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Block</th>
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Time</th>
+              <th style="text-align:right;padding:8px 10px;color:var(--text-3);font-weight:500;">Fee (USDC)</th>
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Status</th>
+              <th style="text-align:left;padding:8px 10px;color:var(--text-3);font-weight:500;">Tx Hash</th>
+            </tr>
+          </thead>
+          <tbody id="np-wallet-txs-body">
+            <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text-3);">Click Refresh to load</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div id="tab-office" class="tab-panel">
+    <div class="page-title">Agent Office</div>
+    <div class="card">
+      <iframe id="office-frame" src="/office" style="width:100%;height:600px;border:none;border-radius:12px;"></iframe>
+    </div>
+  </div>
+
   <!-- CHAT TAB -->
   <div id="tab-chat" class="tab-panel">
     <div class="page-title">Ask NEXUS</div>
@@ -676,6 +1108,9 @@ let state = {
 
 let priceChart = null, equityChart = null, agentRadar = null;
 let priceHistory = [];
+let chartPeriod = '24h';  // 1h, 4h, 24h, 7d
+let chartTimestampStart = null;
+let chartTimestampEnd = null;
 
 // ═══════════════════════════════════════════════════
 // NAVIGATION
@@ -706,6 +1141,28 @@ function fmtPct(n) { return n == null ? '—' : (n >= 0 ? '+' : '') + Number(n).
 function fmtN(n,d=2) { return n == null ? '—' : Number(n).toFixed(d); }
 function now() { return new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', second:'2-digit'}); }
 
+async function closePositionManual(tradeId, exitPrice) {
+  if (!confirm(`Close position ${tradeId} at $${exitPrice.toFixed(2)}?`)) return;
+  try {
+    const response = await fetch('/api/positions/close', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({trade_id: tradeId, exit_price: exitPrice})
+    });
+    const data = await response.json();
+    if (data.success) {
+      console.log('✓ Position closed:', data.message);
+      pollAgents();  // Refresh positions
+      flash(document.getElementById('positions-body'));
+    } else {
+      alert('Error: ' + data.error);
+    }
+  } catch (err) {
+    console.error('Failed to close position:', err);
+    alert('Failed to close position');
+  }
+}
+
 function flash(el) {
   if (!el) return;
   el.classList.remove('flashing');
@@ -727,10 +1184,17 @@ async function pollMarket() {
   // Topbar
   const pEl = document.getElementById('tb-price');
   const cEl = document.getElementById('tb-chg');
+  const tEl = document.getElementById('tb-trend');
   if (pEl) { pEl.textContent = fmt$(d.price); flash(pEl); }
   if (cEl) {
     cEl.textContent = fmtPct(d.change_24h);
     cEl.className = 'price-chg ' + (d.change_24h >= 0 ? 'up' : 'dn');
+  }
+  if (tEl) {
+    const trend = d.signal_1h || '—';
+    tEl.textContent = trend.toUpperCase();
+    tEl.style.color = trend === 'bullish' ? 'var(--green)' : trend === 'bearish' ? 'var(--red)' : 'var(--text-2)';
+    tEl.style.background = trend === 'bullish' ? 'rgba(22,163,74,0.15)' : trend === 'bearish' ? 'rgba(220,38,38,0.15)' : 'rgba(107,107,94,0.1)';
   }
 
   // Order flow panel
@@ -744,9 +1208,26 @@ async function pollMarket() {
   setText('sig-vol', d.volume_24h ? '$' + (d.volume_24h/1e9).toFixed(2) + 'B' : '—');
 
   // Price chart
-  const t = new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
-  priceHistory.push({ t, v: d.price });
+  const now = new Date();
+  const timeLabel = now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+  priceHistory.push({ 
+    t: timeLabel,
+    ts: now.getTime(),  // Full timestamp in milliseconds
+    v: d.price 
+  });
   if (priceHistory.length > 60) priceHistory.shift();
+  
+  // Update timestamp range display
+  if (priceHistory.length > 0) {
+    const firstTs = new Date(priceHistory[0].ts);
+    const lastTs = new Date(priceHistory[priceHistory.length - 1].ts);
+    const rangeText = firstTs.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) + 
+                      ' → ' + lastTs.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+    setText('chart-timestamp-range', rangeText);
+    chartTimestampStart = firstTs;
+    chartTimestampEnd = lastTs;
+  }
+  
   updatePriceChart();
 
   document.getElementById('last-update').textContent = 'Updated ' + now();
@@ -989,17 +1470,25 @@ function updateAgentRadar(agents) {
 function renderPositions(positions) {
   const body = document.getElementById('positions-body');
   if (!body) return;
-  if (!positions.length) { body.innerHTML = '<tr><td colspan="6" class="empty">No open positions</td></tr>'; return; }
+  if (!positions.length) { body.innerHTML = '<tr><td colspan="8" class="empty">No open positions</td></tr>'; return; }
   body.innerHTML = positions.map(p => {
-    const pnl = p.pnl_usd || 0;
-    const pnlColor = pnl >= 0 ? 'var(--green)' : 'var(--red)';
+    const livePnl = p.live_pnl_usd || p.pnl_usd || 0;
+    const livePnlPct = p.live_pnl_pct || p.pnl_pct || 0;
+    const pnlColor = livePnl >= 0 ? 'var(--green)' : 'var(--red)';
+    const currentPrice = p.current_price || p.entry_price || 0;
+    const amount = p.amount_traded || p.amount || p.size_usd || 0;
+    const entryPrice = fmt$(p.entry_price);
+    const curPrice = fmt$(currentPrice);
+    
     return `<tr>
       <td><b>${p.pair || p.symbol || '—'}</b></td>
       <td><span class="vote-pill vote-${(p.direction||'HOLD').toUpperCase()}">${p.direction || '—'}</span></td>
-      <td>${fmt$(p.size_usd)}</td>
-      <td>${fmt$(p.entry_price)}</td>
-      <td style="color:${pnlColor};font-weight:600">${fmt$(pnl)}</td>
-      <td><span class="status-open">${p.status || 'OPEN'}</span></td>
+      <td>${amount.toFixed(4)}</td>
+      <td>${entryPrice}</td>
+      <td>${curPrice}</td>
+      <td style="color:${pnlColor};font-weight:600">${fmt$(livePnl)}</td>
+      <td style="color:${pnlColor};font-weight:600">${livePnlPct.toFixed(2)}%</td>
+      <td><button class="close-btn" onclick="closePositionManual('${p.trade_id}', ${currentPrice})" title="Close position">✕</button></td>
     </tr>`;
   }).join('');
 }
@@ -1007,19 +1496,23 @@ function renderPositions(positions) {
 function renderTrades(trades) {
   const body = document.getElementById('trades-body');
   if (!body) return;
-  if (!trades.length) { body.innerHTML = '<tr><td colspan="6" class="empty">No closed trades yet</td></tr>'; return; }
+  if (!trades.length) { body.innerHTML = '<tr><td colspan="7" class="empty">No closed trades yet</td></tr>'; return; }
   body.innerHTML = trades.slice(-20).reverse().map(t => {
     const pnl = t.pnl_usd || 0;
     const pnlPct = t.pnl_pct || 0;
     const pnlColor = pnl >= 0 ? 'var(--green)' : 'var(--red)';
-    const closed = t.closed_at ? new Date(t.closed_at * 1000).toLocaleString() : '—';
+    // Format timestamps
+    const opened = t.entry_timestamp ? new Date(t.entry_timestamp * 1000).toLocaleString() : '—';
+    const closed = t.exit_timestamp ? new Date(t.exit_timestamp * 1000).toLocaleString() : '—';
+    const exitReason = (t.exit_reason || '—').replace(/_/g, ' ').toUpperCase();
     return `<tr>
       <td><b>${t.pair || t.symbol || '—'}</b></td>
       <td><span class="vote-pill vote-${(t.direction||'HOLD').toUpperCase()}">${t.direction || '—'}</span></td>
       <td style="color:${pnlColor};font-weight:600">${fmt$(pnl)}</td>
       <td style="color:${pnlColor}">${fmtPct(pnlPct)}</td>
-      <td style="color:var(--text-3)">${t.strategy || '—'}</td>
-      <td style="color:var(--text-3)">${closed}</td>
+      <td style="color:var(--text-3);font-size:12px">${opened}</td>
+      <td style="color:var(--text-3);font-size:12px">${closed}</td>
+      <td style="color:var(--text-3)">${exitReason}</td>
     </tr>`;
   }).join('');
 }
@@ -1290,6 +1783,9 @@ async function init() {
   const cfg = await apiFetch("/api/config");
   if (cfg && cfg.groq_key) { window.GROQ_KEY = cfg.groq_key; }
   initEquityChart();
+  loadSchedulerConfig();
+  loadTransferLog();
+  loadWalletTxs();
 
   // Initial fetch — all at once
   await Promise.all([pollMarket(), pollAgents(), pollSentiment(), pollRisk()]);
@@ -1299,9 +1795,655 @@ async function init() {
   setInterval(pollAgents,    POLL_AGENTS);
   setInterval(pollSentiment, POLL_SENTIMENT);
   setInterval(pollRisk,      POLL_EQUITY);
+  setInterval(loadTransferLog, 15000); // Refresh every 15 seconds
+  setInterval(loadWalletTxs, 30000); // Refresh every 30 seconds
 }
 
+// Settings Tab Functions
+function updateRiskDisplay() {
+  const val = document.getElementById('risk-slider').value;
+  document.getElementById('risk-display').textContent = val + '%';
+}
+
+function updateSLDisplay() {
+  const val = document.getElementById('sl-slider').value;
+  document.getElementById('sl-display').textContent = val + '%';
+}
+
+function updateTPDisplay() {
+  const val = document.getElementById('tp-slider').value;
+  document.getElementById('tp-display').textContent = val + '%';
+}
+
+function updatePosDisplay() {
+  const val = document.getElementById('pos-slider').value;
+  document.getElementById('pos-display').textContent = val + '%';
+}
+
+function updateLevDisplay() {
+  const val = document.getElementById('lev-slider').value;
+  document.getElementById('lev-display').textContent = val + 'x';
+}
+
+function updateMinDisplay() {
+  const val = document.getElementById('min-slider').value;
+  document.getElementById('min-display').textContent = '$' + val;
+}
+
+function updateChartPeriod() {
+  const periodSelect = document.getElementById('chart-period');
+  if (!periodSelect) return;
+  
+  const newPeriod = periodSelect.value;
+  chartPeriod = newPeriod;
+  
+  // Calculate time cutoff based on period
+  const now = Date.now();
+  let cutoffTime = now;
+  
+  switch(newPeriod) {
+    case '1h':
+      cutoffTime = now - (1 * 60 * 60 * 1000);
+      break;
+    case '4h':
+      cutoffTime = now - (4 * 60 * 60 * 1000);
+      break;
+    case '24h':
+      cutoffTime = now - (24 * 60 * 60 * 1000);
+      break;
+    case '7d':
+      cutoffTime = now - (7 * 24 * 60 * 60 * 1000);
+      break;
+  }
+  
+  // Filter priceHistory based on cutoff
+  const filteredHistory = priceHistory.filter(p => p.ts >= cutoffTime);
+  
+  // Update chart with filtered data
+  if (priceChart) {
+    priceChart.data.labels = filteredHistory.map(p => p.t);
+    priceChart.data.datasets[0].data = filteredHistory.map(p => p.v);
+    priceChart.update('none');
+  }
+  
+  console.log('📊 Chart period changed to:', newPeriod, 'showing', filteredHistory.length, 'data points');
+}
+
+function saveSettings() {
+  const settings = {
+    risk_per_trade: parseFloat(document.getElementById('risk-slider').value),
+    stop_loss_pct: parseFloat(document.getElementById('sl-slider').value),
+    take_profit_pct: parseFloat(document.getElementById('tp-slider').value),
+    max_position_pct: parseFloat(document.getElementById('pos-slider').value),
+    max_leverage: parseFloat(document.getElementById('lev-slider').value),
+    min_trade_size: parseFloat(document.getElementById('min-slider').value),
+    enabled_agents: {
+      momentum: document.getElementById('agent-momentum').checked,
+      mean_reversion: document.getElementById('agent-mean-rev').checked,
+      sentiment: document.getElementById('agent-sentiment').checked,
+      orderflow: document.getElementById('agent-orderflow').checked,
+      yolo: document.getElementById('agent-yolo').checked
+    }
+  };
+  
+  fetch('/api/settings', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(settings)
+  })
+  .then(r => r.json())
+  .then(data => {
+    alert('✅ Settings saved successfully!');
+  })
+  .catch(err => {
+    console.error('Settings save error:', err);
+    alert('❌ Error saving settings');
+  });
+}
+
+function resetSettings() {
+  document.getElementById('risk-slider').value = 1;
+  document.getElementById('sl-slider').value = 2;
+  document.getElementById('tp-slider').value = 5;
+  document.getElementById('pos-slider').value = 20;
+  document.getElementById('lev-slider').value = 3;
+  document.getElementById('min-slider').value = 10;
+  
+  updateRiskDisplay();
+  updateSLDisplay();
+  updateTPDisplay();
+  updatePosDisplay();
+  updateLevDisplay();
+  updateMinDisplay();
+  
+  alert('🔄 Settings reset to defaults');
+}
+
+// Wallet Tab Functions
+function connectMetaMask() {
+  if (typeof window.ethereum !== 'undefined') {
+    window.ethereum.request({ method: 'eth_requestAccounts' })
+      .then(accounts => {
+        document.getElementById('wallet-status').innerHTML = '✅ Connected: ' + accounts[0].substring(0, 10) + '...';
+        document.getElementById('wallet-status').style.background = 'rgba(34, 197, 94, 0.1)';
+      })
+      .catch(err => {
+        alert('❌ MetaMask connection failed: ' + err.message);
+      });
+  } else {
+    alert('❌ MetaMask not installed. Please install it to use this feature.');
+  }
+}
+
+// Asset Selector State
+let currentAssetType = localStorage.getItem('selectedAssetType') || 'crypto';
+let currentCurrency = localStorage.getItem('selectedCurrency') || 'USD';
+
+// Select asset type
+function selectAsset(type) {
+  currentAssetType = type;
+  localStorage.setItem('selectedAssetType', type);
+  
+  // Update button states
+  document.querySelectorAll('.asset-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-asset') === type) {
+      btn.classList.add('active');
+    }
+  });
+  
+  // Update title and info
+  const titles = {
+    crypto: { title: '💱 Cryptocurrency Markets', desc: 'Showing 16 major cryptocurrencies from CoinGecko and Binance' },
+    jse: { title: '📈 JSE Top 50 Stocks', desc: 'Showing 50 JSE stocks (South African companies)' },
+    us: { title: '🏢 US Market Stocks', desc: 'Showing 20 major US stocks' },
+    all: { title: '🌍 All Assets (86 Total)', desc: 'Showing 16 crypto + 50 JSE + 20 US stocks combined' }
+  };
+  
+  const info = titles[type] || titles.crypto;
+  document.getElementById('currencies-title').textContent = info.title;
+  document.getElementById('asset-info-title').textContent = info.title;
+  document.getElementById('asset-info-desc').textContent = info.desc;
+  
+  loadCurrencies();
+}
+
+// Change currency and reload data
+function changeCurrency() {
+  const selector = document.getElementById('currency-selector');
+  currentCurrency = selector.value;
+  localStorage.setItem('selectedCurrency', currentCurrency);
+  
+  // Reload all data with new currency
+  loadCurrencies();
+  updateExchangeRateInfo();
+}
+
+// Update exchange rate display
+async function updateExchangeRateInfo() {
+  try {
+    const from = currentAssetType === 'jse' ? 'ZAR' : 'USD';
+    const to = currentCurrency;
+    
+    if (from === to) {
+      document.getElementById('exchange-rate').textContent = '1 ' + from + ' = 1 ' + to;
+      return;
+    }
+    
+    const response = await fetch(`/api/exchange-rate?from=${from}&to=${to}`);
+    const data = await response.json();
+    
+    if (data.rate) {
+      document.getElementById('exchange-rate').textContent = `1 ${from} = ${data.rate.toFixed(4)} ${to}`;
+    }
+  } catch (err) {
+    console.warn('Could not update exchange rate:', err);
+  }
+}
+
+// Initialize currency selector on page load
+function initCurrencySelector() {
+  const selector = document.getElementById('currency-selector');
+  if (selector) {
+    selector.value = currentCurrency;
+  }
+  updateExchangeRateInfo();
+}
+
+// Currencies Tab Functions
+async function loadCurrencies() {
+  try {
+    const tbody = document.getElementById('currencies-table-body');
+    const select = document.getElementById('crypto-select');
+    
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 16px; color: var(--text-3);">Loading data...</td></tr>';
+    select.innerHTML = '<option>Select an asset...</option>';
+    
+    let allAssets = [];
+    
+    // Load based on current asset type with currency parameter
+    if (currentAssetType === 'crypto' || currentAssetType === 'all') {
+      try {
+        const response = await fetch(`/api/market-overview?currency=${currentCurrency}`);
+        const data = await response.json();
+        const currencies = data.currencies || [];
+        allAssets = allAssets.concat(currencies);
+      } catch (err) {
+        console.warn('Error loading crypto data:', err);
+      }
+    }
+    
+    if (currentAssetType === 'jse' || currentAssetType === 'all') {
+      try {
+        const response = await fetch(`/api/stocks/jse?currency=${currentCurrency}`);
+        const data = await response.json();
+        const stocks = data.stocks || [];
+        allAssets = allAssets.concat(stocks);
+      } catch (err) {
+        console.warn('Error loading JSE data:', err);
+      }
+    }
+    
+    if (currentAssetType === 'us' || currentAssetType === 'all') {
+      try {
+        const response = await fetch(`/api/stocks/us?currency=${currentCurrency}`);
+        const data = await response.json();
+        const stocks = data.stocks || [];
+        allAssets = allAssets.concat(stocks);
+      } catch (err) {
+        console.warn('Error loading US stocks data:', err);
+      }
+    }
+    
+    if (allAssets.length > 0) {
+      tbody.innerHTML = '';
+      select.innerHTML = '<option>Select an asset...</option>';
+      
+      allAssets.forEach((asset) => {
+        // Add row to table
+        const changeVal = asset.change_24h_pct || asset.change_24h || 0;
+        const changeColor = changeVal >= 0 ? 'var(--green)' : 'var(--coral)';
+        const assetType = asset.category ? 'Crypto' : 'Stock';
+        const categoryOrType = asset.category || 'Stock';
+        
+        // Get currency symbol for display
+        const currencySymbols = {
+          'USD': '$', 'ZAR': 'R', 'EUR': '€', 'GBP': '£', 'JPY': '¥',
+          'CNY': '¥', 'INR': '₹', 'AUD': 'A$', 'CAD': 'C$', 'SGD': 'S$',
+          'HKD': 'HK$', 'MXN': '$', 'BRL': 'R$', 'CHF': 'CHF', 'KRW': '₩'
+        };
+        const currencySymbol = currencySymbols[currentCurrency] || '$';
+        
+        const row = `<tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px;">${asset.symbol}</td>
+          <td style="padding: 8px;">${asset.name || asset.symbol}</td>
+          <td style="padding: 8px;">${categoryOrType}</td>
+          <td style="text-align: right; padding: 8px; color: var(--green);">${currencySymbol}${(asset.price || 0).toFixed(2)}</td>
+          <td style="text-align: right; padding: 8px; color: ${changeColor};">${changeVal.toFixed(2)}%</td>
+        </tr>`;
+        tbody.innerHTML += row;
+        
+        // Add to select
+        const opt = document.createElement('option');
+        opt.value = asset.symbol;
+        opt.textContent = asset.symbol + ' - ' + (asset.name || asset.symbol);
+        select.appendChild(opt);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 16px; color: var(--text-3);">No data available</td></tr>';
+    }
+  } catch (err) {
+    console.error('Asset load error:', err);
+    document.getElementById('currencies-table-body').innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 16px; color: var(--coral);">Error loading data</td></tr>';
+  }
+}
+
+// Show crypto details when selected
+async function showCryptoDetails(symbol) {
+  if (!symbol) {
+    document.getElementById('crypto-details').innerHTML = '<p style="color: var(--text-3);">Select a cryptocurrency to see details</p>';
+    return;
+  }
+  
+  try {
+    // Show loading state
+    document.getElementById('crypto-details').innerHTML = '<p style="color: var(--text-3);">Loading ' + symbol + ' details...</p>';
+    
+    // Fetch market overview to get coin data
+    const response = await fetch('/api/market-overview');
+    const data = await response.json();
+    
+    const coin = data.currencies.find(c => c.symbol === symbol);
+    if (!coin) {
+      document.getElementById('crypto-details').innerHTML = '<p style="color: var(--coral);">Coin data not found</p>';
+      return;
+    }
+    
+    // Calculate price change styling
+    const change24h = coin.change_24h_pct || 0;
+    const changeColor = change24h >= 0 ? 'var(--green)' : 'var(--red)';
+    const changeIcon = change24h >= 0 ? '↑' : '↓';
+    
+    // Format market cap and volume
+    const volume = coin.volume_24h || 0;
+    const volumeFormatted = volume > 1e9 ? '$' + (volume / 1e9).toFixed(2) + 'B' : '$' + (volume / 1e6).toFixed(2) + 'M';
+    
+    // Build details HTML
+    const detailsHTML = `
+      <div style="margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+          <div style="background: var(--bg-2); padding: 12px; border-radius: 6px;">
+            <div style="font-size: 11px; color: var(--text-3); margin-bottom: 4px;">Price</div>
+            <div style="font-size: 20px; font-weight: 600; color: var(--text);">$${coin.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+          </div>
+          <div style="background: var(--bg-2); padding: 12px; border-radius: 6px;">
+            <div style="font-size: 11px; color: var(--text-3); margin-bottom: 4px;">24h Change</div>
+            <div style="font-size: 20px; font-weight: 600; color: ${changeColor};">${changeIcon} ${Math.abs(change24h).toFixed(2)}%</div>
+          </div>
+          <div style="background: var(--bg-2); padding: 12px; border-radius: 6px;">
+            <div style="font-size: 11px; color: var(--text-3); margin-bottom: 4px;">Category</div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--text);">${coin.category || 'Crypto'}</div>
+          </div>
+        </div>
+        <div style="background: var(--bg-2); padding: 12px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-size: 11px; color: var(--text-3); margin-bottom: 4px;">24h Volume</div>
+          <div style="font-size: 16px; font-weight: 600; color: var(--text);">${volumeFormatted}</div>
+        </div>
+        <div style="background: var(--bg-2); padding: 12px; border-radius: 6px;">
+          <div style="font-size: 11px; color: var(--text-3); margin-bottom: 4px;">Status</div>
+          <div style="font-size: 14px; font-weight: 600; color: ${coin.active ? 'var(--green)' : 'var(--coral)'};">${coin.active ? 'Active' : 'Inactive'}</div>
+        </div>
+      </div>
+      <div style="text-align: center; color: var(--text-3); font-size: 12px;">
+        <p>Data from ${coin.source || 'Binance'}</p>
+        <p>${symbol} is a ${coin.category} asset</p>
+      </div>
+    `;
+    
+    document.getElementById('crypto-details').innerHTML = detailsHTML;
+  } catch (err) {
+    console.error('Error loading crypto details:', err);
+    document.getElementById('crypto-details').innerHTML = '<p style="color: var(--coral);">Error loading details</p>';
+  }
+}
+
+// Setup crypto selector event listener
+document.addEventListener('DOMContentLoaded', function() {
+  const select = document.getElementById('crypto-select');
+  if (select) {
+    select.addEventListener('change', function() {
+      showCryptoDetails(this.value);
+    });
+  }
+});
+
+// Load currencies when tab is shown
+document.addEventListener('DOMContentLoaded', function() {
+  const currenciesTab = document.getElementById('tab-currencies');
+  if (currenciesTab) {
+    initCurrencySelector();
+    loadCurrencies();
+    setInterval(loadCurrencies, 30000); // Refresh every 30s
+    setInterval(updateExchangeRateInfo, 300000); // Update exchange rate every 5min
+  }
+});
+
 document.addEventListener('DOMContentLoaded', init);
+
+// ── NANOPAY ─────────────────────────────────────────────────────────────────
+const NP_AGENTS = [
+  {from:'MomentumAgent',    to:'ConsensusEngine',  action:'signal_vote'},
+  {from:'SentimentAgent',   to:'PRISMDataFeed',    action:'market_data_request'},
+  {from:'ConsensusEngine',  to:'RiskGuardian',     action:'trade_validation'},
+  {from:'MeanReversionAgent',to:'ConsensusEngine', action:'signal_vote'},
+  {from:'MomentumAgent',    to:'RiskGuardian',     action:'risk_check'},
+  {from:'SentimentAgent',   to:'ConsensusEngine',  action:'sentiment_report'},
+  {from:'RiskGuardian',     to:'ConsensusEngine',  action:'approval'},
+  {from:'MeanReversionAgent',to:'PRISMDataFeed',   action:'price_query'},
+];
+
+async function executeNanopayBatch() {
+  const count  = Math.min(20, Math.max(1, parseInt(document.getElementById('np-count').value) || 4));
+  const amount = parseFloat(document.getElementById('np-amount').value) || 0.005;
+  const btn    = document.getElementById('np-execute-btn');
+  const icon   = document.getElementById('np-btn-icon');
+  const label  = document.getElementById('np-btn-label');
+  const dot    = document.getElementById('nanopay-status-dot');
+  const status = document.getElementById('nanopay-status-label');
+  const errDiv = document.getElementById('np-error');
+  const sumDiv = document.getElementById('np-summary');
+
+  btn.disabled = true; icon.textContent = '⏳'; label.textContent = 'Executing...';
+  dot.style.background = '#F59E0B'; status.textContent = 'Processing';
+  errDiv.style.display = 'none'; sumDiv.style.display = 'none';
+
+  const actions = Array.from({length: count}, (_, i) => {
+    const agent = NP_AGENTS[i % NP_AGENTS.length];
+    return {
+      channelId: `nexus-dash-${Date.now()}-${i}`,
+      amountUSDC: amount,
+      metadata: { from: agent.from, to: agent.to, action: agent.action }
+    };
+  });
+
+  try {
+    const resp = await fetch('/api/nanopay/batch', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({actions})
+    });
+    const data = await resp.json();
+
+    if (!data.success) throw new Error(data.error || 'Batch failed');
+
+    const receipts = data.result.receipts;
+    const blocks   = [...new Set(receipts.map(r => r.blockNumber))];
+    document.getElementById('np-block-badge').textContent =
+      `Block${blocks.length > 1 ? 's' : ''}: ${blocks.join(', ')}`;
+
+    const tbody = document.getElementById('np-receipts-body');
+    tbody.innerHTML = receipts.map(r => `
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 10px;color:var(--text-2);">${r.channelId.split('-').slice(-2).join('-')}</td>
+        <td style="padding:8px 10px;text-align:right;font-family:'DM Mono',monospace;">${r.amountUSDC} USDC</td>
+        <td style="padding:8px 10px;text-align:right;font-family:'DM Mono',monospace;color:var(--text-2);">
+          ${r.fee_usdc !== undefined ? r.fee_usdc.toFixed(8) : '—'}
+        </td>
+        <td style="padding:8px 10px;font-family:'DM Mono',monospace;color:var(--text-3);">${r.blockNumber}</td>
+        <td style="padding:8px 10px;">
+          <a href="${r.block_explorer || '#'}" target="_blank"
+             style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-decoration:none;">
+            ${r.txHash ? r.txHash.slice(0,12)+'…'+r.txHash.slice(-6) : '—'}
+          </a>
+        </td>
+      </tr>
+    `).join('');
+
+    const totalFee = receipts.reduce((s, r) => s + (r.fee_usdc || 0), 0);
+    document.getElementById('np-summary-text').innerHTML =
+      `✓ ${receipts.length} actions settled on Arc Testnet &nbsp;·&nbsp; ` +
+      `Total fee: <strong>${totalFee.toFixed(8)} USDC</strong> &nbsp;·&nbsp; ` +
+      `Avg: <strong>${(totalFee / receipts.length).toFixed(8)} USDC</strong> per action`;
+    sumDiv.style.display = 'block';
+
+    dot.style.background = 'var(--green)'; status.textContent = 'Success';
+    setTimeout(() => { dot.style.background = 'var(--text-3)'; status.textContent = 'Idle'; }, 4000);
+
+  } catch(err) {
+    document.getElementById('np-error-text').textContent = err.message;
+    errDiv.style.display = 'block';
+    dot.style.background = 'var(--red)'; status.textContent = 'Error';
+  } finally {
+    btn.disabled = false; icon.textContent = '⚡'; label.textContent = 'Execute Batch';
+  }
+}
+
+async function executeAgentTransfer() {
+  const actionCount = Math.min(20, Math.max(1, parseInt(document.getElementById('agent-action-count').value) || 4));
+  const amountPerAction = parseFloat(document.getElementById('agent-amount').value) || 0.005;
+  const statusEl = document.getElementById('agent-status');
+  const errDiv = document.getElementById('agent-error');
+  
+  statusEl.textContent = 'Transferring...';
+  statusEl.style.color = 'var(--amber)';
+  errDiv.style.display = 'none';
+  
+  try {
+    const resp = await fetch('/api/agents/transfer', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        action_count: actionCount,
+        amount_per_action: amountPerAction
+      })
+    });
+    const data = await resp.json();
+    
+    if (!data.success) throw new Error(data.error || 'Transfer failed');
+    
+    statusEl.textContent = `✓ ${actionCount} transfers executed`;
+    statusEl.style.color = 'var(--green)';
+    
+    // Reload wallet transactions
+    setTimeout(() => {
+      loadWalletTxs();
+      statusEl.textContent = 'Idle';
+      statusEl.style.color = 'var(--text-3)';
+    }, 2000);
+  } catch(err) {
+    document.getElementById('agent-error-text').textContent = err.message;
+    errDiv.style.display = 'block';
+    statusEl.textContent = 'Error';
+    statusEl.style.color = 'var(--red)';
+  }
+}
+
+async function loadSchedulerConfig() {
+  try {
+    const resp = await fetch('/api/agents/scheduler/config');
+    const data = await resp.json();
+    if (data.success) {
+      const cfg = data.config;
+      document.getElementById('scheduler-interval').value = cfg.interval_seconds || 300;
+      document.getElementById('scheduler-amount').value = cfg.amount_per_action || 0.005;
+      document.getElementById('scheduler-actions').value = cfg.actions_per_batch || 4;
+      
+      const btn = document.getElementById('scheduler-toggle');
+      const badge = document.getElementById('scheduler-status-badge');
+      if (cfg.enabled) {
+        btn.textContent = 'Disable Scheduler';
+        btn.style.background = 'var(--red)';
+        badge.textContent = `✓ Active (${cfg.interval_seconds}s)`;
+        badge.style.background = 'var(--green-bg)';
+        badge.style.color = 'var(--green)';
+      } else {
+        btn.textContent = 'Enable Scheduler';
+        btn.style.background = 'var(--blue)';
+        badge.textContent = 'Disabled';
+        badge.style.background = 'var(--red-bg)';
+        badge.style.color = 'var(--red)';
+      }
+    }
+  } catch(err) {
+    console.warn('Failed to load scheduler config:', err);
+  }
+}
+
+async function toggleScheduler() {
+  const interval = parseInt(document.getElementById('scheduler-interval').value) || 300;
+  const amount = parseFloat(document.getElementById('scheduler-amount').value) || 0.005;
+  const actions = parseInt(document.getElementById('scheduler-actions').value) || 4;
+  const errDiv = document.getElementById('scheduler-error');
+  
+  const resp = await fetch('/api/agents/scheduler/config');
+  const currentData = await resp.json();
+  const currentConfig = currentData.config;
+  const newEnabled = !currentConfig.enabled;
+  
+  try {
+    const resp = await fetch('/api/agents/scheduler/config', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        enabled: newEnabled,
+        interval_seconds: interval,
+        amount_per_action: amount,
+        actions_per_batch: actions
+      })
+    });
+    const data = await resp.json();
+    
+    if (!data.success) throw new Error(data.error || 'Failed to update scheduler');
+    
+    errDiv.style.display = 'none';
+    await loadSchedulerConfig();
+  } catch(err) {
+    document.getElementById('scheduler-error-text').textContent = err.message;
+    errDiv.style.display = 'block';
+  }
+}
+
+async function loadTransferLog() {
+  const tbody = document.getElementById('transfer-log-body');
+  tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-3);">Loading…</td></tr>';
+  try {
+    const resp = await fetch('/api/agents/transfer-log');
+    const data = await resp.json();
+    if (!data.success || !data.transfers.length) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-3);">No transfers yet</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.transfers.map(tx => {
+      const ts = tx.timestamp ? new Date(tx.timestamp).toLocaleTimeString() : '—';
+      const type = tx.scheduled ? '🔄 Auto' : '👤 Manual';
+      const fee = (tx.enriched_fee || tx.result?.result?.receipts?.reduce((s, r) => s + (r.fee_usdc || 0), 0) || 0).toFixed(8);
+      const actions = tx.action_count || '—';
+      return `
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px 10px;color:var(--text-2);">${ts}</td>
+          <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:500;">${type}</td>
+          <td style="padding:8px 10px;text-align:center;font-family:'DM Mono',monospace;">${actions}</td>
+          <td style="padding:8px 10px;text-align:right;font-family:'DM Mono',monospace;color:var(--green);">${fee}</td>
+          <td style="padding:8px 10px;text-align:center;"><span style="font-size:11px;color:var(--green);">✓ Done</span></td>
+        </tr>`;
+    }).join('');
+  } catch(err) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--red);">${err.message}</td></tr>`;
+  }
+}
+
+async function loadWalletTxs() {
+  const tbody = document.getElementById('np-wallet-txs-body');
+  tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-3);">Loading…</td></tr>';
+  try {
+    const resp = await fetch('/api/nanopay/wallet-txs');
+    const data = await resp.json();
+    if (!data.success || !data.txs.length) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-3);">No transactions found</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.txs.map(tx => {
+      const ts = tx.timestamp ? new Date(tx.timestamp).toLocaleTimeString() : '—';
+      const statusColor = tx.status === 'ok' ? 'var(--green)' : 'var(--text-3)';
+      return `
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px 10px;font-family:'DM Mono',monospace;color:var(--text-3);">${tx.block || '—'}</td>
+          <td style="padding:8px 10px;color:var(--text-2);">${ts}</td>
+          <td style="padding:8px 10px;text-align:right;font-family:'DM Mono',monospace;">${(tx.fee_usdc||0).toFixed(8)}</td>
+          <td style="padding:8px 10px;"><span style="color:${statusColor};font-size:11px;">${tx.status || '—'}</span></td>
+          <td style="padding:8px 10px;">
+            <a href="${tx.explorer}" target="_blank"
+               style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-decoration:underline;cursor:pointer;font-weight:600;">
+              ${tx.txHash ? tx.txHash.slice(0,12)+'…'+tx.txHash.slice(-6) : '—'} ↗
+            </a>
+          </td>
+        </tr>`;
+    }).join('');
+  } catch(err) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--red);">${err.message}</td></tr>`;
+  }
+}
+
 </script>
 </body>
 </html>

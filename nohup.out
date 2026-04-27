@@ -1,0 +1,23 @@
+/Users/thapelodipela/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+ * Serving Flask app 'dashboard_server'
+ * Debug mode: on
+Address already in use
+Port 3000 is in use by another program. Either identify and stop that program, or start the server with a different port.

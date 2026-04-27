@@ -1,0 +1,18 @@
+@@ -850,6 +851,17 @@
+     if args.ping:
+         kraken_client = KrakenClient()
+         prism_client = PrismClient(config.PRISM_API_KEY, kraken_client)
+         success = ping_prism_and_kraken(prism_client, kraken_client)
+         sys.exit(0 if success else 1)
+ 
++    # --check-prism: test PRISM API only (no Kraken needed)
++    if args.check_prism:
++        kraken_client = KrakenClient()
++        prism_client = PrismClient(config.PRISM_API_KEY, kraken_client)
++        console.print("\n[bold]NEXUS --check-prism: PRISM API Check[/bold]")
++        resolved = prism_client.resolve_asset(config.PRISM_SYMBOL)
++        if resolved and resolved.get("symbol") == config.PRISM_SYMBOL:
++            console.print(f"[green]✓ PRISM API key is valid. Symbol: {resolved['symbol']}[/green]")
++            sys.exit(0)
++        else:
++            console.print("[red]✗ PRISM API key invalid or unreachable[/red]")

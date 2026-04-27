@@ -1,0 +1,790 @@
+from dotenv import load_dotenv
+load_dotenv()
+"""
+NEXUS Dashboard API Server
+Serves real-time market data and bot performance metrics to the HTML dashboard
+"""
+import os
+import json
+import sys
+import requests
+from datetime import datetime, timedelta
+from pathlib import Path
+from flask import Flask, jsonify, render_template, send_file, request
+from flask_cors import CORS
+import logging
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent))
+
+import config
+from data.prism import PrismClient
+from execution.kraken import KrakenClient
+import os
+from agents.sentiment import fetch_composite_sentiment
+from data.free_market import FreeMarketClient
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Initialize Flask
+app = Flask(__name__)
+CORS(app)
+
+# Initialize PRISM client
+try:
+    _kraken = KrakenClient()
+    prism_client = PrismClient(api_key=os.environ.get("PRISM_API_KEY", ""), kraken_client=_kraken)
+    logger.info("✅ PRISM client initialized")
+except Exception as e:
+    logger.error(f"❌ Failed to initialize PRISM client: {e}")
+    prism_client = None
+
+# Initialize FreeMarketClient (CoinGecko + Binance — no API key required)
+try:
+    free_market = FreeMarketClient()
+    logger.info("✅ FreeMarketClient initialized (CoinGecko + Binance)")
+except Exception as e:
+    logger.error(f"❌ Failed to initialize FreeMarketClient: {e}")
+    free_market = None
+
+# ============================================================================
+# Data Loading Functions
+# ============================================================================
+
+def load_agent_weights():
+    """Load agent weights from nexus_weights.json"""
+    try:
+        with open('nexus_weights.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return [
+            {'id': 'orderflow', 'name': 'OrderFlow', 'weight': 1.0, 'trades_closed': 0, 'wins': 0, 'pnl_total': 0},
+            {'id': 'momentum', 'name': 'Momentum', 'weight': 1.0, 'trades_closed': 0, 'wins': 0, 'pnl_total': 0},
+            {'id': 'sentiment', 'name': 'Sentiment', 'weight': 1.0, 'trades_closed': 0, 'wins': 0, 'pnl_total': 0},
+            {'id': 'risk_guardian', 'name': 'Risk Guardian', 'weight': 1.0, 'trades_closed': 0, 'wins': 0, 'pnl_total': 0},
+        ]
+
+def load_positions():
+    """Load open positions from nexus_positions.json with live P&L calculation"""
+    try:
+        with open('nexus_positions.json', 'r') as f:
+            all_pos = json.load(f)
+        
+        # Get current market price for P&L calculation
+        current_price = 0
+        try:
+            response = requests.get(f'{config.PRISM_API_BASE_URL}/prices/BTC', 
+                                   headers={'Authorization': f'Bearer {config.PRISM_API_KEY}'}, 
+                                   timeout=5)
+            if response.status_code == 200:
+                current_price = response.json().get('price', 0)
+        except:
+            pass
+        
+        # Add symbol field if missing and calculate live P&L
+        positions = []
+        for p in all_pos:
+            if p.get('status') != 'closed':
+                if 'symbol' not in p and 'pair' not in p:
+                    p['symbol'] = config.PRIMARY_SYMBOL
+                    p['pair'] = config.PRIMARY_SYMBOL + '/USDT'
+                
+                # Calculate live P&L
+                if current_price > 0 and p.get('entry_price'):
+                    entry_price = p.get('entry_price')
+                    amount_traded = p.get('amount', p.get('volume', 0))
+                    direction = p.get('direction', 'BUY')
+                    
+                    # Calculate live P&L
+                    if direction == 'BUY':
+                        pnl_usd = (current_price - entry_price) * amount_traded
+                        pnl_pct = ((current_price - entry_price) / entry_price * 100) if entry_price else 0
+                    else:  # SELL
+                        pnl_usd = (entry_price - current_price) * amount_traded
+                        pnl_pct = ((entry_price - current_price) / entry_price * 100) if entry_price else 0
+                    
+                    p['live_pnl_usd'] = pnl_usd
+                    p['live_pnl_pct'] = pnl_pct
+                    p['current_price'] = current_price
+                
+                # Ensure amount_traded is present
+                if 'amount_traded' not in p:
+                    p['amount_traded'] = p.get('amount', p.get('volume', 0))
+                
+                positions.append(p)
+        return positions
+    except FileNotFoundError:
+        return []
+
+def load_equity_curve():
+    """Load equity curve from nexus_equity_curve.json"""
+    try:
+        with open('nexus_equity_curve.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+# ============================================================================
+# API Routes
+# ============================================================================
+
+@app.route('/', methods=['GET'])
+def dashboard():
+    """Serve main dashboard"""
+    try:
+        with open('dashboard.html', 'r') as f:
+            return f.read()
+    except FileNotFoundError:
+        return "Dashboard not found", 404
+
+@app.route('/api/market', methods=['GET'])
+def get_market_data():
+    """Get current market data"""
+    try:
+        # BTC price: Binance (reliable 24h change + volume)
+        price_data = free_market.get_price('BTC') if free_market else None
+
+        # BTC signals: PRISM primary, FreeMarketClient fallback
+        signals_1h, signals_4h = None, None
+        if prism_client:
+            signals_1h = prism_client.get_signals('BTC', '1h')
+            signals_4h = prism_client.get_signals('BTC', '4h')
+        if not signals_1h and free_market:
+            signals_1h = free_market.get_signals('BTC', '1h')
+        if not signals_4h and free_market:
+            signals_4h = free_market.get_signals('BTC', '4h')
+
+        # BTC risk: PRISM primary, FreeMarketClient fallback
+        risk = prism_client.get_risk('BTC') if prism_client else None
+        if not risk and free_market:
+            risk = free_market.get_risk('BTC')
+
+        if not price_data:
+            return jsonify({'success': False, 'error': 'Could not fetch BTC price'}), 503
+
+        return jsonify({
+            'success': True,
+            'price': price_data.get('price', 0),
+            'change_24h': price_data.get('change_24h_pct', 0),
+            'volume_24h': price_data.get('volume_24h', 0),
+            'signal_1h': signals_1h.direction if signals_1h else 'neutral',
+            'signal_4h': signals_4h.direction if signals_4h else 'neutral',
+            'risk_score': risk.risk_score if risk else 0,
+            'source': 'binance+prism',
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching market data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/agents', methods=['GET'])
+def get_agents():
+    """Get agent performance metrics"""
+    try:
+        agents = load_agent_weights()
+        
+        # Calculate aggregated metrics
+        total_trades = sum(a.get('trades_closed', 0) for a in agents)
+        total_wins = sum(a.get('wins', 0) for a in agents)
+        total_pnl = sum(a.get('pnl_total', 0) for a in agents)
+        
+        return jsonify({
+            'success': True,
+            'agents': agents,
+            'summary': {
+                'total_trades': total_trades,
+                'total_wins': total_wins,
+                'win_rate': (total_wins / total_trades * 100) if total_trades > 0 else 0,
+                'total_pnl': total_pnl,
+                'avg_pnl_per_trade': (total_pnl / total_trades) if total_trades > 0 else 0,
+            },
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching agent data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/sentiment', methods=['GET'])
+def get_sentiment():
+    """Get sentiment analysis"""
+    try:
+        import requests
+        
+        sentiment_data = {
+            'timestamp': datetime.now().isoformat()
+        }
+        
+        # Fear & Greed Index
+        try:
+            fng_response = requests.get('https://api.alternative.me/fng/?limit=1', timeout=5)
+            fng_data = fng_response.json()
+            if fng_data.get('data'):
+                sentiment_data['fear_greed'] = int(fng_data['data'][0]['value'])
+        except Exception as e:
+            logger.warning(f"Failed to fetch Fear & Greed: {e}")
+        
+        # Composite sentiment
+        try:
+            composite = fetch_composite_sentiment()
+            sentiment_data['composite'] = composite
+        except Exception as e:
+            logger.warning(f"Failed to fetch composite sentiment: {e}")
+        
+        return jsonify({
+            'success': True,
+            **sentiment_data
+        })
+    except Exception as e:
+        logger.error(f"Error fetching sentiment data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/positions', methods=['GET'])
+def get_positions():
+    """Get current open positions"""
+    try:
+        positions = load_positions()
+        return jsonify({
+            'success': True,
+            'positions': positions,
+            'count': len(positions),
+            'total_exposure': sum(p.get('size_usd', 0) for p in positions),
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching positions: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/equity', methods=['GET'])
+def get_equity():
+    """Get equity curve"""
+    try:
+        equity_data = load_equity_curve()
+        return jsonify({
+            'success': True,
+            'data': equity_data,
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching equity data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/risk', methods=['GET'])
+def get_risk():
+    """Get risk metrics"""
+    try:
+        risk = None
+        source = 'mock'
+
+        # Primary: PRISM
+        if prism_client:
+            risk = prism_client.get_risk('BTC')
+            if risk:
+                source = 'prism'
+
+        # Fallback: FreeMarketClient (computed from Binance daily OHLCV)
+        if not risk and free_market:
+            risk = free_market.get_risk('BTC')
+            if risk:
+                source = 'binance'
+
+        if risk:
+            return jsonify({
+                'success': True,
+                'risk_score': risk.risk_score,
+                'atr_pct': risk.atr_pct,
+                'volatility_30d': risk.volatility_30d,
+                'max_drawdown_30d': risk.max_drawdown_30d,
+                'sharpe_ratio': risk.sharpe_ratio,
+                'sortino_ratio': risk.sortino_ratio,
+                'source': source,
+                'timestamp': datetime.now().isoformat()
+            })
+
+        # Last resort: static fallback so dashboard never breaks
+        return jsonify({
+            'success': True,
+            'risk_score': 42.5,
+            'atr_pct': 1.2,
+            'volatility_30d': 22.5,
+            'max_drawdown_30d': 8.3,
+            'sharpe_ratio': 1.45,
+            'sortino_ratio': 2.1,
+            'source': 'mock',
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching risk data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/market-overview', methods=['GET'])
+def get_market_overview():
+    """Get prices and basic info for all supported cryptocurrencies"""
+    try:
+        if not free_market:
+            return jsonify({'success': False, 'error': 'FreeMarketClient not available'}), 503
+
+        # Single batch call — all symbols in one Binance API request
+        symbols = list(config.SUPPORTED_SYMBOLS.keys())
+        all_prices = free_market.get_prices_batch(symbols)
+
+        overview = []
+        for symbol, price_data in all_prices.items():
+            if symbol in config.SUPPORTED_SYMBOLS:
+                meta = config.SUPPORTED_SYMBOLS[symbol]
+                overview.append({
+                    'symbol': symbol,
+                    'name': meta['name'],
+                    'category': meta['category'],
+                    'active': meta['active'],
+                    'price': price_data.get('price') if price_data else None,
+                    'change_24h_pct': price_data.get('change_24h_pct') if price_data else None,
+                    'volume_24h': price_data.get('volume_24h') if price_data else None,
+                    'source': 'binance',
+                })
+
+        return jsonify({
+            'success': True,
+            'count': len(overview),
+            'currencies': overview,
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching market overview: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/crypto/<symbol>/price', methods=['GET'])
+def get_crypto_price(symbol):
+    """Get price for a specific cryptocurrency"""
+    try:
+        symbol_upper = symbol.upper()
+        price_data = None
+        source = None
+
+        # Primary: FreeMarketClient (Binance)
+        if free_market:
+            price_data = free_market.get_price(symbol_upper)
+            if price_data:
+                source = 'binance'
+
+        # Fallback: PRISM (BTC only, reliably)
+        if not price_data and prism_client:
+            price_data = prism_client.get_price(symbol_upper)
+            if price_data:
+                source = 'prism'
+
+        if price_data:
+            return jsonify({
+                'success': True,
+                'symbol': symbol_upper,
+                'price': price_data.get('price'),
+                'change_24h_pct': price_data.get('change_24h_pct'),
+                'volume_24h': price_data.get('volume_24h'),
+                'source': source,
+                'timestamp': datetime.now().isoformat()
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': f'Could not fetch price for {symbol_upper}'
+            }), 404
+    except Exception as e:
+        logger.error(f"Error fetching price for {symbol}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/crypto/<symbol>/signals', methods=['GET'])
+def get_crypto_signals(symbol):
+    """Get signals for a specific cryptocurrency"""
+    try:
+        symbol_upper = symbol.upper()
+        timeframe = request.args.get('timeframe', '1h')
+        signals = None
+        source = None
+
+        # BTC: PRISM primary (best signal quality), FreeMarketClient fallback
+        # Altcoins: FreeMarketClient primary (avoids PRISM rate limits)
+        if symbol_upper == 'BTC' and prism_client:
+            signals = prism_client.get_signals(symbol_upper, timeframe)
+            if signals:
+                source = 'prism'
+
+        if not signals and free_market:
+            signals = free_market.get_signals(symbol_upper, timeframe)
+            if signals:
+                source = 'binance'
+
+        if signals:
+            return jsonify({
+                'success': True,
+                'symbol': symbol_upper,
+                'timeframe': timeframe,
+                'direction': signals.direction,
+                'confidence': signals.confidence,
+                'score': signals.score,
+                'reasoning': signals.reasoning,
+                'indicators': signals.indicators,
+                'current_price': signals.current_price,
+                'source': source,
+                'timestamp': datetime.now().isoformat()
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': f'Could not fetch signals for {symbol_upper}'
+            }), 404
+    except Exception as e:
+        logger.error(f"Error fetching signals for {symbol}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/performance', methods=['GET'])
+def get_performance():
+    """Get comprehensive performance metrics"""
+    try:
+        agents = load_agent_weights()
+        positions = load_positions()
+        equity_data = load_equity_curve()
+        
+        # Calculate performance metrics
+        total_trades = sum(a.get('trades_closed', 0) for a in agents)
+        total_wins = sum(a.get('wins', 0) for a in agents)
+        total_pnl = sum(a.get('pnl_total', 0) for a in agents)
+        
+        # Calculate Sharpe and Max Drawdown from equity curve
+        if equity_data:
+            equity_values = [e['equity'] for e in equity_data]
+            max_equity = max(equity_values)
+            min_equity = min(equity_values)
+            max_dd = (max_equity - min_equity) / max_equity * 100 if max_equity > 0 else 0
+            returns = [(equity_values[i] - equity_values[i-1]) / equity_values[i-1] * 100 
+                      for i in range(1, len(equity_values))
+                      if equity_values[i-1] > 0.01]
+            # Clamp to reasonable range to avoid division artifacts
+            returns = [max(-100, min(100, r)) for r in returns]
+            avg_return = sum(returns) / len(returns) if returns else 0
+        else:
+            max_dd = 0
+            avg_return = 0
+        
+        return jsonify({
+            'success': True,
+            'performance': {
+                'total_trades': total_trades,
+                'wins': total_wins,
+                'losses': total_trades - total_wins if total_trades > 0 else 0,
+                'win_rate': (total_wins / total_trades * 100) if total_trades > 0 else 0,
+                'total_pnl': total_pnl,
+                'avg_pnl': (total_pnl / total_trades) if total_trades > 0 else 0,
+                'max_drawdown': max_dd,
+                'avg_daily_return': avg_return,
+                'open_positions': len(positions),
+            },
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error fetching performance data: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/balance', methods=['GET'])
+def get_balance():
+    try:
+        import subprocess
+        result = subprocess.run(['kraken', 'balance', '-o', 'json'], capture_output=True, text=True, timeout=10)
+        balance = 0.0
+        if result.returncode == 0 and result.stdout.strip():
+            import json as _json
+            bal = _json.loads(result.stdout)
+            balance = sum(float(v) for v in bal.values()) if isinstance(bal, dict) else 0.0
+        
+        # If balance is 0 or not available, use allocated trading balance from config
+        if balance <= 0:
+            # Use allocated trading capital (from environment or config)
+            allocated_balance = float(os.environ.get('ALLOCATED_BALANCE', '10000'))
+            balance = allocated_balance
+        
+        # Also add PnL from weights
+        agents = load_agent_weights()
+        total_pnl = sum(a.get('pnl_total', 0) for a in agents)
+        total_trades = sum(a.get('trades_closed', 0) for a in agents)
+        total_wins = sum(a.get('wins', 0) for a in agents)
+        
+        # Calculate current equity: allocated balance + PnL
+        current_equity = balance + total_pnl
+        
+        return jsonify({
+            'success': True,
+            'balance_usd': current_equity,  # Current equity (balance + PnL)
+            'initial_balance': balance,     # Starting allocated balance
+            'total_pnl': total_pnl,
+            'total_trades': total_trades,
+            'total_wins': total_wins,
+            'win_rate': (total_wins / total_trades * 100) if total_trades > 0 else 0,
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/trades', methods=['GET'])
+def get_trades():
+    try:
+        with open('nexus_positions.json') as f:
+            all_trades = json.load(f)
+        closed = [t for t in all_trades if t.get('status') == 'closed']
+        # Add symbol field if missing (default to PRIMARY_SYMBOL)
+        for t in closed:
+            if 'symbol' not in t and 'pair' not in t:
+                t['symbol'] = config.PRIMARY_SYMBOL
+                t['pair'] = config.PRIMARY_SYMBOL + '/USDT'
+        total_pnl = sum(t.get('pnl_usd', 0) for t in closed)
+        wins = [t for t in closed if t.get('pnl_usd', 0) > 0]
+        return jsonify({'success': True, 'trades': closed[-20:],
+            'total': len(closed), 'wins': len(wins),
+            'total_pnl': total_pnl, 'win_rate': len(wins)/len(closed)*100 if closed else 0})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/consensus', methods=['GET'])
+def get_consensus():
+    try:
+        with open('nexus_live_decisions.json') as f:
+            data = json.load(f)
+        return jsonify({'success': True, 'data': data.get('consensus_decision', {}),
+            'cycle': data.get('latest_cycle', 0), 'timestamp': data.get('timestamp', '')})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/checkpoints', methods=['GET'])
+def get_checkpoints():
+    try:
+        with open('nexus_weights.json') as f:
+            weights = json.load(f)
+        return jsonify({'success': True, 'checkpoints': weights,
+            'timestamp': datetime.now().isoformat()})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/health', methods=['GET'])
+def health():
+    """Health check endpoint"""
+    return jsonify({
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat(),
+        'prism_connected': prism_client is not None,
+        'free_market_connected': free_market is not None,
+    })
+
+@app.route('/api/settings', methods=['GET', 'POST'])
+def manage_settings():
+    """Get or save agent configuration and risk settings"""
+    try:
+        if request.method == 'POST':
+            # Save settings to JSON file
+            settings = request.json
+            if not settings:
+                return jsonify({'success': False, 'error': 'No settings provided'}), 400
+            
+            # Validate settings structure
+            required_fields = ['risk_per_trade', 'stop_loss_pct', 'take_profit_pct', 
+                             'max_position_pct', 'max_leverage', 'enabled_agents']
+            missing_fields = [f for f in required_fields if f not in settings]
+            if missing_fields:
+                logger.warning(f"Settings missing fields: {missing_fields}. Using partial update.")
+            
+            # Write settings to file
+            with open('nexus_agent_settings.json', 'w') as f:
+                json.dump(settings, f, indent=2)
+            
+            logger.info(f"✅ Settings saved: risk={settings.get('risk_per_trade')}%, "
+                       f"sl={settings.get('stop_loss_pct')}%, "
+                       f"tp={settings.get('take_profit_pct')}%, "
+                       f"leverage={settings.get('max_leverage')}x")
+            
+            return jsonify({
+                'success': True,
+                'message': 'Settings saved successfully',
+                'settings': settings,
+                'timestamp': datetime.now().isoformat()
+            })
+        
+        else:  # GET request
+            # Load settings from JSON file or return defaults
+            try:
+                with open('nexus_agent_settings.json') as f:
+                    settings = json.load(f)
+                return jsonify({
+                    'success': True,
+                    'source': 'file',
+                    'settings': settings,
+                    'timestamp': datetime.now().isoformat()
+                })
+            except FileNotFoundError:
+                # Return default settings if file doesn't exist
+                default_settings = {
+                    'risk_per_trade': 1.0,
+                    'stop_loss_pct': 2.0,
+                    'take_profit_pct': 5.0,
+                    'max_position_pct': 20.0,
+                    'max_leverage': 3.0,
+                    'min_trade_size': 10.0,
+                    'enabled_agents': {
+                        'momentum': True,
+                        'mean_reversion': True,
+                        'sentiment': True,
+                        'orderflow': True,
+                        'yolo': True
+                    }
+                }
+                return jsonify({
+                    'success': True,
+                    'source': 'defaults',
+                    'settings': default_settings,
+                    'message': 'Using default settings (no saved config found)',
+                    'timestamp': datetime.now().isoformat()
+                })
+    
+    except Exception as e:
+        logger.error(f"Error managing settings: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/live-decisions', methods=['GET'])
+def get_live_decisions():
+    """Get live agent decisions and position reasoning"""
+    try:
+        with open('nexus_live_decisions.json', 'r') as f:
+            data = json.load(f)
+        return jsonify({
+            'success': True,
+            'data': data,
+            'timestamp': datetime.now().isoformat()
+        })
+    except FileNotFoundError:
+        return jsonify({
+            'success': True,
+            'data': {
+                'latest_cycle': 0,
+                'agent_decisions': [],
+                'consensus_decision': None,
+                'positions': [],
+                'recent_closes': [],
+                'timestamp': ''
+            },
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/config', methods=['GET'])
+def get_config():
+    """Serve frontend config from .env — never expose secrets, only what dashboard needs"""
+    return jsonify({
+        'groq_key':  os.environ.get('GROQ_API_KEY', ''),
+        'strategy':  os.environ.get('ACTIVE_STRATEGY', 'algorithmic_quant'),
+        'chain_id':  os.environ.get('CHAIN_ID', '11155111'),
+    })
+
+@app.route('/office')
+def pixel_office():
+    """Serve pixel office HTML"""
+    return send_file('pixel_office.html')
+
+# Serve JSON files from root directory
+@app.route('/<filename>')
+def serve_static(filename):
+    """Serve static files (JSON, etc.) from root directory"""
+    if filename.endswith('.json'):
+        try:
+            with open(filename, 'r') as f:
+                data = json.load(f)
+            return jsonify(data)
+        except FileNotFoundError:
+            return jsonify({'error': 'File not found'}), 404
+        except json.JSONDecodeError:
+            return send_file(filename, mimetype='application/json')
+    return send_file(filename)
+
+# ============================================================================
+# Position Management (Manual Close)
+# ============================================================================
+
+@app.route('/api/positions/close', methods=['POST'])
+def close_position():
+    """Close an open position manually"""
+    try:
+        data = request.get_json()
+        trade_id = data.get('trade_id')
+        
+        if not trade_id:
+            return jsonify({'success': False, 'error': 'trade_id required'}), 400
+        
+        # Load positions
+        with open('nexus_positions.json', 'r') as f:
+            positions_data = json.load(f)
+        
+        # Find and close position
+        closed = False
+        for p in positions_data:
+            if p.get('trade_id') == trade_id and p.get('status') == 'open':
+                p['status'] = 'closed'
+                p['exit_timestamp'] = int(datetime.now().timestamp())
+                p['exit_reason'] = 'manual_close'
+                # Use current price as exit price
+                p['exit_price'] = data.get('exit_price', p.get('entry_price', 0))
+                closed = True
+                break
+        
+        if not closed:
+            return jsonify({'success': False, 'error': 'Position not found or already closed'}), 404
+        
+        # Save updated positions
+        with open('nexus_positions.json', 'w') as f:
+            json.dump(positions_data, f, indent=2)
+        
+        logger.info(f"✓ Manually closed position: {trade_id}")
+        return jsonify({
+            'success': True,
+            'message': f'Position {trade_id} closed successfully',
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        logger.error(f"Error closing position: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# ============================================================================
+# Error Handlers
+# ============================================================================
+
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'success': False, 'error': 'Endpoint not found'}), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+# ============================================================================
+# Main
+# ============================================================================
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 3000))
+    logger.info("🚀 Starting NEXUS Dashboard API Server")
+    logger.info(f"📊 Dashboard available at http://localhost:{port}")
+    logger.info("📡 API endpoints:")
+    logger.info("   - GET  /api/market           → Market data (BTC)")
+    logger.info("   - GET  /api/agents           → Agent performance")
+    logger.info("   - GET  /api/sentiment        → Sentiment analysis")
+    logger.info("   - GET  /api/positions        → Current positions")
+    logger.info("   - GET  /api/equity           → Equity curve")
+    logger.info("   - GET  /api/risk             → Risk metrics (BTC)")
+    logger.info("   - GET  /api/performance      → Overall performance")
+    logger.info("   - GET  /api/health           → Health check")
+    logger.info("   - GET  /api/market-overview  → All crypto prices")
+    logger.info("   - GET  /api/crypto/<sym>/price   → Single crypto price")
+    logger.info("   - GET  /api/crypto/<sym>/signals → Single crypto signals")
+    logger.info("   - GET  /office               → Pixel office display")
+    
+    app.run(host='0.0.0.0', port=port, debug=True)

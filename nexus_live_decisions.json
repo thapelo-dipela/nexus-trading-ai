@@ -3,76 +3,76 @@
   "agent_decisions": [
     {
       "agent_id": "orderflow",
-      "direction": "SELL",
-      "confidence": 0.3,
+      "direction": "HOLD",
+      "confidence": 0.9,
       "regime_multiplier": 1.0,
-      "reasoning": "cvd_momentum=+0.0000 | vwap_dev=-1.68% | imbalance=+0.00 | signal=-0.3000"
+      "reasoning": "CVD divergence VETO: cvd_momentum=-1.2820 (threshold=-0.2), price=$84022.42 > vwap=$77986.80 | bearish divergence"
     },
     {
       "agent_id": "momentum",
-      "direction": "SELL",
-      "confidence": 0.7248449852507314,
+      "direction": "BUY",
+      "confidence": 0.5106776778951291,
       "regime_multiplier": 1.5,
-      "reasoning": "Momentum composite: -0.725"
+      "reasoning": "Momentum composite: 0.511"
     },
     {
       "agent_id": "sentiment",
-      "direction": "BUY",
-      "confidence": 0.32,
+      "direction": "SELL",
+      "confidence": 0.25,
       "regime_multiplier": 0.8,
-      "reasoning": "composite=0.320 | fear_greed=0.200 | prism=1.000 | price_mom=0.000 | news=0.000 | social=0.000"
+      "reasoning": "composite=-0.250 | fear_greed=0.000 | prism=-1.000 | price_mom=0.000 | news=0.000 | social=0.000"
     },
     {
       "agent_id": "risk_guardian",
-      "direction": "SELL",
-      "confidence": 0.3,
+      "direction": "HOLD",
+      "confidence": 0.2,
       "regime_multiplier": 1.0,
-      "reasoning": "Risk signal: -0.240"
+      "reasoning": "Risk signal: 0.100"
     },
     {
       "agent_id": "mean_reversion",
-      "direction": "HOLD",
-      "confidence": 0.1,
+      "direction": "SELL",
+      "confidence": 0.7796088919829038,
       "regime_multiplier": 0.5,
-      "reasoning": "MeanReversion: rsi=0.000 bb=0.000 sma=0.000 composite=0.000"
+      "reasoning": "MeanReversion: rsi=0.000 bb=-1.000 sma=-0.518 composite=-0.480"
     }
   ],
   "consensus_decision": {
-    "direction": "SELL",
-    "confidence": 0.2647459762722495
+    "direction": "HOLD",
+    "confidence": 0.2073416879917943
   },
   "positions": [],
   "recent_closes": [
     {
       "agent_id": "momentum",
-      "pnl_total": 106.41317300008583,
-      "wins": 66,
-      "trades_closed": 91
+      "pnl_total": 93.7314438168079,
+      "wins": 124,
+      "trades_closed": 244
     },
     {
       "agent_id": "sentiment",
-      "pnl_total": 103.02895352424244,
+      "pnl_total": 111.09025100325735,
       "wins": 68,
-      "trades_closed": 91
+      "trades_closed": 244
     },
     {
       "agent_id": "risk_guardian",
-      "pnl_total": 3.423253782934075,
-      "wins": 1,
-      "trades_closed": 91
+      "pnl_total": 28.176818710023944,
+      "wins": 15,
+      "trades_closed": 244
     },
     {
       "agent_id": "mean_reversion",
-      "pnl_total": 0.8091096872656253,
+      "pnl_total": 5.889229566581832,
       "wins": 0,
-      "trades_closed": 90
+      "trades_closed": 243
     },
     {
       "agent_id": "orderflow",
-      "pnl_total": -12.588236916271281,
-      "wins": 4,
-      "trades_closed": 15
+      "pnl_total": -25.26996609954916,
+      "wins": 62,
+      "trades_closed": 168
     }
   ],
-  "timestamp": "2026-04-13T00:46:56.943679"
+  "timestamp": "2026-04-27T13:05:40.534166"
 }

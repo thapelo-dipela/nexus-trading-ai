@@ -2,16 +2,241 @@
 SentimentAgent — Advanced multi-source contrarian sentiment analysis
 Source: Oansa/ice-cream (richer multi-source model with weighted blending)
 Fuses Fear/Greed, PRISM signals, price momentum, news NLP, social volume.
+
+News sources (all free, no API key required):
+  - CoinGecko News: replaces Messari (404 since endpoint removed)
+  - Reddit (r/Bitcoin + r/CryptoCurrency): social sentiment proxy
 """
 import logging
 import requests
-from typing import List
 import math
 
 from agents.base import BaseAgent, MarketData, Vote, VoteDirection
 
 logger = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Shared NLP word lists
+# ---------------------------------------------------------------------------
+POSITIVE_WORDS = {
+    "surge", "bull", "rally", "gain", "high", "growth", "positive",
+    "rise", "soar", "breakout", "adoption", "upgrade", "recover",
+    "ath", "accumulate", "inflow", "partnership", "launch",
+}
+NEGATIVE_WORDS = {
+    "crash", "bear", "drop", "loss", "low", "decline", "negative",
+    "fear", "sell", "hack", "ban", "regulation", "lawsuit", "exploit",
+    "liquidation", "dump", "outflow", "delist", "scam", "fraud",
+}
+
+
+def _nlp_score(text: str) -> float:
+    """
+    Score a text string -1.0 to +1.0 using whole-word keyword NLP.
+    Uses regex word boundaries to avoid partial-word false positives
+    e.g. 'liquidity' matching 'liquidat', 'follow' matching 'low'.
+    """
+    import re
+    t = text.lower()
+    pos = sum(1 for w in POSITIVE_WORDS if re.search(r'\b' + re.escape(w) + r'\b', t))
+    neg = sum(1 for w in NEGATIVE_WORDS if re.search(r'\b' + re.escape(w) + r'\b', t))
+    return max(-1.0, min(1.0, float(pos - neg)))
+
+
+# ---------------------------------------------------------------------------
+# Free data fetchers
+# ---------------------------------------------------------------------------
+
+def _fetch_fear_greed() -> tuple:
+    """Returns (raw_value: int | None, composite_contribution: float)."""
+    try:
+        resp = requests.get(
+            "https://api.alternative.me/fng/?limit=1", timeout=5
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        if data.get("data"):
+            fg_val = int(data["data"][0]["value"])
+            if fg_val < 20:
+                contribution = 0.6
+            elif fg_val < 30:
+                contribution = 0.3
+            elif fg_val > 80:
+                contribution = -0.6
+            elif fg_val > 70:
+                contribution = -0.3
+            else:
+                contribution = 0.0
+            return fg_val, contribution
+    except Exception as e:
+        logger.warning(f"Fear/Greed fetch failed: {e}")
+    return None, 0.0
+
+
+def _fetch_coingecko_news() -> tuple:
+    """
+    Fetches latest crypto news from CoinGecko (free, no API key).
+    Endpoint: GET /api/v3/news
+    Returns (news_score: float, composite_contribution: float).
+
+    Replaces Messari which permanently removed their free /api/v1/news endpoint.
+    """
+    try:
+        resp = requests.get(
+            "https://api.coingecko.com/api/v3/news",
+            params={"page": 1},
+            headers={"User-Agent": "NEXUS-SentimentAgent/1.0"},
+            timeout=6,
+        )
+        resp.raise_for_status()
+
+        if not resp.text.strip():
+            logger.warning("CoinGecko news returned empty response")
+            return 0.0, 0.0
+
+        data = resp.json()
+        articles = data.get("data", [])[:15]
+
+        if not articles:
+            logger.warning("CoinGecko news: no articles in response")
+            return 0.0, 0.0
+
+        scores = []
+        for article in articles:
+            title       = article.get("title", "")
+            description = article.get("description", "")[:200]
+            scores.append(_nlp_score(f"{title} {description}"))
+
+        if scores:
+            news_score = round(sum(scores) / len(scores), 3)
+            logger.debug(f"CoinGecko news score: {news_score} from {len(scores)} articles")
+            return news_score, news_score * 0.3
+
+    except Exception as e:
+        logger.warning(f"CoinGecko news fetch failed: {e}")
+
+    return 0.0, 0.0
+
+
+def _fetch_reddit_sentiment() -> tuple:
+    """
+    Fetches recent posts from r/Bitcoin and r/CryptoCurrency (free, no API key).
+    Returns (social_score: float, composite_contribution: float).
+    Uses Reddit's public JSON endpoint — no auth required.
+    """
+    subreddits = ["Bitcoin", "CryptoCurrency"]
+    all_scores = []
+    headers = {"User-Agent": "NEXUS-SentimentAgent/1.0"}
+
+    for sub in subreddits:
+        try:
+            resp = requests.get(
+                f"https://www.reddit.com/r/{sub}/new.json?limit=20",
+                headers=headers,
+                timeout=5,
+            )
+            resp.raise_for_status()
+
+            if not resp.text.strip():
+                continue
+
+            data = resp.json()
+            posts = data.get("data", {}).get("children", [])
+
+            for post in posts:
+                pd    = post.get("data", {})
+                score = pd.get("score", 0)
+
+                # Skip brand-new posts with too few votes to be reliable
+                if score < 10:
+                    continue
+
+                text         = pd.get("title", "") + " " + pd.get("selftext", "")[:200]
+                upvote_ratio = pd.get("upvote_ratio", 0.5)
+
+                # log scale gives diminishing returns on viral posts
+                import math as _math
+                weight = _math.log1p(score) * upvote_ratio
+                all_scores.append((_nlp_score(text), weight))
+
+        except Exception as e:
+            logger.warning(f"Reddit fetch failed for r/{sub}: {e}")
+
+    if all_scores:
+        total_weight = sum(w for _, w in all_scores)
+        if total_weight > 0:
+            social_score = round(
+                sum(s * w for s, w in all_scores) / total_weight, 3
+            )
+            logger.debug(
+                f"Reddit social score: {social_score} "
+                f"from {len(all_scores)} weighted posts"
+            )
+            return social_score, social_score * 0.2
+
+    return 0.0, 0.0
+
+
+# ---------------------------------------------------------------------------
+# Standalone composite function (called by dashboard_server.py)
+# ---------------------------------------------------------------------------
+
+def fetch_composite_sentiment() -> dict:
+    """
+    Standalone helper called by dashboard_server.py.
+    Fetches Fear/Greed, Messari news, and Reddit sentiment.
+    All sources are free with no API key required.
+    """
+    result = {
+        "fear_greed": None,
+        "news_score": 0.0,
+        "social_score": 0.0,
+        "composite": 0.0,
+        "label": "Neutral",
+        "sources": [],
+    }
+
+    # 1. Fear & Greed (contributes up to ±0.6)
+    fg_val, fg_contribution = _fetch_fear_greed()
+    result["fear_greed"] = fg_val
+    result["composite"] += fg_contribution
+    if fg_val is not None:
+        result["sources"].append("fear_greed")
+
+    # 2. CoinGecko news NLP (contributes up to ±0.3)
+    news_score, news_contribution = _fetch_coingecko_news()
+    result["news_score"] = news_score
+    result["composite"] += news_contribution
+    if news_score != 0.0:
+        result["sources"].append("coingecko_news")
+
+    # 3. Reddit social sentiment (contributes up to ±0.2)
+    social_score, social_contribution = _fetch_reddit_sentiment()
+    result["social_score"] = social_score
+    result["composite"] += social_contribution
+    if social_score != 0.0:
+        result["sources"].append("reddit")
+
+    # Clamp and label
+    result["composite"] = round(max(-1.0, min(1.0, result["composite"])), 3)
+    if result["composite"] > 0.2:
+        result["label"] = "Bullish"
+    elif result["composite"] < -0.2:
+        result["label"] = "Bearish"
+    else:
+        result["label"] = "Neutral"
+
+    logger.info(
+        f"Sentiment composite={result['composite']} ({result['label']}) "
+        f"| sources={result['sources']}"
+    )
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# SentimentAgent class
+# ---------------------------------------------------------------------------
 
 class SentimentAgent(BaseAgent):
     """
@@ -20,13 +245,10 @@ class SentimentAgent(BaseAgent):
       - Fear/Greed Index (0.35): extreme readings trigger strong signals
       - PRISM signals (0.25): technical consensus from price action
       - Price momentum (0.20): contrarian reversal signals
-      - News sentiment (0.12): NLP from CryptoPanic headlines
-      - Social volume (0.08): activity proxy from CoinGecko community
-
-    Non-linear contrarianism: readings extreme for 3+ days increase confidence.
+      - News sentiment (0.12): NLP from Messari headlines
+      - Social volume (0.08): Reddit community activity proxy
     """
 
-    # Source weights (must sum to 1.0)
     SOURCES = {
         "fear_greed": 0.35,
         "prism": 0.25,
@@ -35,7 +257,11 @@ class SentimentAgent(BaseAgent):
         "social": 0.08,
     }
 
-    def __init__(self, agent_id: str = "sentiment", reasoning: str = "Multi-source sentiment analysis with weighted blending."):
+    def __init__(
+        self,
+        agent_id: str = "sentiment",
+        reasoning: str = "Multi-source sentiment analysis with weighted blending.",
+    ):
         super().__init__(agent_id, reasoning)
         self.weight = 1.0
         self.consecutive_wrong = 0
@@ -47,17 +273,16 @@ class SentimentAgent(BaseAgent):
         # 1. Fear/Greed (contrarian, non-linear)
         if market_data.fear_greed_index is not None:
             fg = market_data.fear_greed_index
-            # Non-linear: >80 or <20 triggers strong signal
             if fg < 20:
-                scores["fear_greed"] = min(1.0, (20 - fg) / 20)  # extreme fear
+                scores["fear_greed"] = min(1.0, (20 - fg) / 20)
             elif fg < 30:
-                scores["fear_greed"] = (30 - fg) / 30 * 0.7  # mild fear
+                scores["fear_greed"] = (30 - fg) / 30 * 0.7
             elif fg > 80:
-                scores["fear_greed"] = -min(1.0, (fg - 80) / 20)  # extreme greed
+                scores["fear_greed"] = -min(1.0, (fg - 80) / 20)
             elif fg > 70:
-                scores["fear_greed"] = -(fg - 70) / 30 * 0.7  # mild greed
+                scores["fear_greed"] = -(fg - 70) / 30 * 0.7
             else:
-                scores["fear_greed"] = 0.0  # neutral zone
+                scores["fear_greed"] = 0.0
         else:
             scores["fear_greed"] = 0.0
 
@@ -69,26 +294,18 @@ class SentimentAgent(BaseAgent):
             prism_score += -self._prism_signal_to_score(market_data.signal_1h) * 0.4
         scores["prism"] = max(-1.0, min(1.0, prism_score))
 
-        # 3. Price momentum (contrarian — big run-ups mean reversal risk)
+        # 3. Price momentum (contrarian)
         chg = market_data.change_24h_pct
-        if abs(chg) > 2.0:
-            scores["price_mom"] = -math.tanh(chg / 10.0)  # contrarian: big up → bearish
-        else:
-            scores["price_mom"] = 0.0
+        scores["price_mom"] = -math.tanh(chg / 10.0) if abs(chg) > 2.0 else 0.0
 
-        # 4. News NLP score (from market_data.news_sentiment if available, else 0.0)
+        # 4. News NLP (pre-fetched into market_data by orchestrator, else 0.0)
         scores["news"] = getattr(market_data, "news_sentiment", None) or 0.0
 
-        # 5. Social volume proxy from market_data.social_score (CoinGecko community)
+        # 5. Social score (pre-fetched into market_data by orchestrator, else 0.0)
         scores["social"] = getattr(market_data, "social_score", None) or 0.0
 
-        # Weighted composite
-        composite = sum(
-            self.SOURCES[k] * scores.get(k, 0.0)
-            for k in self.SOURCES
-        )
+        composite = sum(self.SOURCES[k] * scores.get(k, 0.0) for k in self.SOURCES)
 
-        # Determine direction and confidence
         if composite > 0.06:
             direction = VoteDirection.BUY
             confidence = min(0.95, abs(composite))
@@ -99,13 +316,11 @@ class SentimentAgent(BaseAgent):
             direction = VoteDirection.HOLD
             confidence = 0.12
 
-        # Build reasoning string
         score_str = " | ".join(f"{k}={v:.3f}" for k, v in scores.items())
         reasoning = f"composite={composite:.3f} | {score_str}"
 
         logger.debug(
-            f"[dim]SentimentAgent multi-source: {direction.value} "
-            f"({confidence:.2%}) | {reasoning}[/dim]"
+            f"[dim]SentimentAgent: {direction.value} ({confidence:.2%}) | {reasoning}[/dim]"
         )
 
         return Vote(
@@ -117,170 +332,24 @@ class SentimentAgent(BaseAgent):
 
     @staticmethod
     def _prism_signal_to_score(signal) -> float:
-        """
-        Extract numeric score from PRISM signal object.
-        Uses the .score attribute if available (already -1.0 to +1.0),
-        otherwise map direction string.
-        """
-        if hasattr(signal, 'score') and signal.score is not None:
+        if hasattr(signal, "score") and signal.score is not None:
             return float(signal.score)
-
-        if hasattr(signal, 'direction') and signal.direction:
-            direction_lower = signal.direction.lower()
-            if direction_lower in ("strong_bullish", "strongbullish"):
-                return 1.0
-            elif direction_lower == "bullish":
-                return 0.5
-            elif direction_lower == "neutral":
-                return 0.0
-            elif direction_lower == "bearish":
-                return -0.5
-            elif direction_lower in ("strong_bearish", "strongbearish"):
-                return -1.0
-
+        if hasattr(signal, "direction") and signal.direction:
+            mapping = {
+                "strong_bullish": 1.0, "strongbullish": 1.0,
+                "bullish": 0.5,
+                "neutral": 0.0,
+                "bearish": -0.5,
+                "strong_bearish": -1.0, "strongbearish": -1.0,
+            }
+            return mapping.get(signal.direction.lower(), 0.0)
         return 0.0
 
     def boost(self, amount: float = 0.1):
-        """Reward correct call — increase weight."""
         self.weight = min(5.0, self.weight + amount)
         self.consecutive_wrong = 0
 
     def punish(self, consecutive: bool = False):
-        """Penalize wrong call — decrease weight."""
         self.weight = max(0.15, self.weight - 0.1)
         if consecutive:
             self.consecutive_wrong += 1
-
-def fetch_composite_sentiment() -> dict:
-    """
-    Standalone function for dashboard_server.py to call.
-    Returns a composite sentiment dict from available free sources.
-    """
-    import requests
-
-    result = {
-        "fear_greed": None,
-        "news_score": 0.0,
-        "social_score": 0.0,
-        "composite": 0.0,
-        "label": "Neutral",
-    }
-
-    try:
-        # Fear & Greed
-        fng = requests.get(
-            "https://api.alternative.me/fng/?limit=1", timeout=5
-        ).json()
-        if fng.get("data"):
-            fg_val = int(fng["data"][0]["value"])
-            result["fear_greed"] = fg_val
-            # Contrarian score: <20 = bullish signal, >80 = bearish
-            if fg_val < 20:
-                result["composite"] += 0.6
-            elif fg_val < 30:
-                result["composite"] += 0.3
-            elif fg_val > 80:
-                result["composite"] -= 0.6
-            elif fg_val > 70:
-                result["composite"] -= 0.3
-    except Exception:
-        pass
-
-    try:
-        # CryptoPanic news headlines (free, no key needed)
-        news = requests.get(
-            "https://cryptopanic.com/api/v1/posts/?currencies=BTC&kind=news&public=true",
-            timeout=5,
-        ).json()
-        posts = news.get("results", [])[:10]
-        positive_words = {"surge", "bull", "rally", "gain", "high", "up", "growth", "positive"}
-        negative_words = {"crash", "bear", "drop", "loss", "low", "down", "decline", "negative", "fear"}
-        scores = []
-        for post in posts:
-            title = post.get("title", "").lower()
-            score = sum(1 for w in positive_words if w in title)
-            score -= sum(1 for w in negative_words if w in title)
-            scores.append(max(-1, min(1, score)))
-        if scores:
-            news_score = sum(scores) / len(scores)
-            result["news_score"] = round(news_score, 3)
-            result["composite"] += news_score * 0.3
-    except Exception:
-        pass
-
-    # Clamp composite to -1.0 / +1.0
-    result["composite"] = round(max(-1.0, min(1.0, result["composite"])), 3)
-
-    if result["composite"] > 0.2:
-        result["label"] = "Bullish"
-    elif result["composite"] < -0.2:
-        result["label"] = "Bearish"
-    else:
-        result["label"] = "Neutral"
-
-    return result
-
-def fetch_composite_sentiment() -> dict:
-    """
-    Standalone helper called by dashboard_server.py.
-    Fetches Fear/Greed and CryptoPanic news, returns a composite dict.
-    """
-    result = {
-        "fear_greed": None,
-        "news_score": 0.0,
-        "social_score": 0.0,
-        "composite": 0.0,
-        "label": "Neutral",
-    }
-
-    # Fear & Greed Index
-    try:
-        fng = requests.get(
-            "https://api.alternative.me/fng/?limit=1", timeout=5
-        ).json()
-        if fng.get("data"):
-            fg_val = int(fng["data"][0]["value"])
-            result["fear_greed"] = fg_val
-            if fg_val < 20:
-                result["composite"] += 0.6
-            elif fg_val < 30:
-                result["composite"] += 0.3
-            elif fg_val > 80:
-                result["composite"] -= 0.6
-            elif fg_val > 70:
-                result["composite"] -= 0.3
-    except Exception as e:
-        logger.warning(f"Fear/Greed fetch failed: {e}")
-
-    # CryptoPanic news (free, no API key needed)
-    try:
-        news = requests.get(
-            "https://cryptopanic.com/api/v1/posts/?currencies=BTC&kind=news&public=true",
-            timeout=5,
-        ).json()
-        posts = news.get("results", [])[:10]
-        positive_words = {"surge", "bull", "rally", "gain", "high", "growth", "positive", "rise"}
-        negative_words = {"crash", "bear", "drop", "loss", "low", "decline", "negative", "fear", "sell"}
-        scores = []
-        for post in posts:
-            title = post.get("title", "").lower()
-            score = sum(1 for w in positive_words if w in title)
-            score -= sum(1 for w in negative_words if w in title)
-            scores.append(max(-1, min(1, score)))
-        if scores:
-            news_score = sum(scores) / len(scores)
-            result["news_score"] = round(news_score, 3)
-            result["composite"] += news_score * 0.3
-    except Exception as e:
-        logger.warning(f"CryptoPanic fetch failed: {e}")
-
-    # Clamp and label
-    result["composite"] = round(max(-1.0, min(1.0, result["composite"])), 3)
-    if result["composite"] > 0.2:
-        result["label"] = "Bullish"
-    elif result["composite"] < -0.2:
-        result["label"] = "Bearish"
-    else:
-        result["label"] = "Neutral"
-
-    return result

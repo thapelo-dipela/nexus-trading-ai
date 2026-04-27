@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "debugverify.ts",
+    "deposit_test.ts",
+    "deposit_test2.ts",
+    "checkbalance.ts",
+    "checkgateway.ts",
+    "buyer_test.ts",
+    "seller_server.ts",
+    "node_modules"
+  ]
+}

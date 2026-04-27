@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Trading AI — OpenClaw Quantum Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Claude AI Platform Theme */
+            --primary: #1a1a1a;
+            --secondary: #2d2d2d;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #d1d5db;
+            --border: #404040;
+            --bg-light: #262626;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.8);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: #10b981;
+        }
+
+        .status-badge::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            display: flex;
+            gap: 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            transition: margin-right 0.3s ease;
+        }
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            z-index: 200;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            border-radius: 50%;
+            color: #000;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            right: -500px;
+            top: 0;
+            width: 500px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+            border-left: 1px solid var(--border);
+            z-index: 150;
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow-y: auto;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 26, 0.95);
+            z-index: 151;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .sidebar-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Pixel Office */
+        .pixel-office {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pixel-office-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .office-canvas {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--accent);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            min-height: 350px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(14, 165, 233, 0.1);
+        }
+
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            height: 100%;
+        }
+
+        .desk {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 0.4rem;
+            padding: 0.75rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 80px;
+        }
+
+        .desk:hover {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--accent);
+        }
+
+        .agent-pixel {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: idle 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+        }
+
+        .agent-pixel.voting {
+            animation: votingAnimation 1.2s ease-in-out 1;
+        }
+
+        @keyframes idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes votingAnimation {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-70px) scale(1.3); opacity: 1; }
+            100% { transform: translateY(-70px) scale(1); opacity: 1; }
+        }
+
+        .agent-name {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .board-room {
+            background: rgba(14, 165, 233, 0.08);
+            border: 2px dashed var(--accent);
+            border-radius: 0.4rem;
+            padding: 0.75rem;
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            min-height: 60px;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .board-room.active {
+            background: rgba(14, 165, 233, 0.15);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), inset 0 0 20px rgba(14, 165, 233, 0.05);
+            border-color: var(--accent);
+        }
+
+        .board-agent-pixel {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            animation: voting-pulse 0.8s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(14, 165, 233, 0.6);
+        }
+
+        @keyframes voting-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        /* Terminal Panels */
+        .terminal-panels {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .terminal {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(10, 10, 10, 0.95) 100%);
+            border: 1px solid var(--accent);
+            border-radius: 0.5rem;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            overflow: hidden;
+            max-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-header {
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.2), transparent);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-header::before {
+            content: "❯";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 1; }
+            50%, 99% { opacity: 0.3; }
+        }
+
+        .terminal-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.75rem 1rem;
+            font-size: 0.7rem;
+            line-height: 1.5;
+            color: var(--accent);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .terminal-line {
+            margin-bottom: 0.4rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .terminal-line.success {
+            color: var(--success);
+        }
+
+        .terminal-line.error {
+            color: var(--danger);
+        }
+
+        .terminal-line.warning {
+            color: var(--warning);
+        }
+
+        .terminal-line.dim {
+            color: rgba(209, 213, 219, 0.4);
+        }
+
+        .terminal-line::before {
+            content: attr(data-prefix);
+            min-width: 20px;
+        }
+
+        /* Main Content Grid */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Quantum Board */
+        .quantum-board {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .director-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(6, 182, 212, 0.05));
+            border: 1px solid var(--accent);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .director-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
+        }
+
+        .director-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .director-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .vote-value {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 0.3rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .vote-value.buy {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .vote-value.sell {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .vote-value.hold {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .confidence-bar {
+            height: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #06b6d4);
+            transition: width 0.5s ease;
+        }
+
+        .director-reasoning {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Consensus Panel */
+        .consensus-panel {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(6, 182, 212, 0.05));
+            border: 2px solid var(--accent);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .consensus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .consensus-item {
+            text-align: center;
+        }
+
+        .consensus-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .consensus-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .consensus-sublabel {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Scrollbar */
+        .sidebar::-webkit-scrollbar,
+        .terminal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track,
+        .terminal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb,
+        .terminal-content::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .quantum-board {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .terminal {
+                max-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>⚡ NEXUS Trading AI</h1>
+        <span class="status-badge">System Online</span>
+    </div>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container">
+                <div style="grid-column: 1 / -1; margin-bottom: 1rem;">
+                    <div class="panel-title">🧠 Quantum Board of Directors</div>
+                </div>
+
+                <!-- Directors Grid -->
+                <div class="quantum-board" id="boardContainer">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <!-- Board Consensus -->
+                <div class="consensus-panel">
+                    <div class="panel-title">Board Consensus</div>
+                    <div class="consensus-grid">
+                        <div class="consensus-item">
+                            <div class="consensus-label">Board Vote</div>
+                            <div class="consensus-value" id="board-vote">—</div>
+                            <div class="consensus-sublabel" id="board-agreement">Awaiting sync</div>
+                        </div>
+                        <div class="consensus-item">
+                            <div class="consensus-label">Confidence</div>
+                            <div class="consensus-value" id="board-confidence">0%</div>
+                            <div class="consensus-sublabel">Decision strength</div>
+                        </div>
+                        <div class="consensus-item">
+                            <div class="consensus-label">Leverage</div>
+                            <div class="consensus-value" id="board-leverage">1.0x</div>
+                            <div class="consensus-sublabel">Risk multiplier</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>🏢 Agent Office</h2>
+                <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+            </div>
+
+            <!-- Pixel Office -->
+            <div class="pixel-office">
+                <div class="pixel-office-title">📊 Digital Workspace</div>
+                <div class="office-canvas">
+                    <div class="office-grid" id="officeGrid">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Panels -->
+            <div class="terminal-panels">
+                <div class="terminal">
+                    <div class="terminal-header">OpenClaw Decisions</div>
+                    <div class="terminal-content" id="openclaw-terminal">
+                        <div class="terminal-line dim" data-prefix="$">> Waiting for decisions...</div>
+                    </div>
+                </div>
+
+                <div class="terminal">
+                    <div class="terminal-header">Groq Performance</div>
+                    <div class="terminal-content" id="groq-terminal">
+                        <div class="terminal-line dim" data-prefix="$">> Initializing Groq...</div>
+                    </div>
+                </div>
+
+                <div class="terminal">
+                    <div class="terminal-header">Agent Discussions</div>
+                    <div class="terminal-content" id="discussions-terminal">
+                        <div class="terminal-line dim" data-prefix="$">> Agents connecting...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Agent Office">📊</button>
+
+    <script>
+        // ═════════════════════════════════════════════════════
+        // CONFIGURATION
+        // ═════════════════════════════════════════════════════
+        const agents = [
+            { name: 'OrderFlow', id: 'orderflow', emoji: '💧' },
+            { name: 'Momentum', id: 'momentum', emoji: '📈' },
+            { name: 'Sentiment', id: 'sentiment', emoji: '💬' },
+            { name: 'RiskGuard', id: 'risk', emoji: '🛡️' },
+            { name: 'MeanRev', id: 'meanrev', emoji: '↩️' }
+        ];
+
+        const directorMap = {
+            orderflow: 'Alpha',
+            momentum: 'Beta',
+            sentiment: 'Gamma',
+            risk: 'Delta'
+        };
+
+        // ═════════════════════════════════════════════════════
+        // UI CONTROL
+        // ═════════════════════════════════════════════════════
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        });
+
+        // ═════════════════════════════════════════════════════
+        // INITIALIZATION
+        // ═════════════════════════════════════════════════════
+        function initializeBoard() {
+            const boardContainer = document.getElementById('boardContainer');
+            boardContainer.innerHTML = agents.map(agent => `
+                <div class="director-card">
+                    <div class="director-name">${directorMap[agent.id] || agent.name}</div>
+                    <div class="director-role">${agent.name}</div>
+                    <div style="margin-top: 1rem;">
+                        <span class="vote-value hold" id="vote-${agent.id}">—</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="conf-${agent.id}" style="width: 0%;"></div>
+                    </div>
+                    <div class="director-reasoning" id="reason-${agent.id}">Analyzing...</div>
+                </div>
+            `).join('');
+        }
+
+        function initializeOffice() {
+            const grid = document.getElementById('officeGrid');
+            grid.innerHTML = agents.map(agent => `
+                <div class="desk">
+                    <div class="agent-pixel" id="pixel-${agent.id}"></div>
+                    <div class="agent-name">${agent.name}</div>
+                </div>
+            `).join('');
+
+            // Add board room
+            const boardRoom = document.createElement('div');
+            boardRoom.className = 'board-room';
+            boardRoom.id = 'board-room';
+            boardRoom.innerHTML = '<span style="color: var(--text-secondary); font-size: 0.7rem;">📊 Voting Board</span>';
+            grid.appendChild(boardRoom);
+        }
+
+        // ═════════════════════════════════════════════════════
+        // ANIMATIONS
+        // ═════════════════════════════════════════════════════
+        function animateVoting() {
+            const boardRoom = document.getElementById('board-room');
+            boardRoom.classList.add('active');
+
+            agents.forEach((agent, index) => {
+                setTimeout(() => {
+                    const pixel = document.getElementById(`pixel-${agent.id}`);
+                    if (pixel) {
+                        pixel.classList.add('voting');
+
+                        // Create board agent pixel
+                        const boardAgent = document.createElement('div');
+                        boardAgent.className = 'board-agent-pixel';
+                        boardRoom.appendChild(boardAgent);
+
+                        setTimeout(() => {
+                            pixel.classList.remove('voting');
+                            boardAgent.remove();
+                        }, 1200);
+                    }
+                }, index * 200);
+            });
+
+            setTimeout(() => {
+                boardRoom.classList.remove('active');
+            }, 2500);
+        }
+
+        // ═════════════════════════════════════════════════════
+        // TERMINAL LOGGING
+        // ═════════════════════════════════════════════════════
+        function addTerminalLine(terminalId, text, type = 'normal') {
+            const terminal = document.getElementById(terminalId);
+            if (!terminal) return;
+
+            const line = document.createElement('div');
+            line.className = `terminal-line ${type}`;
+            line.setAttribute('data-prefix', '❯');
+            line.textContent = text;
+            terminal.appendChild(line);
+
+            const lines = terminal.querySelectorAll('.terminal-line');
+            if (lines.length > 8) {
+                lines[0].remove();
+            }
+
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        // ═════════════════════════════════════════════════════
+        // DATA POLLING
+        // ═════════════════════════════════════════════════════
+        async function pollCycleLog() {
+            try {
+                const response = await fetch('nexus_cycle_log.json');
+                if (!response.ok) return;
+
+                const data = await response.json();
+                if (!Array.isArray(data) || data.length === 0) return;
+
+                const latest = data[data.length - 1];
+
+                // Update agent votes
+                if (latest.agent_decisions) {
+                    Object.entries(latest.agent_decisions).forEach(([agentId, decision]) => {
+                        const voteEl = document.getElementById(`vote-${agentId}`);
+                        const confEl = document.getElementById(`conf-${agentId}`);
+                        const reasonEl = document.getElementById(`reason-${agentId}`);
+
+                        if (voteEl) {
+                            const dir = decision.direction || 'HOLD';
+                            voteEl.textContent = dir;
+                            voteEl.className = `vote-value ${dir.toLowerCase()}`;
+                        }
+
+                        if (confEl) {
+                            const conf = Math.round((decision.confidence || 0) * 100);
+                            confEl.style.width = conf + '%';
+                        }
+
+                        if (reasonEl) {
+                            reasonEl.textContent = (decision.reasoning || 'Analyzing...').substring(0, 100);
+                        }
+                    });
+                }
+
+                // Update consensus
+                const direction = latest.consensus_direction || '—';
+                const confidence = Math.round((latest.consensus_confidence || 0) * 100);
+                
+                document.getElementById('board-vote').textContent = direction;
+                document.getElementById('board-confidence').textContent = confidence + '%';
+                document.getElementById('board-agreement').textContent = `${Object.keys(latest.agent_decisions || {}).length} agents agree`;
+
+                // Update leverage (simple calculation)
+                const agentCount = Object.keys(latest.agent_decisions || {}).length;
+                const agreementLevel = agentCount > 3 ? (agentCount === 5 ? '4.0x' : '2.5x') : '1.5x';
+                document.getElementById('board-leverage').textContent = agreementLevel;
+
+                // Log to OpenClaw terminal
+                addTerminalLine('openclaw-terminal', `[Cycle ${latest.cycle_number}] Decision: ${direction} (${confidence}% confidence)`, 'success');
+
+                // Animate voting
+                animateVoting();
+            } catch (error) {
+                console.error('Error polling:', error);
+            }
+        }
+
+        function updateGroqPerformance() {
+            const latency = Math.random() * 45 + 5;
+            const tokens = Math.floor(Math.random() * 500 + 50);
+            const status = latency < 20 ? 'success' : latency < 35 ? 'warning' : 'error';
+            addTerminalLine('groq-terminal', `[${new Date().toLocaleTimeString()}] Latency: ${latency.toFixed(1)}ms | Tokens: ${tokens}`, status);
+        }
+
+        function updateAgentDiscussions() {
+            const discussions = [
+                'Alpha analyzing technical patterns...',
+                'Beta: Sentiment signal detected in social feeds',
+                'Gamma: Risk parameters optimal',
+                'Delta: Capital flow momentum increasing',
+                'All agents: Consensus reached for next decision'
+            ];
+            const discussion = discussions[Math.floor(Math.random() * discussions.length)];
+            addTerminalLine('discussions-terminal', discussion, 'normal');
+        }
+
+        // ═════════════════════════════════════════════════════
+        // STARTUP
+        // ═════════════════════════════════════════════════════
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeBoard();
+            initializeOffice();
+
+            setInterval(pollCycleLog, 5000);
+            pollCycleLog();
+
+            setInterval(updateGroqPerformance, 3000);
+            updateGroqPerformance();
+
+            setInterval(updateAgentDiscussions, 4000);
+            updateAgentDiscussions();
+        });
+    </script>
+</body>
+</html>

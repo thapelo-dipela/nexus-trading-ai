@@ -30,7 +30,7 @@ class OrderFlowAgent(BaseAgent):
         self._cvd_history: List[float] = []  # rolling 30-bar CVD
         self._vwap: float = 0.0
         self._cvd_lookback = config.CVD_LOOKBACK_BARS  # default 30
-        self._veto_threshold = config.CVD_VETO_THRESHOLD  # default 0.15
+        self._veto_threshold = config.CVD_VETO_THRESHOLD  # default 0.15 (too strict, reduce to 0.20)
         self._divergence_pct = config.VWAP_DIVERGENCE_PCT  # default 1.0
 
     def _compute_cvd(self, candles) -> float:

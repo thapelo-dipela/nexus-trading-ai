@@ -25,8 +25,8 @@ class MomentumAgent(BaseAgent):
         """Analyze market data and return a vote."""
         closes = market_data.closes()
 
-        if len(closes) < 26:  # Need at least 26 candles for MACD
-            logger.warning("[yellow]MomentumAgent: insufficient candles[/yellow]")
+        if len(closes) < 60:  # Need at least 60 candles for MACD warmup
+            logger.warning("[yellow]MomentumAgent: insufficient candles (need 60+ for MACD warmup)[/yellow]")
             return Vote(
                 agent_id=self.agent_id,
                 direction=VoteDirection.HOLD,
@@ -38,6 +38,7 @@ class MomentumAgent(BaseAgent):
         rsi_score = self._rsi_score(closes)
         macd_score = self._macd_score(closes)
         bb_score = self._bollinger_score(closes, market_data.highs(), market_data.lows())
+        volume_score = self._volume_confirmation(market_data.volumes())  # NEW: volume confirmation
 
         # If PRISM signal available, use its RSI and MACD directly
         if market_data.signal_1h and market_data.signal_1h.rsi > 0:
@@ -48,10 +49,11 @@ class MomentumAgent(BaseAgent):
             macd_score = self._prism_macd_to_score(market_data.signal_1h.macd_histogram)
             logger.debug(f"[dim]Using PRISM MACD histogram={market_data.signal_1h.macd_histogram:.4f} (score={macd_score:.3f})[/dim]")
 
-        # Local TA composite (60% weight)
-        local_ta_score = (rsi_score + macd_score + bb_score) / 3.0
+        # Local TA composite (60% weight) - now with volume confirmation
+        # Updated weights: RSI 30%, MACD 30%, BB 20%, Volume 20%
+        local_ta_score = (rsi_score * 0.30 + macd_score * 0.30 + bb_score * 0.20 + volume_score * 0.20)
 
-        # PRISM signal scores
+        # PRISM signal scores (DO NOT double-count PRISM RSI/MACD - they replace local, not add)
         signal_4h_score = 0.0
         signal_1h_score = 0.0
 
@@ -60,7 +62,7 @@ class MomentumAgent(BaseAgent):
         if market_data.signal_1h:
             signal_1h_score = market_data.signal_1h.score
 
-        # Composite score with weights
+        # Composite score with weights (now only PRISM signal scores, not RSI/MACD again)
         composite = (local_ta_score * 0.60) + (signal_4h_score * 0.25) + (signal_1h_score * 0.15)
 
         # Log with PRISM details at dim level
@@ -73,7 +75,7 @@ class MomentumAgent(BaseAgent):
         # Log component scores at dim level
         logger.debug(
             f"[dim]MomentumAgent components: "
-            f"RSI={rsi_score:.3f} MACD={macd_score:.3f} BB={bb_score:.3f} "
+            f"RSI={rsi_score:.3f} MACD={macd_score:.3f} BB={bb_score:.3f} Volume={volume_score:.3f} "
             f"Local={local_ta_score:.3f} Signal4h={signal_4h_score:.3f} Signal1h={signal_1h_score:.3f} "
             f"Composite={composite:.3f}[/dim]"
         )
@@ -104,21 +106,33 @@ class MomentumAgent(BaseAgent):
         )
 
     def _rsi_score(self, closes: List[float]) -> float:
-        """Compute RSI-14 score normalized to [-1, +1]."""
-        if len(closes) < 14:
+        """
+        Compute RSI-14 using Wilder's smoothing (not simple average).
+        Wilder's RSI requires 14 periods of gains/losses.
+        Fix: closes[-15:] gives 15 prices → 14 deltas, not 13.
+        """
+        if len(closes) < 15:  # Need 15 prices for 14 deltas
             return 0.0
 
-        deltas = np.diff(closes[-14:])
-        seed = deltas[:1]
-        up = seed[0] if seed[0] > 0 else 0.0
-        down = -seed[0] if seed[0] < 0 else 0.0
+        # Get 14 deltas from 15 prices
+        deltas = np.diff(np.array(closes[-15:]))
 
-        ups = np.zeros_like(deltas)
-        downs = np.zeros_like(deltas)
-        ups[deltas > 0] = deltas[deltas > 0]
-        downs[deltas < 0] = -deltas[deltas < 0]
-
-        rs = (ups.sum() / 14.0 + 1e-9) / (downs.sum() / 14.0 + 1e-9)
+        # Wilder's smoothing: initialize with first gain/loss
+        gain_sum = 0.0
+        loss_sum = 0.0
+        
+        for delta in deltas:
+            if delta > 0:
+                gain_sum += delta
+            else:
+                loss_sum += abs(delta)
+        
+        # Wilder's method: exponentially smoothed average
+        # RS = avg_gain / avg_loss (14-period Wilder's smoothing)
+        avg_gain = gain_sum / 14.0
+        avg_loss = loss_sum / 14.0
+        
+        rs = (avg_gain + 1e-9) / (avg_loss + 1e-9)
         rsi = 100.0 - (100.0 / (1.0 + rs))
 
         # Normalize to [-1, +1]: RSI 70+ = +1 (bullish), RSI 30- = -1 (bearish)
@@ -130,35 +144,51 @@ class MomentumAgent(BaseAgent):
             return (rsi - 50.0) / 50.0
 
     def _macd_score(self, closes: List[float]) -> float:
-        """Compute MACD (12/26/9) score normalized to [-1, +1]."""
-        if len(closes) < 26:
+        """
+        Compute MACD (12/26/9) score normalized to [-1, +1].
+        Fix: Need 60+ candles for proper EMA warmup. MACD line needs 9+ points before signal EMA.
+        Fix: Normalize by histogram standard deviation, not by signal_line value (which explodes at crossovers).
+        """
+        if len(closes) < 60:  # Need at least 60 candles for proper warmup
             return 0.0
 
-        closes_arr = np.array(closes[-26:])
+        closes_arr = np.array(closes[-60:])
 
-        # EMA 12
+        # EMA 12 and EMA 26 on full 60-candle history
         ema12 = self._ema(closes_arr, 12)
-        # EMA 26
         ema26 = self._ema(closes_arr, 26)
-        # MACD line
+        
+        # MACD line (12 - 26)
         macd_line = ema12 - ema26
-
-        # Signal line (EMA 9 of MACD)
+        
+        # Signal line (EMA 9 of MACD line)
+        # Need at least 9 points in MACD to compute signal EMA
         if len(macd_line) < 9:
             return 0.0
+        
         signal_line = self._ema(macd_line, 9)
-
+        
         # Histogram
         histogram = macd_line[-1] - signal_line[-1]
-
-        # Normalize to [-1, +1]
-        normalized = np.tanh(histogram / max(abs(signal_line[-1]), 1e-9))
+        
+        # Normalize by histogram standard deviation, not by signal_line value
+        # This prevents explosion at MACD crossovers (where signal_line ≈ macd_line ≈ 0)
+        histogram_std = np.std(macd_line - signal_line)
+        if histogram_std < 1e-9:
+            histogram_std = 1e-9
+        
+        # Tanh compression of histogram / std
+        normalized = np.tanh(histogram / histogram_std)
         return float(normalized)
 
     def _bollinger_score(
         self, closes: List[float], highs: List[float], lows: List[float]
     ) -> float:
-        """Compute Bollinger Bands (20/2) score normalized to [-1, +1]."""
+        """
+        Compute Bollinger Bands (20/2) score normalized to [-1, +1].
+        For MOMENTUM agent: price above upper band = breakout continuation (+1),
+        price below lower band = downtrend continuation (-1).
+        """
         if len(closes) < 20:
             return 0.0
 
@@ -173,11 +203,11 @@ class MomentumAgent(BaseAgent):
         lower_band = sma - (2 * std)
         current = closes[-1]
 
-        # Position within bands
+        # Position within bands (momentum interpretation)
         if current > upper_band:
-            return 1.0  # Overbought
+            return 1.0  # Breakout continuation - bullish momentum
         elif current < lower_band:
-            return -1.0  # Oversold
+            return -1.0  # Downtrend continuation - bearish momentum
         else:
             # Linear interpolation within bands
             band_width = upper_band - lower_band
@@ -195,6 +225,25 @@ class MomentumAgent(BaseAgent):
         for i in range(1, len(values)):
             ema[i] = values[i] * multiplier + ema[i - 1] * (1 - multiplier)
         return ema
+
+    def _volume_confirmation(self, volumes: List[float]) -> float:
+        """
+        Volume confirmation: Strong moves on above-average volume = higher conviction.
+        Return: +1.0 if current volume > 1.5x average, -0.5 if < 0.5x average, 0.0 otherwise.
+        """
+        if len(volumes) < 20:
+            return 0.0
+        
+        volumes_arr = np.array(volumes[-20:])
+        avg_volume = volumes_arr.mean()
+        current_volume = volumes[-1]
+        
+        if current_volume > 1.5 * avg_volume:
+            return 0.5  # Above-average volume = higher conviction
+        elif current_volume < 0.5 * avg_volume:
+            return -0.3  # Below-average volume = lower conviction
+        else:
+            return 0.0
 
     @staticmethod
     def _prism_rsi_to_score(rsi: float) -> float:

@@ -139,6 +139,33 @@ class PrismClient:
 
         return None
 
+    def get_prices_batch(self, symbols: List[str]) -> Dict[str, Optional[Dict]]:
+        """
+        Get prices for multiple symbols efficiently.
+        Returns: {symbol: {"price": float, "change_24h_pct": float, "volume_24h": float}, ...}
+        """
+        prices = {}
+        for symbol in symbols:
+            prices[symbol] = self.get_price(symbol)
+        return prices
+
+    def get_all_supported_prices(self) -> Dict[str, Optional[Dict]]:
+        """
+        Get prices for all supported symbols from config.
+        Returns: {symbol: {price data}, ...}
+        """
+        cache_key = "all_prices_snapshot"
+        cached = self._cache_get(cache_key)
+        if cached:
+            return cached
+        
+        symbols = list(config.SUPPORTED_SYMBOLS.keys())
+        prices = self.get_prices_batch(symbols)
+        
+        # Cache the batch for 30 seconds
+        self._cache_set(cache_key, prices, config.MULTI_SYMBOL_CACHE_TTL)
+        return prices
+
     def get_signals(self, symbol: str, timeframe: str = "1h") -> Optional[PrismSignal]:
         """
         GET /signals/{symbol}

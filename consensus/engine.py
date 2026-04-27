@@ -49,6 +49,20 @@ STRATEGY_MODIFIERS = {
     # yolo handled separately with gating
 }
 
+# NEW: Default agent base weights (applied to all strategies)
+# CORRECTED: Weights based on ACTUAL PERFORMANCE, not theoretical roles
+# Performance data: Sentiment +$120.62 (best), Risk Guardian +$37.70, 
+# Mean Reversion +$15.41, Momentum -$25.74 (losing), OrderFlow -$144.74 (worst)
+AGENT_BASE_WEIGHTS = {
+    "sentiment": 1.8,          # HIGHEST: Only profitable agent (+$120.62)
+    "risk_guardian": 1.6,      # HIGH: Positive PnL (+$37.70)
+    "mean_reversion": 1.0,     # NEUTRAL: Barely positive (+$15.41), 0% win rate
+    "momentum": 0.8,           # REDUCED: Losing agent (-$25.74)
+    "orderflow": 0.5,          # LOWEST: Worst performer (-$144.74)
+    "llm_reasoner": 2.0,       # LLM adjudication
+    "yolo": 1.0,               # Extreme bullish
+}
+
 
 @dataclass
 class AgentRecord:
@@ -125,11 +139,13 @@ class ConsensusEngine:
             logger.error(f"[red]Failed to save weights: {e}[/red]")
 
     def register_agent(self, agent_id: str):
-        """Register a new agent."""
+        """Register a new agent with base weight from AGENT_BASE_WEIGHTS."""
         if agent_id not in self.records:
+            # Use agent-specific base weight if available, otherwise use default
+            base_weight = AGENT_BASE_WEIGHTS.get(agent_id, config.INITIAL_AGENT_WEIGHT)
             self.records[agent_id] = AgentRecord(
                 agent_id=agent_id,
-                weight=config.INITIAL_AGENT_WEIGHT,
+                weight=base_weight,
             )
 
     def _get_strategy_modifier(self, agent_id: str, strategy: str) -> float:
@@ -184,16 +200,31 @@ class ConsensusEngine:
             logger.warning("[yellow]All standard agents retired; cannot vote[/yellow]")
             return VoteDirection.HOLD, 0.0, votes, None
 
-        # Compute weighted scores with strategy modifiers
+        # Compute weighted scores with strategy modifiers + ACCURACY-BASED WEIGHTING
         buy_score = 0.0
         sell_score = 0.0
         total_weight = 0.0
+        
+        # Track agents for highest accuracy override
+        agent_performances = []
 
         for vote in active_standard_votes:
             record = self.records[vote.agent_id]
             base_weight = record.weight
             strategy_modifier = self._get_strategy_modifier(vote.agent_id, strategy)
-            effective_weight = base_weight * strategy_modifier
+            
+            # NEW: Apply accuracy-based multiplier (AGGRESSIVE VERSION)
+            # Punish terrible agents much more than before
+            # Examples: 16% accuracy → 0.32x, 42% accuracy → 0.84x, 80% accuracy → 1.6x
+            accuracy_pct = record.accuracy_pct()  # 0-100%
+            
+            # AGGRESSIVE formula: max(0.2, min(1.5, accuracy / 50))
+            # This heavily punishes agents with <50% win rate (below baseline)
+            accuracy_multiplier = max(0.2, min(1.5, accuracy_pct / 50.0))
+            
+            logger.debug(f"[dim]{vote.agent_id}: accuracy={accuracy_pct:.1f}% → multiplier={accuracy_multiplier:.2f}x[/dim]")
+            
+            effective_weight = base_weight * strategy_modifier * accuracy_multiplier
 
             if vote.direction.value == "BUY":
                 buy_score += effective_weight * vote.confidence
@@ -201,6 +232,16 @@ class ConsensusEngine:
                 sell_score += effective_weight * vote.confidence
 
             total_weight += effective_weight
+            
+            # Track for override logic
+            agent_performances.append({
+                "agent_id": vote.agent_id,
+                "accuracy": accuracy_pct,
+                "pnl": record.pnl_total,
+                "direction": vote.direction.value,
+                "confidence": vote.confidence,
+                "effective_weight": effective_weight,
+            })
 
         # Normalize
         if total_weight > 0:
@@ -222,6 +263,33 @@ class ConsensusEngine:
             f"[dim]Standard agents consensus: {consensus_direction.value} "
             f"(buy={buy_score:.3f}, sell={sell_score:.3f}, strategy={strategy})[/dim]"
         )
+
+        # NEW: HIGHEST ACCURACY OVERRIDE
+        # If any agent has >70% accuracy and positive PnL, give them override voting power
+        if agent_performances:
+            agent_performances.sort(key=lambda x: (x["accuracy"], x["pnl"]), reverse=True)
+            top_agent = agent_performances[0]
+            
+            if top_agent["accuracy"] >= 70.0 and top_agent["pnl"] > 0:
+                # Top agent can override if their confidence is high
+                if top_agent["confidence"] >= 0.60:
+                    override_influence = 0.25  # 25% override influence from best agent
+                    old_direction = consensus_direction
+                    old_confidence = consensus_confidence
+                    
+                    if top_agent["direction"] == "BUY":
+                        consensus_direction = VoteDirection.BUY
+                        consensus_confidence = consensus_confidence * (1 - override_influence) + override_influence
+                    elif top_agent["direction"] == "SELL":
+                        consensus_direction = VoteDirection.SELL
+                        consensus_confidence = consensus_confidence * (1 - override_influence) + override_influence
+                    
+                    logger.info(
+                        f"[cyan]🏆 ACCURACY OVERRIDE: Agent '{top_agent['agent_id']}' "
+                        f"(acc={top_agent['accuracy']:.1f}%, pnl=${top_agent['pnl']:.2f}) "
+                        f"overrides consensus: {old_direction.value} → {consensus_direction.value} "
+                        f"(conf {old_confidence:.3f} → {consensus_confidence:.3f})[/cyan]"
+                    )
 
         # Inject LLMReasonerAgent vote if available (post-consensus adjudication with weight 2.0)
         llm_rationale = None

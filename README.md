@@ -1,3 +1,90 @@
+# NEXUS Trading AI — Run instructions
+
+This repository includes the NEXUS dashboard API and the main trading orchestration loop.
+
+Quick start (macOS / zsh):
+
+1. Create and activate a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+```
+
+2. Optional recommended packages (for full features):
+
+```bash
+pip install yfinance alpaca-py eth-account
+```
+
+3. Start both services (background):
+
+```bash
+./run.sh
+tail -f server.log main.log
+```
+
+4. Stop the services:
+
+```bash
+./stop.sh
+```
+
+Access:
+- Dashboard API: http://localhost:3000
+- Health endpoint: http://localhost:3000/api/health
+
+Notes & troubleshooting:
+- I updated `.env` to remove shell `echo` commands which caused python-dotenv to fail parsing. Please keep secrets (API keys, private keys) secure and consider using OS keychain or a `.env` that is not committed to version control.
+- If `yfinance` or other optional packages are missing, stock-related endpoints may be unavailable. Install the optional packages above to enable them.
+- On macOS you may see a warning from `urllib3` about LibreSSL vs OpenSSL; this is informational only.
+- On some macOS systems installing packages like `pandas` or compiled wheels caused import errors (mmap failed). If you see import errors referencing `.so` files for packages like `pandas`:
+  - Try reinstalling wheels with pip:
+
+    ```bash
+    pip install --force-reinstall --no-binary :all: pandas
+    ```
+
+  - Or ensure you use a Python and pip that are compatible with your platform (homebrew Python, or use conda on macOS for complex binary deps).
+
+Files created by the helper scripts:
+- `server.log` — logs from `dashboard_server.py` when started by `run.sh`
+- `main.log` — logs from `main.py` when started by `run.sh`
+- `.dashboard_pid`, `.main_pid` — PID files used by `stop.sh`
+
+If you want, I can: install optional packages for you (done), re-run services (done), or add a launchd plist for macOS to run on boot. Tell me which and I will continue.
+ 
+## Hackathon demo (Agentic Economy on Arc)
+
+Quick steps to run the local Nanopay wrapper and demo 50+ micropayments (testnet):
+
+1. Install and run the nanopay wrapper service (Node/TS scaffold):
+
+```bash
+cd payments/circle_nanopay
+npm install
+npm run start
+# service listens on http://localhost:3001 by default
+```
+
+2. Start Nexus services in another terminal (Python venv):
+
+```bash
+source .venv/bin/activate
+./run.sh
+```
+
+3. (Optional) Use `scripts/demo_bulk_actions.py` to generate 50+ micropayments against the nanopay wrapper — this script is a placeholder that will call `/api/charge-action` repeatedly and persist tx hashes to `nexus_txlog.json`.
+
+```
+python scripts/demo_bulk_actions.py --count 60
+```
+
+4. Open the Dashboard and view the transaction logger panel to capture Arc explorer links for the demo video.
+
+More detailed scaffolding (smart contracts, x402 facilitator, and production-grade Nanopay SDK integration) will be implemented next. 
 # NEXUS Trading AI — ERC-8004 Hackathon Submission
 
 **NEXUS** is a production-grade, multi-agent autonomous trading system that combines specialized AI agents with a reputation-weighted consensus engine and cryptographic audit trail.

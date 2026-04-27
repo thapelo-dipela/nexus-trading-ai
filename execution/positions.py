@@ -69,6 +69,16 @@ class PositionManager:
         self.positions_file = positions_file
         self.positions: Dict[str, Position] = {}
         self.closed_positions: List[Position] = []
+        
+        # Trade block mechanism: if 3+ consecutive losses in same direction,
+        # block that direction for 6 cycles
+        self.buy_loss_streak = 0      # Consecutive BUY losses
+        self.sell_loss_streak = 0     # Consecutive SELL losses
+        self.buy_blocked_cycles = 0   # Cycles remaining for BUY block
+        self.sell_blocked_cycles = 0  # Cycles remaining for SELL block
+        self.block_threshold = 3      # Block after 3 consecutive losses
+        self.block_duration = 6       # Block for 6 cycles
+        
         self.load_positions()
 
     def load_positions(self):
@@ -149,6 +159,39 @@ class PositionManager:
         self.closed_positions.append(position)
         self.save_positions()
 
+        # ============ TRADE BLOCK MECHANISM ============
+        # Track consecutive losses and block direction if threshold exceeded
+        is_loss = position.pnl_usd < 0
+        
+        if position.direction == "BUY":
+            if is_loss:
+                self.buy_loss_streak += 1
+                # If 3+ consecutive losses, block BUY for 6 cycles
+                if self.buy_loss_streak >= self.block_threshold:
+                    self.buy_blocked_cycles = self.block_duration
+                    logger.warning(
+                        f"[red]TRADE BLOCK ACTIVATED[/red]: BUY blocked for {self.block_duration} cycles "
+                        f"(after {self.buy_loss_streak} consecutive losses)"
+                    )
+                    self.buy_loss_streak = 0  # Reset streak
+            else:
+                # Win resets loss streak
+                self.buy_loss_streak = 0
+        else:  # SELL
+            if is_loss:
+                self.sell_loss_streak += 1
+                # If 3+ consecutive losses, block SELL for 6 cycles
+                if self.sell_loss_streak >= self.block_threshold:
+                    self.sell_blocked_cycles = self.block_duration
+                    logger.warning(
+                        f"[red]TRADE BLOCK ACTIVATED[/red]: SELL blocked for {self.block_duration} cycles "
+                        f"(after {self.sell_loss_streak} consecutive losses)"
+                    )
+                    self.sell_loss_streak = 0  # Reset streak
+            else:
+                # Win resets loss streak
+                self.sell_loss_streak = 0
+
         status_color = "[green]✓" if position.pnl_usd >= 0 else "[red]✗"
         logger.info(
             f"{status_color}[/] Position closed ({exit_reason}): "
@@ -162,6 +205,8 @@ class PositionManager:
         Check all open positions for stop-loss / take-profit hits.
         Returns: list of positions that should be closed (but does NOT close them).
         """
+        # Decrement trade block timers at the start of each cycle
+        self._decrement_trade_blocks()
         positions_to_close = []
 
         for trade_id, position in self.positions.items():
@@ -196,6 +241,37 @@ class PositionManager:
                 positions_to_close.append(position)
 
         return positions_to_close
+
+    def _decrement_trade_blocks(self):
+        """Decrement trade block counters each cycle."""
+        if self.buy_blocked_cycles > 0:
+            self.buy_blocked_cycles -= 1
+            if self.buy_blocked_cycles == 0:
+                logger.info("[green]✓ BUY block lifted[/green]")
+        
+        if self.sell_blocked_cycles > 0:
+            self.sell_blocked_cycles -= 1
+            if self.sell_blocked_cycles == 0:
+                logger.info("[green]✓ SELL block lifted[/green]")
+
+    def is_direction_blocked(self, direction: str) -> bool:
+        """Check if a trade direction is currently blocked."""
+        if direction == "BUY":
+            return self.buy_blocked_cycles > 0
+        elif direction == "SELL":
+            return self.sell_blocked_cycles > 0
+        return False
+
+    def get_block_status(self) -> Dict[str, object]:
+        """Get current trade block status for dashboard."""
+        return {
+            "buy_blocked": self.buy_blocked_cycles > 0,
+            "buy_cycles_remaining": self.buy_blocked_cycles,
+            "buy_loss_streak": self.buy_loss_streak,
+            "sell_blocked": self.sell_blocked_cycles > 0,
+            "sell_cycles_remaining": self.sell_blocked_cycles,
+            "sell_loss_streak": self.sell_loss_streak,
+        }
 
     def get_open_positions_value(self, current_price: float) -> float:
         """Sum of all open position notionals at current price."""
@@ -254,7 +330,6 @@ class PositionManager:
             logger.error(f"[red]Failed to write equity curve: {e}[/red]")
 
     def positions_summary(self, current_price: float) -> str:
-        """Generate positions summary."""
         if not self.positions:
             return "[dim]No open positions[/dim]"
 

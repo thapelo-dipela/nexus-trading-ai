@@ -1,0 +1,1358 @@
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+ * Serving Flask app 'dashboard_server'
+ * Debug mode: on
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://10.123.32.38:3000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:23] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:26] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "[36mGET /office HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET /api/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:45] "GET /api/equity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:46] "GET /api/balance HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:47] "GET /api/positions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:47] "GET /api/trades HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:48] "GET /api/risk HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ARM.JO"}}}
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:48] "GET /api/market HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:52] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:agents.sentiment:Sentiment composite=-0.002 (Neutral) | sources=['fear_greed', 'coingecko_news', 'reddit']
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:53] "GET /api/sentiment HTTP/1.1" 200 -
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:52:53] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:53:11] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:53:15] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:53:30] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:53:45] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:53:49] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:54:16] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/dashboard_server.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['ARM.JO', 'NHM.JO', 'AMS.JO', 'BHP.JO', 'MTX.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:54:51] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:55:16] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:55:46] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:55:59] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "[36mGET /office HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:00] "GET /api/equity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:01] "GET /api/balance HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:02] "GET /api/risk HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:02] "GET /api/positions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:02] "GET /api/trades HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:03] "GET /api/market HTTP/1.1" 200 -
+INFO:agents.sentiment:Sentiment composite=-0.003 (Neutral) | sources=['fear_greed', 'coingecko_news', 'reddit']
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:05] "GET /api/sentiment HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:07] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:56:30] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:57:00] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:57:30] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:58:00] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:58:30] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 12:59:00] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'ARM.JO', 'BHP.JO', 'MTX.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:00:32] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:01:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:02:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:03:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:04:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:05:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'ARM.JO', 'BHP.JO', 'MTX.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:06:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/config.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO', 'BHP.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:07:34] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/agents/payer_agent.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/agents/receiver_agent.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ARM.JO"}}}
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MTX.JO"}}}
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'NHM.JO', 'MTX.JO', 'BHP.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:08:34] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/dashboard_server.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/utils/margin_calculator.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MTX.JO"}}}
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['NHM.JO', 'BHP.JO', 'ARM.JO', 'MTX.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:09:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:10:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:11:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:12:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:13:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:14:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'AMS.JO', 'NHM.JO', 'BHP.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "[36mGET /office HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:38] "GET /api/equity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:39] "GET /api/balance HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:40] "GET /api/positions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:40] "GET /api/trades HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:40] "GET /api/risk HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:41] "GET /api/market HTTP/1.1" 200 -
+INFO:agents.sentiment:Sentiment composite=0.037 (Neutral) | sources=['fear_greed', 'coingecko_news', 'reddit']
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:45] "GET /api/sentiment HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:15:45] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:16:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:16:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:17:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:17:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:18:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:18:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:19:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:20:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'AMS.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:21:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:22:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:23:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:24:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:25:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:26:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO', 'BHP.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:27:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:28:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:29:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:30:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:31:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:32:20] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:32:46] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:33:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:34:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:34:54] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:35:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:35:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:36:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:37:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:37:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO', 'BHP.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:38:11] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:39:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:40:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:41:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:42:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:42:43] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:43:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'MTX.JO', 'ARM.JO', 'NHM.JO', 'BHP.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:43:41] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:44:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:45:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:46:18] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:46:19] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:46:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:47:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:47:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:48:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:49:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:50:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/scripts/demo_bulk_actions.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['NHM.JO', 'ARM.JO', 'MTX.JO', 'BHP.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:51:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/scripts/demo_bulk_actions.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/agents/payer_agent.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MTX.JO"}}}
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['AMS.JO', 'NHM.JO', 'MTX.JO', 'BHP.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:52:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:53:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:54:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:55:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:56:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/scripts/demo_bulk_actions.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882
+ERROR:yfinance:HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MTX.JO"}}}
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['ARM.JO', 'AMS.JO', 'BHP.JO', 'NHM.JO', 'MTX.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:57:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:58:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 13:59:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:00:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:01:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:02:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:03:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:04:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:05:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:06:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:07:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:02] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "[36mGET /office HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:04] "GET /api/equity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:05] "GET /api/balance HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:06] "GET /api/positions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:06] "GET /api/trades HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:06] "GET /api/risk HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:07] "GET /api/market HTTP/1.1" 200 -
+INFO:agents.sentiment:Sentiment composite=-0.015 (Neutral) | sources=['fear_greed', 'coingecko_news', 'reddit']
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:10] "GET /api/sentiment HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:11] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:30] "GET /api/live-decisions HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:37] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:08:49] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:09:05] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:09:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:10:05] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:10:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:11:05] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:12:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:13:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:13:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:14:08] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:14:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:15:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:16:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:17:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:18:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:19:32] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:20:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:21:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:22:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:23:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:24:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:25:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:26:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:27:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:28:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:29:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:30:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:31:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:32:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:33:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:34:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:35:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:36:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:37:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:38:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:39:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:40:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:41:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:42:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:43:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:44:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:45:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:46:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:47:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:48:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:49:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:50:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:51:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:52:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:53:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:54:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:55:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:56:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:57:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:58:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 14:59:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:00:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:01:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:02:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:03:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:04:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:05:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:06:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'AMS.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:07:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:08:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:09:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:10:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:11:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:12:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:13:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:14:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:15:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:16:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:17:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:18:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:19:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:20:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:21:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:22:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:23:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:24:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:25:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:26:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:27:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:28:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:29:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:30:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:31:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:32:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:33:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:34:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:35:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:36:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:37:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:38:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:39:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:40:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:41:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:42:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:43:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:44:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:
+20 Failed downloads:
+ERROR:yfinance:['IMP.JO', 'MTX.JO', 'BHP.JO', 'PRX.JO', 'NED.JO', 'ANG.JO', 'EXX.JO', 'ABG.JO', 'NPN.JO', 'GFI.JO', 'CPI.JO', 'AMS.JO', 'TGA.JO', 'SSW.JO', 'FSR.JO', 'SBK.JO', 'ARM.JO', 'SHP.JO', 'AGL.JO', 'NHM.JO']: TypeError("'NoneType' object is not subscriptable")
+WARNING:data.stock_market:StockClient: batch download returned empty data
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 15:51:16] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:06:14] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:07:13] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:08:13] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:09:17] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:10:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:11:22] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:12:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:13:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:14:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:15:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:16:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:17:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:18:25] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:19:26] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:20:27] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:21:27] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:22:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:23:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:24:30] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:25:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:26:36] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:27:39] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:28:44] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:29:45] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:30:48] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:31:49] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:32:49] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:33:58] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:34:52] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:35:52] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'AMS.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:56:37] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:57:34] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 16:58:34] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 17:06:54] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 17:24:00] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 17:40:58] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+12 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:['ARM.JO', 'SHP.JO', 'AMS.JO', 'GFI.JO', 'TGA.JO', 'SBK.JO', 'SSW.JO', 'AGL.JO', 'FSR.JO', 'NHM.JO']: TypeError("'NoneType' object is not subscriptable")
+INFO:data.stock_market:StockClient: batch fetched 8/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:12:15] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:13:13] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:18:15] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'ARM.JO', 'AMS.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:27:34] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:28:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 18:33:27] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+13 Failed downloads:
+ERROR:yfinance:['PRX.JO', 'ANG.JO', 'IMP.JO', 'NED.JO', 'MTX.JO', 'ABG.JO', 'NPN.JO', 'CPI.JO', 'EXX.JO', 'BHP.JO']: TypeError("'NoneType' object is not subscriptable")
+ERROR:yfinance:['ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 7/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 19:04:03] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 19:19:04] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'AMS.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 19:32:01] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 19:32:58] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 19:50:50] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:12:31] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:17:09] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:18:12] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:20:22] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'ARM.JO', 'NHM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:38:59] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:
+20 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'NED.JO', 'CPI.JO', 'PRX.JO', 'BHP.JO', 'NPN.JO', 'ABG.JO', 'ANG.JO', 'IMP.JO', 'EXX.JO', 'TGA.JO', 'SBK.JO', 'SSW.JO', 'ARM.JO', 'GFI.JO', 'FSR.JO', 'AGL.JO', 'AMS.JO', 'NHM.JO', 'SHP.JO']: TypeError("'NoneType' object is not subscriptable")
+WARNING:data.stock_market:StockClient: batch download returned empty data
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 20:47:32] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:27:29] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:28:27] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'NHM.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:34:28] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:55:38] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:56:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:57:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:58:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 21:59:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:00:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['MTX.JO', 'BHP.JO', 'NHM.JO', 'ARM.JO', 'AMS.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:01:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:02:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:03:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:04:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:05:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:06:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'ARM.JO', 'AMS.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:07:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:08:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:09:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:10:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:11:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:12:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'AMS.JO', 'ARM.JO', 'NHM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:13:35] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:14:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:15:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:33] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:44] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "[36mGET /office HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/equity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:49] "GET /api/balance HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:50] "GET /api/positions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:50] "GET /api/trades HTTP/1.1" 200 -
+INFO:agents.sentiment:Sentiment composite=-0.032 (Neutral) | sources=['fear_greed', 'coingecko_news', 'reddit']
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:53] "GET /api/sentiment HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:54] "GET /api/risk HTTP/1.1" 200 -
+WARNING:data.prism:[yellow]Failed to parse PRISM risk: float() argument must be a string or a number, not 'NoneType'[/yellow]
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:16:55] "GET /api/market HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:17:03] "GET /api/live-decisions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:17:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:17:49] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:18:19] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+ERROR:yfinance:$BHP.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$MTX.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$NHM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$AMS.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:$ARM.JO: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+ERROR:yfinance:
+5 Failed downloads:
+ERROR:yfinance:['BHP.JO', 'MTX.JO', 'NHM.JO', 'AMS.JO', 'ARM.JO']: possibly delisted; no price data found  (period=2d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:data.stock_market:StockClient: batch fetched 15/20 prices
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 22:18:51] "GET /api/stocks/jse?currency=ZAR HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/thapelodipela/Desktop/nexus-trading-ai/middleware/x402_middleware.py', reloading
+INFO:werkzeug: * Restarting with stat
+/Users/thapelodipela/Desktop/nexus-trading-ai/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:__main__:✅ PRISM client initialized
+INFO:__main__:✅ FreeMarketClient initialized (CoinGecko + Binance)
+INFO:__main__:✅ StockMarketClient initialized (Yahoo Finance — JSE + US)
+INFO:execution.alpaca_client:✅ AlpacaClient initialized (PAPER mode)
+INFO:__main__:✅ AlpacaClient initialized (paper trading)
+INFO:__main__:🚀 Starting NEXUS Dashboard API Server
+INFO:__main__:📊 Dashboard available at http://localhost:3000
+INFO:__main__:📡 API endpoints:
+INFO:__main__:   - GET  /api/market           → Market data (BTC)
+INFO:__main__:   - GET  /api/agents           → Agent performance
+INFO:__main__:   - GET  /api/sentiment        → Sentiment analysis
+INFO:__main__:   - GET  /api/positions        → Current positions
+INFO:__main__:   - GET  /api/equity           → Equity curve
+INFO:__main__:   - GET  /api/risk             → Risk metrics (BTC)
+INFO:__main__:   - GET  /api/performance      → Overall performance
+INFO:__main__:   - GET  /api/health           → Health check
+INFO:__main__:   - GET  /api/market-overview  → All crypto prices
+INFO:__main__:   - GET  /api/crypto/<sym>/price   → Single crypto price
+INFO:__main__:   - GET  /api/crypto/<sym>/signals → Single crypto signals
+INFO:__main__:   - GET  /office               → Pixel office display
+INFO:__main__:   - GET  /api/stocks/jse       → JSE Top 50 overview
+INFO:__main__:   - GET  /api/stocks/us        → US Top stocks overview
+INFO:__main__:   - GET  /api/stocks/btc-signal → JSE vs BTC correlation signal
+INFO:__main__:   - GET  /api/stocks/alpaca    → Alpaca account + positions
+INFO:__main__:   - GET  /api/stocks/sepolia-pairs → Sepolia testnet token pairs
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 903-799-882

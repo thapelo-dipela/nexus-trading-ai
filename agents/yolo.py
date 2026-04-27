@@ -33,7 +33,7 @@ class YOLOAgent(BaseAgent):
 
     ACTIVATION_REQUIREMENTS = {
         "fear_greed_min": 75,
-        "cvd_momentum_min": 0.20,
+        "cvd_momentum_min": 0.10,  # Reduced from 0.20: institutional buying signal, not requiring extreme strength
         "price_above_vwap": True,
         "prism_risk_max": 60,
         "drawdown_max_pct": 3.0,

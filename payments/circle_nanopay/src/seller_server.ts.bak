@@ -1,0 +1,33 @@
+import express from "express";
+import { createGatewayMiddleware, BatchFacilitatorClient } from "@circle-fin/x402-batching/server";
+
+const app = express();
+const PORT = process.env.NANOPAY_PORT || 3001;
+const SELLER = process.env.SELLER_WALLET_ADDRESS || '';
+
+// Patch fetch to log Circle API calls
+const origFetch = global.fetch;
+(global as any).fetch = async (url: any, opts: any) => {
+  const res = await origFetch(url, opts);
+  if (url.toString().includes('circle.com')) {
+    const clone = res.clone();
+    const body = await clone.json().catch(() => ({}));
+    console.log('\n[Circle API]', url.toString());
+    console.log('[Response]', JSON.stringify(body, null, 2));
+  }
+  return res;
+};
+
+const gateway = createGatewayMiddleware({
+  sellerAddress: SELLER as `0x${string}`,
+  facilitatorUrl: 'https://gateway-api-testnet.circle.com',
+  networks: ['eip155:5042002'],
+});
+
+app.get("/api/crypto/:symbol/signals", gateway.require("$0.0001"), (req, res) => {
+  const { payer, amount, network } = (req as any).payment;
+  console.log(`[nanopay] Paid ${amount} USDC by ${payer} on ${network}`);
+  res.json({ symbol: req.params.symbol, paid_by: payer, signal: "BUY", confidence: 0.82 });
+});
+
+app.listen(PORT, () => console.log(`[nanopay] Seller server on http://localhost:${PORT}`));

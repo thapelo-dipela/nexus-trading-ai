@@ -11,6 +11,46 @@ PRISM_API_BASE_URL = "https://api.prismapi.ai"
 PRISM_SYMBOL = os.getenv("PRISM_SYMBOL", "BTC")
 PRISM_OHLCV_INTERVAL = int(os.getenv("PRISM_OHLCV_INTERVAL", "60"))  # minutes
 
+# Multi-Crypto Configuration
+# Primary trading symbol (always monitored)
+PRIMARY_SYMBOL = os.getenv("PRIMARY_SYMBOL", "BTC")
+
+# Supported cryptocurrencies (for multi-symbol dashboard view)
+# Organized by category: major, altcoins, layer2/L1, meme coins
+SUPPORTED_SYMBOLS = {
+    # Major cryptocurrencies
+    "BTC": {"name": "Bitcoin", "category": "major", "active": True},
+    "ETH": {"name": "Ethereum", "category": "major", "active": True},
+    
+    # Large cap altcoins
+    "SOL": {"name": "Solana", "category": "altcoin", "active": True},
+    "ADA": {"name": "Cardano", "category": "altcoin", "active": True},
+    "POLKA": {"name": "Polkadot", "category": "altcoin", "active": True},
+    "AVAX": {"name": "Avalanche", "category": "altcoin", "active": True},
+    "MATIC": {"name": "Polygon", "category": "altcoin", "active": True},
+    
+    # DeFi tokens
+    "UNI": {"name": "Uniswap", "category": "defi", "active": True},
+    "AAVE": {"name": "Aave", "category": "defi", "active": True},
+    "LINK": {"name": "Chainlink", "category": "defi", "active": True},
+    
+    # Meme coins
+    "DOGE": {"name": "Dogecoin", "category": "meme", "active": True},
+    "SHIB": {"name": "Shiba Inu", "category": "meme", "active": True},
+    "PEPE": {"name": "Pepe", "category": "meme", "active": False},
+    "FLOKI": {"name": "Floki", "category": "meme", "active": False},
+    
+    # Layer 2 / Scaling
+    "ARB": {"name": "Arbitrum", "category": "layer2", "active": True},
+    "OP": {"name": "Optimism", "category": "layer2", "active": True},
+}
+
+# Symbols to monitor for trading signals (beyond PRIMARY_SYMBOL)
+WATCH_SYMBOLS = ["ETH", "SOL", "DOGE"]  # Include in agent analysis
+
+# Cache TTL for multi-symbol market overview
+MULTI_SYMBOL_CACHE_TTL = 30  # seconds (refresh every 30s)
+
 # PRISM Cache TTLs (seconds)
 PRISM_CACHE_TTL_RESOLVE = 3600  # 1 hour
 PRISM_CACHE_TTL_PRICE = 15  # 15 seconds
@@ -34,27 +74,59 @@ LOOP_INTERVAL_SECONDS = int(os.getenv("NEXUS_LOOP_INTERVAL", "300"))
 
 # Risk Limits
 MAX_DRAWDOWN_PCT = float(os.getenv("MAX_DRAWDOWN_PCT", "5.0"))
-MAX_POSITION_PCT = float(os.getenv("MAX_POSITION_PCT", "20.0"))
+MAX_POSITION_PCT = float(os.getenv("MAX_POSITION_PCT", "30.0"))  # Increased from 20% for more aggressive trading
 VOLATILITY_THRESHOLD = float(os.getenv("VOLATILITY_THRESHOLD", "0.07"))
 
 # Position Sizing
 RISK_PCT_PER_TRADE = float(os.getenv("RISK_PCT_PER_TRADE", "0.01"))
 MIN_TRADE_SIZE_USD = float(os.getenv("MIN_TRADE_SIZE_USD", "10.0"))
-MAX_TRADE_SIZE_USD = float(os.getenv("MAX_TRADE_SIZE_USD", "500.0"))
+MAX_TRADE_SIZE_USD = float(os.getenv("MAX_TRADE_SIZE_USD", "750.0"))  # Increased from 500 for more aggressive trading
 
 # Risk-Adjusted Returns & Compliance (Hackathon Standards)
 MAX_LEVERAGE = float(os.getenv("MAX_LEVERAGE", "3.0"))
+
+# Multi-Coin Margin Configuration (allows up to 10x leverage)
+# Can be overridden per symbol for flexibility
+DEFAULT_MARGIN_RATIO = float(os.getenv("DEFAULT_MARGIN_RATIO", "0.1"))  # 10x leverage (10% margin = 1/0.1)
+MIN_MARGIN_RATIO = float(os.getenv("MIN_MARGIN_RATIO", "0.05"))  # 20x maximum (5% margin)
+MAX_MARGIN_RATIO = float(os.getenv("MAX_MARGIN_RATIO", "1.0"))  # 1x leverage (no margin)
+
+# Per-symbol margin ratios (can be adjusted for different risk profiles)
+SYMBOL_MARGIN_RATIOS = {
+    "BTC": 0.1,    # 10x leverage (default)
+    "ETH": 0.15,   # 6.67x leverage
+    "SOL": 0.2,    # 5x leverage
+    "ADA": 0.25,   # 4x leverage
+    "POLKA": 0.25, # 4x leverage
+    "AVAX": 0.2,   # 5x leverage
+    "MATIC": 0.2,  # 5x leverage
+    "UNI": 0.15,   # 6.67x leverage
+    "AAVE": 0.15,  # 6.67x leverage
+    "LINK": 0.15,  # 6.67x leverage
+    "DOGE": 0.3,   # 3.33x leverage (meme - lower)
+    "SHIB": 0.3,   # 3.33x leverage (meme - lower)
+    "PEPE": 0.5,   # 2x leverage (meme - conservative)
+    "FLOKI": 0.5,  # 2x leverage (meme - conservative)
+    "ARB": 0.2,    # 5x leverage
+    "OP": 0.2,     # 5x leverage
+}
+
 MIN_VOLUME_24H_USD = float(os.getenv("MIN_VOLUME_24H_USD", "1e9"))  # 1B minimum
 MAX_SLIPPAGE_PCT = float(os.getenv("MAX_SLIPPAGE_PCT", "0.5"))
 MIN_SHARPE_RATIO = float(os.getenv("MIN_SHARPE_RATIO", "0.5"))
 TARGET_VOLATILITY_PCT = float(os.getenv("TARGET_VOLATILITY_PCT", "10.0"))
 
 # Consensus Configuration
-CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.20"))
+CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.25"))  # Relaxed from 0.35 to allow moderate signals
 INITIAL_AGENT_WEIGHT = 1.0
 WEIGHT_LEARN_RATE = 0.1
 AGENT_RETIREMENT_FLOOR_TRADES = 10  # consecutive trades at floor before retirement
 ROLLING_ACCURACY_WINDOW = 20  # trades
+
+# Risk Guardrails (NEW) — RELAXED for better agent flexibility
+CONSECUTIVE_LOSS_LIMIT = 5  # Increased from 3 — allow more losses before halt
+SESSION_LOSS_LIMIT_PCT = 5.0  # Increased from 2.0% — more session flexibility
+MAX_EQUITY_DRAWDOWN_PCT = 25.0  # Increased from 15.0% — more room for equity swings
 
 # On-chain Configuration (ERC-8004 Ethereum Sepolia)
 RPC_URL = os.getenv("RPC_URL", "https://rpc.sepolia.org")
@@ -75,7 +147,7 @@ MESSARI_METRICS = "https://data.messari.io/api/v1/assets/btc/metrics"
 
 # Position Management (exit conditions)
 TAKE_PROFIT_PCT = float(os.getenv("TAKE_PROFIT_PCT", "5.0"))  # close if up 5%
-STOP_LOSS_PCT = float(os.getenv("STOP_LOSS_PCT", "2.0"))  # close if down 2%
+STOP_LOSS_PCT = float(os.getenv("STOP_LOSS_PCT", "6.5"))  # Increased to 65% of equal position margin (was 2%)
 MAX_HOLD_TIME_MINUTES = int(os.getenv("MAX_HOLD_TIME_MINUTES", "1440"))  # 24 hours
 
 # Persistence Files
@@ -131,7 +203,7 @@ REDDIT_API_SECRET = os.getenv("REDDIT_API_SECRET", "")
 
 # Order Flow Configuration (Task A)
 CVD_LOOKBACK_BARS = int(os.getenv("CVD_LOOKBACK_BARS", "30"))
-CVD_VETO_THRESHOLD = float(os.getenv("CVD_VETO_THRESHOLD", "0.15"))
+CVD_VETO_THRESHOLD = float(os.getenv("CVD_VETO_THRESHOLD", "0.20"))  # Increased from 0.15: less strict, prevents false vetos
 VWAP_DIVERGENCE_PCT = float(os.getenv("VWAP_DIVERGENCE_PCT", "1.0"))
 
 # Sentiment Multi-Source Configuration (Task D)
@@ -162,10 +234,74 @@ YOLO_ENABLED = os.getenv("YOLO_ENABLED", "false").lower() == "true"
 YOLO_MAX_ACTIVATIONS_24H = 3
 YOLO_COOLDOWN_AFTER_SL = 3600  # 1 hour in seconds
 YOLO_FEAR_GREED_MIN = 75
-YOLO_CVD_MOMENTUM_MIN = 0.20
+YOLO_CVD_MOMENTUM_MIN = 0.10  # Reduced from 0.20: more realistic for institutional buying signal detection
 YOLO_PRISM_RISK_MAX = 60
 YOLO_DRAWDOWN_MAX_PCT = 3.0
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Stock Trading Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Alpaca Paper/Live Trading (US Stocks)
+# Get free paper keys at: https://alpaca.markets
+ALPACA_API_KEY    = os.getenv("ALPACA_API_KEY", "")
+ALPACA_API_SECRET = os.getenv("ALPACA_API_SECRET", "")
+ALPACA_LIVE       = os.getenv("ALPACA_LIVE", "false").lower() == "true"
+
+# Feature flags — enable/disable per asset class
+JSE_ENABLED              = os.getenv("JSE_ENABLED", "true").lower() == "true"
+US_STOCKS_ENABLED        = os.getenv("US_STOCKS_ENABLED", "true").lower() == "true"
+BTC_CORRELATION_ENABLED  = os.getenv("BTC_CORRELATION_ENABLED", "true").lower() == "true"
+
+# BTC Correlation Strategy
+# Relative strength threshold (%) to trigger a crypto signal
+# e.g. 5.0 means JSE must lag BTC by 5%+ to trigger BUY_CRYPTO
+BTC_CORRELATION_THRESHOLD    = float(os.getenv("BTC_CORRELATION_THRESHOLD", "5.0"))
+BTC_CORRELATION_LOOKBACK_DAYS = int(os.getenv("BTC_CORRELATION_LOOKBACK_DAYS", "30"))
+
+# JSE config
+JSE_TOP_N = int(os.getenv("JSE_TOP_N", "20"))  # How many JSE stocks to track
+
+# Sepolia Testnet Token Pairs
+# These are string labels for the RiskRouter pair field.
+# The contract records intent on-chain — it does not move real tokens.
+# Sepolia ERC-20 test tokens can be obtained from:
+#   https://faucets.chain.link (LINK tokens on Sepolia)
+#   https://sepoliafaucet.com  (ETH for gas)
+SEPOLIA_TEST_PAIRS = [
+    "WBTC/USDC",   # Wrapped BTC testnet
+    "WETH/USDC",   # Wrapped ETH testnet
+    "WSOL/USDC",   # Wrapped SOL testnet
+    "LINK/ETH",    # Chainlink testnet
+    "WMATIC/USDC", # Polygon testnet
+    "WAVAX/USDC",  # Avalanche testnet
+    "WBNB/USDC",   # BNB testnet
+    "WDOGE/USDC",  # Dogecoin testnet
+    "ARB/ETH",     # Arbitrum testnet
+    "OP/ETH",      # Optimism testnet
+]
+
+# Primary Sepolia pair for on-chain submission (maps to NEXUS primary symbol)
+SEPOLIA_PRIMARY_PAIR = os.getenv("SEPOLIA_PRIMARY_PAIR", "WBTC/USDC")
+
 # Etherscan API (for audit trail links - Sepolia)
 ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY", "")
+
+# ===== ARC / Circle (Hackathon) =====
+# Arc L1 testnet RPC and chain id for Arc-compatible deployments.
+ARC_RPC_URL = os.getenv("ARC_RPC_URL", os.getenv("ARC_RPC_URL", "https://rpc.testnet.arc.org"))
+try:
+    ARC_CHAIN_ID = int(os.getenv("ARC_CHAIN_ID", os.getenv("ARC_CHAIN_ID", "84531")))
+except Exception:
+    ARC_CHAIN_ID = 84531
+# USDC contract address on Arc testnet/mainnet - set in .env
+ARC_USDC_ADDRESS = os.getenv("ARC_USDC_ADDRESS", "0x0000000000000000000000000000000000000000")
+
+# Circle Nanopayments / API
+CIRCLE_API_KEY = os.getenv("CIRCLE_API_KEY", "")
+# Local nanopay service URL (we will scaffold a small Node service that wraps the Circle SDK)
+NANOPAY_SERVICE_URL = os.getenv("NANOPAY_SERVICE_URL", "http://localhost:3001")
+
+# Explorer base url (Arc block explorer) - use for tx links in UI
+ARC_EXPLORER_TX_URL = os.getenv("ARC_EXPLORER_TX_URL", "https://explorer.arc.xyz/tx/")
 

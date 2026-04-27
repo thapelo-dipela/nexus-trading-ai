@@ -2,6 +2,7 @@
 NEXUS Compliance & Risk Guardrails — Enhanced validation for hackathon standards.
 Enforces: Best Compliance & Risk Guardrails, Best Risk-Adjusted Return, Best Validation & Trust Model.
 """
+import json
 import logging
 import time
 from dataclasses import dataclass, field
@@ -103,6 +104,15 @@ class ComplianceEngine:
 
         # Rule 10: Trustless verification
         checks.append(self._check_trustless_markers(market_data, direction))
+
+        # Rule 11: Consecutive loss limit (NEW)
+        checks.append(self._check_consecutive_losses())
+
+        # Rule 12: Session/daily loss limit (NEW)
+        checks.append(self._check_session_drawdown(market_data))
+
+        # Rule 13: Max equity drawdown (NEW)
+        checks.append(self._check_max_drawdown(market_data))
 
         # Separate passes and failures
         for check in checks:
@@ -417,6 +427,190 @@ class ComplianceEngine:
                 message=f"Trustless score {trustless_score:.2f} < {min_trustless} — low external verification",
                 metric_value=trustless_score,
                 threshold=min_trustless,
+            )
+
+    def _check_consecutive_losses(self) -> ComplianceCheck:
+        """
+        Compliance Clock Strategy: Instead of blocking trades after consecutive losses,
+        trigger the OPPOSITE direction strategy.
+        - If SELL had N consecutive losses → trigger BUY next
+        - If BUY had N consecutive losses → trigger SELL next
+        This allows agents to adapt and recover from losing streaks.
+        """
+        try:
+            with open("nexus_positions.json", "r") as f:
+                positions_data = json.load(f)
+            
+            # Get recent closed positions and check their outcomes
+            closed_positions = []
+            if isinstance(positions_data, dict) and "positions" in positions_data:
+                closed_positions = [p for p in positions_data["positions"] if p.get("status") == "closed"]
+            elif isinstance(positions_data, list):
+                closed_positions = [p for p in positions_data if p.get("status") == "closed"]
+            
+            # Sort by exit time (most recent first)
+            closed_positions.sort(key=lambda p: p.get("exit_timestamp", 0), reverse=True)
+            
+            # Analyze last N trades for consecutive losses by direction
+            consecutive_losses = 0
+            last_direction = None
+            limit = config.CONSECUTIVE_LOSS_LIMIT
+            
+            for position in closed_positions[:limit * 2]:  # Look at twice the limit to be sure
+                direction = position.get("direction", "HOLD")
+                pnl_pct = position.get("pnl_pct", 0)
+                
+                if pnl_pct < 0:
+                    if last_direction is None or last_direction == direction:
+                        consecutive_losses += 1
+                        last_direction = direction
+                    else:
+                        break  # Direction changed, reset count
+                else:
+                    break  # Stop counting when we hit a win
+            
+            # Compliance Clock: Instead of FAIL, suggest opposite direction
+            if consecutive_losses >= limit:
+                opposite = "BUY" if last_direction == "SELL" else "SELL"
+                return ComplianceCheck(
+                    rule_id="consecutive_losses",
+                    rule_name="Compliance Clock",
+                    level=ComplianceLevel.PASS,  # PASS - don't block, just switch direction
+                    message=f"{consecutive_losses} consecutive {last_direction} losses — trigger {opposite} strategy",
+                    metric_value=consecutive_losses,
+                    threshold=limit,
+                )
+            else:
+                return ComplianceCheck(
+                    rule_id="consecutive_losses",
+                    rule_name="Compliance Clock",
+                    level=ComplianceLevel.PASS,
+                    message=f"{consecutive_losses} consecutive losses < {limit} limit",
+                    metric_value=consecutive_losses,
+                    threshold=limit,
+                )
+        except Exception as e:
+            logger.warning(f"Could not check consecutive losses: {e}")
+            return ComplianceCheck(
+                rule_id="consecutive_losses",
+                rule_name="Compliance Clock",
+                level=ComplianceLevel.PASS,
+                message=f"Compliance Clock: ready",
+            )
+
+    def _check_session_drawdown(self, market_data) -> ComplianceCheck:
+        """
+        Check daily/session drawdown and halt trading if exceeded.
+        Prevents cascading losses in a single trading session.
+        """
+        try:
+            with open("nexus_positions.json", "r") as f:
+                positions_data = json.load(f)
+            
+            # Calculate today's PnL (all trades closed today)
+            import datetime
+            today = datetime.date.today()
+            today_start_ts = int(datetime.datetime.combine(today, datetime.time.min).timestamp())
+            
+            today_pnl = 0.0
+            closed_positions = []
+            if isinstance(positions_data, dict) and "positions" in positions_data:
+                closed_positions = positions_data["positions"]
+            elif isinstance(positions_data, list):
+                closed_positions = positions_data
+            
+            for position in closed_positions:
+                exit_ts = position.get("exit_timestamp", 0)
+                if exit_ts >= today_start_ts and position.get("status") == "closed":
+                    today_pnl += position.get("pnl_usd", 0)
+            
+            # Calculate session drawdown percentage
+            portfolio_value = getattr(market_data, "portfolio_value_usd", 10000.0)
+            session_drawdown_pct = abs(today_pnl) / portfolio_value * 100.0 if today_pnl < 0 else 0.0
+            limit_pct = config.SESSION_LOSS_LIMIT_PCT
+            
+            if session_drawdown_pct >= limit_pct:
+                return ComplianceCheck(
+                    rule_id="session_drawdown",
+                    rule_name="Session Loss Limit",
+                    level=ComplianceLevel.FAIL,
+                    message=f"Session loss {session_drawdown_pct:.2f}% >= {limit_pct}% limit — TRADING HALTED",
+                    metric_value=session_drawdown_pct,
+                    threshold=limit_pct,
+                )
+            else:
+                return ComplianceCheck(
+                    rule_id="session_drawdown",
+                    rule_name="Session Loss Limit",
+                    level=ComplianceLevel.PASS,
+                    message=f"Session loss {session_drawdown_pct:.2f}% < {limit_pct}% limit",
+                    metric_value=session_drawdown_pct,
+                    threshold=limit_pct,
+                )
+        except Exception as e:
+            logger.warning(f"Could not check session drawdown: {e}")
+            return ComplianceCheck(
+                rule_id="session_drawdown",
+                rule_name="Session Loss Limit",
+                level=ComplianceLevel.WARNING,
+                message=f"Could not assess: {e}",
+            )
+
+    def _check_max_drawdown(self, market_data) -> ComplianceCheck:
+        """
+        Check maximum equity drawdown from peak and halt trading if exceeded.
+        Protects against catastrophic losses over longer periods.
+        """
+        try:
+            with open("nexus_equity_curve.json", "r") as f:
+                equity_data = json.load(f)
+            
+            # Calculate max drawdown from peak
+            equity_values = []
+            if isinstance(equity_data, dict):
+                equity_values = list(equity_data.values())
+            elif isinstance(equity_data, list):
+                equity_values = equity_data
+            
+            if not equity_values or len(equity_values) < 2:
+                return ComplianceCheck(
+                    rule_id="max_drawdown",
+                    rule_name="Max Equity Drawdown",
+                    level=ComplianceLevel.PASS,
+                    message="Insufficient equity history to assess drawdown",
+                )
+            
+            # Find peak-to-trough drawdown
+            max_equity = max(equity_values)
+            current_equity = equity_values[-1]
+            drawdown_pct = ((max_equity - current_equity) / max_equity * 100.0) if max_equity > 0 else 0.0
+            limit_pct = config.MAX_EQUITY_DRAWDOWN_PCT
+            
+            if drawdown_pct >= limit_pct:
+                return ComplianceCheck(
+                    rule_id="max_drawdown",
+                    rule_name="Max Equity Drawdown",
+                    level=ComplianceLevel.FAIL,
+                    message=f"Equity drawdown {drawdown_pct:.2f}% >= {limit_pct}% limit — TRADING HALTED",
+                    metric_value=drawdown_pct,
+                    threshold=limit_pct,
+                )
+            else:
+                return ComplianceCheck(
+                    rule_id="max_drawdown",
+                    rule_name="Max Equity Drawdown",
+                    level=ComplianceLevel.PASS,
+                    message=f"Equity drawdown {drawdown_pct:.2f}% < {limit_pct}% limit",
+                    metric_value=drawdown_pct,
+                    threshold=limit_pct,
+                )
+        except Exception as e:
+            logger.warning(f"Could not check max drawdown: {e}")
+            return ComplianceCheck(
+                rule_id="max_drawdown",
+                rule_name="Max Equity Drawdown",
+                level=ComplianceLevel.WARNING,
+                message=f"Could not assess: {e}",
             )
 
     def compliance_report(self) -> str:

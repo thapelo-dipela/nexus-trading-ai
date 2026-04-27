@@ -1,0 +1,788 @@
+[
+  {
+    "channelId": "test-1",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-23T06:29:51.451Z",
+    "txHash": "0xa3c0e1483b7b3f7ebd3e7be98cb71850ce4956fe868aec34de8d7680bb9c8e04",
+    "blockNumber": 38577660,
+    "chain": "arc-testnet",
+    "batchIndex": 0
+  },
+  {
+    "channelId": "test-2",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-23T06:29:51.458Z",
+    "txHash": "0x962099d4757fd37ec750ffff34902a3e5dedb18dadf300b1ac30b0177be6a369",
+    "blockNumber": 38577660,
+    "chain": "arc-testnet",
+    "batchIndex": 1
+  },
+  {
+    "channelId": "nexus-dash-1776926540952-0",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-23T06:42:27.637Z",
+    "txHash": "0x7ec8a8054d63f4a8907f0ca652e06963cd0518fcd47d074b6dcb4f989ffadf58",
+    "blockNumber": 38579104,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1776926540952-1",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-23T06:42:27.637Z",
+    "txHash": "0xcb62535fd4bac3c5f6bb0f18a548148bf076f62d540622776db38e73a3cdc9db",
+    "blockNumber": 38579104,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1776926540952-2",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-23T06:42:27.637Z",
+    "txHash": "0xcffc2f4337a2c90f09ebea884582d077dceea447c542bfb92f6125bd2f680467",
+    "blockNumber": 38579104,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1776926540952-3",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-23T06:42:27.637Z",
+    "txHash": "0x757c62d838c943845845767e05236627242de087403543951ec4e732b629e97a",
+    "blockNumber": 38579104,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777139205365-0",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-25T17:46:53.003Z",
+    "txHash": "0x249c8a0c0f21492adad68d9b2a4c362764a9d497a1e07a5df860684209f43a77",
+    "blockNumber": 38996090,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777139205365-1",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-25T17:46:53.014Z",
+    "txHash": "0xf7c23ca1dcbb677f0806c7d0524097a007fbf80ce0ba6fb45537c34871904bce",
+    "blockNumber": 38996090,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777139205365-2",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-25T17:46:53.014Z",
+    "txHash": "0xa92e9d059809ae29f4d2aa5c579e5755ced8f269f80a894f8c1b00fb550171dd",
+    "blockNumber": 38996090,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777139205365-3",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-25T17:46:53.014Z",
+    "txHash": "0xd44b5c6b88bb774b15fb00e717e9bf7fe6c5a486c1b850f146a2cfcf1cae38e8",
+    "blockNumber": 38996090,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777140462998-0",
+    "amountUSDC": 0.05,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-25T18:07:49.997Z",
+    "txHash": "0xa816665ec968fdcf8196e59cb32990c740a46df36ba527fcdd74256a24c50dfb",
+    "blockNumber": 38998567,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777140462998-1",
+    "amountUSDC": 0.05,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-25T18:07:49.997Z",
+    "txHash": "0x6955a22c5088eea7ac30f3b708e523c56328fede0489c0429e7744a3920624ff",
+    "blockNumber": 38998567,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777140462998-2",
+    "amountUSDC": 0.05,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-25T18:07:49.997Z",
+    "txHash": "0xd6fbeeb0c03d351c865ca530ef68babbf772fb8bccadb76f334a847da83f5ee9",
+    "blockNumber": 38998567,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777140462998-3",
+    "amountUSDC": 0.05,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-25T18:07:49.997Z",
+    "txHash": "0x5a4a532dd6d4ec72e9950c4fb2fd404db427e2d8f790bcd47c5993ab0fe98944",
+    "blockNumber": 38998567,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-0-to-1",
+    "amountUSDC": 0.001,
+    "timestamp": "2026-04-26T09:39:53.356Z",
+    "txHash": "0x55fddf64362d8008bb1a30ffd6c4aa1065435dca04384f0e0c6235b6ba09d223",
+    "blockNumber": 39108643,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-1-to-2",
+    "amountUSDC": 0.001,
+    "timestamp": "2026-04-26T09:39:53.358Z",
+    "txHash": "0x7f2715821e0c6ec59741e3ae7ab2070ef710f01c277e2b04bebfcfbfd57bfbb6",
+    "blockNumber": 39108643,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777196443444-0",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T09:40:50.143Z",
+    "txHash": "0xb85244ab24ad7c8241a837c2f51a0f22349e7e32c2120011584cd794b9bd54a4",
+    "blockNumber": 39108755,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777196443444-1",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-26T09:40:50.143Z",
+    "txHash": "0x598a14c16dd9e0dd3d06e5cc2462bde33c16d55ce019e74130d0f3e0bf7dc454",
+    "blockNumber": 39108755,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777196443444-2",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-26T09:40:50.143Z",
+    "txHash": "0x79f33a467fea1b36443dbebc6ec675f5a1c272e1f443c0cd155dd09804730b26",
+    "blockNumber": 39108755,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777196443444-3",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T09:40:50.143Z",
+    "txHash": "0x3504ffa3e168e0a180baf76e9f9e80c1708bcb61974075f2030de790a8d49bd7",
+    "blockNumber": 39108755,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777201329466-0",
+    "amountUSDC": 0.5,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T11:02:16.250Z",
+    "txHash": "0xfdfd2e496f0074859ff71ee2af08b71eaf952e3f21253df75b57884316f47b16",
+    "blockNumber": 39118374,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777201329466-1",
+    "amountUSDC": 0.5,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-26T11:02:16.251Z",
+    "txHash": "0xe8fbba6565ee86132d924e5ebc04e836b0bd718915e5d8fb3cd68f1a15235e56",
+    "blockNumber": 39118374,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777201329466-2",
+    "amountUSDC": 0.5,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-26T11:02:16.251Z",
+    "txHash": "0xf6492b5e50c96cf34960c96bd5cec54442dd42efcdb8041fb485927f272a8bfc",
+    "blockNumber": 39118374,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777201329466-3",
+    "amountUSDC": 0.5,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T11:02:16.251Z",
+    "txHash": "0x6f1ff6b4790a0975eb3803b6ca8ca8aaced5179100b156d6fca44b30de8d85d8",
+    "blockNumber": 39118374,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777210428163-0",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T13:33:55.373Z",
+    "txHash": "0xa41c2e46f0558ef8d0f8a68eedfbdac9dbed1206d1ee71343a291ee0f8a56381",
+    "blockNumber": 39136287,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777210428163-1",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-26T13:33:55.375Z",
+    "txHash": "0x057b4c71810ee093142619beb30916d33f65d31c3cf83e2f5056c4bbf24ebadf",
+    "blockNumber": 39136287,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777210428163-2",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-26T13:33:55.375Z",
+    "txHash": "0x202db0f7902bf4c71b6c2ec99950319457735017f0ed9c41a3b02ac6864102a4",
+    "blockNumber": 39136287,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777210428163-3",
+    "amountUSDC": 0.1,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T13:33:55.375Z",
+    "txHash": "0x493aa860e17882dbb15e1b9d6b883950b9d6cdb574ad7c86d1727281f83e0190",
+    "blockNumber": 39136287,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.001091,
+    "gas_used": 54550,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777214522099-0",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T14:42:08.446Z",
+    "txHash": "0xf9cdd286b331b9cae0d6b55e8bc6219660daffbc6135791be1ff207d1e3ae4cf",
+    "blockNumber": 39144349,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777214522099-1",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-26T14:42:08.446Z",
+    "txHash": "0x23d2732c9b7c154432c057d8d5b4b2bacc7fc91b705d4e2d86a18e9fca8f8a9d",
+    "blockNumber": 39144349,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777214522099-2",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-26T14:42:08.446Z",
+    "txHash": "0xf5612930710be1b18f36e9b62f75e9f3f53e9364f5a3977fed18a9de1b5b507f",
+    "blockNumber": 39144349,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777214522099-3",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T14:42:08.446Z",
+    "txHash": "0xa0d3315d2ad5463b217b9fb84e3f671d3d263f7c9a478700c69ac7b78c7ccac2",
+    "blockNumber": 39144349,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-0-to-1",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-26T14:42:12.927Z",
+    "txHash": "0x0abbd97c9b527c5732bf2974a78c3f5346d60aa7f69f9e9a3d769e7bde21445c",
+    "blockNumber": 39144357,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-1-to-2",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-26T14:42:12.927Z",
+    "txHash": "0xf6d78ee3706d5375344fc2b8d2431c5472d9e98bf974cfa5471f8bbf08d478bc",
+    "blockNumber": 39144357,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-2-to-3",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-26T14:42:12.927Z",
+    "txHash": "0xef8a2e65e69b6cecb89bda59b2c2626f518c5706744226d084ba57ebe5b785e3",
+    "blockNumber": 39144357,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "agent-transfer-3-to-0",
+    "amountUSDC": 0.005,
+    "timestamp": "2026-04-26T14:42:12.927Z",
+    "txHash": "0x58c7cf72dcd105a42948d6885a5be51d26fedabc8e84f4535451a431feff54c2",
+    "blockNumber": 39144357,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777233767375-0",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MomentumAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T20:02:54.241Z",
+    "txHash": "0x19f04fc3c641ab1078492d150924973a8b9dbcd585f67f54acbe69c91dafe5b7",
+    "blockNumber": 39182270,
+    "chain": "arc-testnet",
+    "batchIndex": 0,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777233767375-1",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "SentimentAgent",
+      "to": "PRISMDataFeed",
+      "action": "market_data_request"
+    },
+    "timestamp": "2026-04-26T20:02:54.245Z",
+    "txHash": "0xe265134c184d783898af756f33c8ce2c1655452ea224c68ea84e987016187483",
+    "blockNumber": 39182270,
+    "chain": "arc-testnet",
+    "batchIndex": 1,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777233767375-2",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "ConsensusEngine",
+      "to": "RiskGuardian",
+      "action": "trade_validation"
+    },
+    "timestamp": "2026-04-26T20:02:54.245Z",
+    "txHash": "0xe8b947cf1addb4bc92fd37c9f2dafc7233d70bdd08e31c64e073626309753aa2",
+    "blockNumber": 39182270,
+    "chain": "arc-testnet",
+    "batchIndex": 2,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777233767375-3",
+    "amountUSDC": 0.005,
+    "metadata": {
+      "from": "MeanReversionAgent",
+      "to": "ConsensusEngine",
+      "action": "signal_vote"
+    },
+    "timestamp": "2026-04-26T20:02:54.245Z",
+    "txHash": "0xa7ad8de4d7f8cbf90e93a6500818f75bc62ea8557f11749b2d4770d9994d469c",
+    "blockNumber": 39182270,
+    "chain": "arc-testnet",
+    "batchIndex": 3,
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777285872415-0",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTg2MiIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjE3MiIsIm5vbmNlIjoiMHhiZDNhZTVkOWZmZTc2MDMxYTg3NGJkZTNhMWZiOWRlNTkyYTAzYzUwODA4ZDE0MzQxMmY0MDNmZGE5OGNlNzlkIn0sInNpZ25hdHVyZSI6IjB4MGRkMmFlOTI2MmY0MjlhNjRkMDllNjIxMWRiYTY5MTEwNmNlMTVmNGEyYjczMWZmOTkwOTE5OWQ4MzJhOTlmZDY1OTI2NGVlODliMjRlYWE1YzE5ZGY2ZWFjN2VmNGMxYWI0MTIwYzgwMTA1NmU0ZDU5MTZlMTY1NGNiY2RmNjgxYyJ9fQ==",
+    "timestamp": "2026-04-27T10:31:12.425Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "nexus-dash-1777285872415-1",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTg2MiIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjE3MiIsIm5vbmNlIjoiMHhmYTg3YjFhZjlhMDU0MjJiYzRiZDdkMDhlODZiOWY3OGIyMjJlZDcwOWU0MWQxZWJiNGVhYTQ5MzFlNzM4YzQyIn0sInNpZ25hdHVyZSI6IjB4MDRjZWMzYjlhNWIyYzc5MzExMzc2NDNhZGJlODNlNDdmMmUxZDY2ZWQxNzg0ZTA5ODg0NmE3ZjNlMGM4YjlhMjY2MmQ2YjNiMjM3ZDEyN2ZhZTMyZGQ3NTBkNGNmMTJjMWFhNmJkZThkZjQ0NDQ1YmQxNWQ1N2MxZTUxNmU2MWMxYiJ9fQ==",
+    "timestamp": "2026-04-27T10:31:12.425Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "nexus-dash-1777285872415-2",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTg2MiIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjE3MiIsIm5vbmNlIjoiMHhhN2IyOTYwNzA1ZTljYzY4MWRmMGZkNjMwOTA4NmJiNDQyOTM1NmY4MzljOGI4MTZkYTAyMWQ1YWE5MjFjZDJiIn0sInNpZ25hdHVyZSI6IjB4MGM5NDY1YjhlZjA5NmU0YmJlZWI0OWQzZjczMWY1ZWUzMTZiNjJiOWFiMzQyNzg2MWI5YjAwMmM1ZDQ2NDAxZTQzYWViNzQzMjhmNjU5NGRiY2NlNmI2Yzg4MGFiMTA5YTdlZGU2ZmY0OGYzNWNmYmE0ZjQzNWQyYjY1ZDlkZDIxYiJ9fQ==",
+    "timestamp": "2026-04-27T10:31:12.425Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "nexus-dash-1777285872415-3",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTg2MiIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjE3MiIsIm5vbmNlIjoiMHhjNWI4ZjJiYjc2YWQxMWM5NjkyNWZmYjQ3NzYyZmUwZjU5NTExYjliMzgyOWE2NjE1NDY2ZjRhNjdkODg0YzhkIn0sInNpZ25hdHVyZSI6IjB4M2QzMDM2N2YzZGFiYzRkNTczMDY1NGJlMjBkNjhmZDY1NTViYmY4MWRlMzgyOWJiNzZkNTRkYjgyMDYwODNiZDBjMTk1MjU1NzRiYWFiYTNiZDA0YThhNzVkZDljYWExYmY3OTI3M2Y3MTcwMTEyYzA5NjE0NzBkNjUyMjhmZTUxYiJ9fQ==",
+    "timestamp": "2026-04-27T10:31:12.425Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "agent-transfer-0-to-1",
+    "amountUSDC": 0.005,
+    "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "to": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEMyRDJCN0U0RjhBNkMzRDVFMUY3QTlCMkM0RTZGOEEwQjJENEU2RjgiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTkxMSIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjIyMSIsIm5vbmNlIjoiMHg0MTY2ZmI3OGM2OWFlYzViMTUyN2NmODA3MWQ1NzYyYmY3NmY5YjRmYTMyYzFiNzM3ZTdkMzZiYTZjZDQ2OTI4In0sInNpZ25hdHVyZSI6IjB4MTg1NTk0ZDZmNmMwY2MzZmQwMTM3Njk1YzlhNTEwNDQ4MGM5NGE4ZDlmOGM1OWU5OTM3MDlmMjJhNWVkNGFjYTE1N2NiMmI1YWVmY2NhZDA5OTU3MTg4MzlmMjcxMWY1NzY4NjZlNDBjNmNjMTYzZmQwZGVhNGNlYjU2MDgxM2YxYyJ9fQ==",
+    "timestamp": "2026-04-27T10:32:01.628Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "agent-transfer-1-to-2",
+    "amountUSDC": 0.005,
+    "from": "0xC2D2B7E4F8A6C3D5E1F7A9B2C4E6F8A0B2D4E6F8",
+    "to": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEExQjNDNUQ3RTlGMUEzQjVDN0Q5RTFGM0E1QjdDOUQxRTNGNUE3QjkiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTkxMSIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjIyMSIsIm5vbmNlIjoiMHg1NjEzZTkyNTE0MmQyYTI2MzU3MjE2NTk2YWNmOTM1ODRiNDg1NDU5YjYyZGVlMjk4MTU5YThlNGIwZTJhMjQ2In0sInNpZ25hdHVyZSI6IjB4MjA0NzM3YWM3MTFhNWFmZTAyNGIyMDcxY2JjY2Y1NjAyYjYyYWI4ZmJjMmQ0NzY5MDljYzNhMWIxNmRlOGE0NzBjZDUyYTcyZjI0NWYwYmY2Nzc0NDdjNmM4Nzc2ODJiNzYwMjE0ZmUxNDA1Y2NjYWJiZDVhNTQyYjZmOTJjNTUxYyJ9fQ==",
+    "timestamp": "2026-04-27T10:32:01.628Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "agent-transfer-2-to-3",
+    "amountUSDC": 0.005,
+    "from": "0xA1B3C5D7E9F1A3B5C7D9E1F3A5B7C9D1E3F5A7B9",
+    "to": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEYzRTVEN0M5QjFBM0Y1RTdEOUMxQjNBNUY3RTlEMUMzQjVBN0Y5RTEiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTkxMSIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjIyMSIsIm5vbmNlIjoiMHhkYTMzOWE3M2MwY2E4OGIwZDJmNDM3MzlmNzE4Yzk4Njk4N2EzMDQxZTVkM2RmMTE3Y2M1NmQxNDc0NmM5Mzg5In0sInNpZ25hdHVyZSI6IjB4NWRkYWJlYjM0MjI0YTFlNmIyMzRlM2Q5NTkxY2QyNmVhMTAwZWFjNTJkMmQwYWVkM2E3ZDg1ODNlN2E1OWM3YTQ2MDcxYmMzNmRmODkwZjRmYWFlZDVjMDdlNGE5YmQxYTNjMWUxNzk0NmY1YTlkMGI2MmNiYzc2ZTQ2MWZiYjkxYiJ9fQ==",
+    "timestamp": "2026-04-27T10:32:01.628Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "agent-transfer-3-to-0",
+    "amountUSDC": 0.005,
+    "from": "0xF3E5D7C9B1A3F5E7D9C1B3A5F7E9D1C3B5A7F9E1",
+    "to": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NTkxMSIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjIyMSIsIm5vbmNlIjoiMHgxMjI2MDUxNTE1OTljNGNlMTQ3YmQ5NGEzMWEyOTU3ZmQ5MTM3NzdhMzcxNjg1OWYwMzVkMTk4MzZhMjExYWE5In0sInNpZ25hdHVyZSI6IjB4YzZjY2UxYTA5NWM5YWY1ODU4MGYwNjUyZTY3MzdiOTU5ODMxMmQ3ZDg5YzA4YWZlYzFlNTFmMjQxNDBlN2ViYjBmMTM4ZjdjMGI4NGJhYmEyNDUxNjkxZGZkMzhiODA2MjcyNmIyOGY3MWU5ZTYyZTg2OTRiZGI5ZDJhZTg4OWExYiJ9fQ==",
+    "timestamp": "2026-04-27T10:32:01.628Z",
+    "chain": "arc-testnet"
+  },
+  {
+    "channelId": "nexus-dash-1777286134265-0",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NjEyNCIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjQzNCIsIm5vbmNlIjoiMHg1NmQ3ZjI1NmQzYjkxNmQ1NGU5YjdmNDQzNWRjZDhlOTVhMDdjZmRiNGI3YjFkOGQzYjE3MDViNzNhOWE3Yjc2In0sInNpZ25hdHVyZSI6IjB4YmVmMDg4OTAzZWIzNzI4OThkZWYxMjJjYzZjMzYyOTExZmVmOWEyYjFjYmVjYjk0OGFhNWY5YjY4NzBjYmI1YTU1ZjYwNzAyNzc3YTgyNjU5N2E5NWRkMWFmNDI1ZmVjYjMzZDJkMTJmZmEyNmQzNzRkZmJmY2JhMGU1NjAyNmExYiJ9fQ==",
+    "txHash": "0xbef088903eb372898def122cc6c362911fef9a2b1cbecb948aa5f9b6870cbb5a",
+    "blockNumber": null,
+    "timestamp": "2026-04-27T10:35:34.306Z",
+    "chain": "arc-testnet",
+    "type": "x402-offchain"
+  },
+  {
+    "channelId": "nexus-dash-1777286134265-1",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NjEyNCIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjQzNCIsIm5vbmNlIjoiMHhkNDNhYjJmYmNjYjM3OGE2NjBjNzkzN2IwOGJiMTYzMTc3MTgyN2E1NGY5OTljZDdmNTE5Yzc0MGY0YjFjOWU5In0sInNpZ25hdHVyZSI6IjB4MmEwOTZjYTkzMjdmOGFhMGNlNWE2ODQyNDM2OWU2MTJlNjhkMGU5OWVhODBlM2E4Y2VlNWNiZDVhZDM1OTA1MTBjY2ViYzIzYWUzOGYyZTEyZmZlODczM2UwOThiZjI5ZGUxM2M2NWYzMjVmZGNkMmZlOTZkNzJiNWM1MWQ1N2QxYiJ9fQ==",
+    "txHash": "0x2a096ca9327f8aa0ce5a68424369e612e68d0e99ea80e3a8cee5cbd5ad359051",
+    "blockNumber": null,
+    "timestamp": "2026-04-27T10:35:34.306Z",
+    "chain": "arc-testnet",
+    "type": "x402-offchain"
+  },
+  {
+    "channelId": "nexus-dash-1777286134265-2",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NjEyNCIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjQzNCIsIm5vbmNlIjoiMHgyNDNkMjZjOGE1YzYxZGYxNzdmMmRlY2Q0YmE3YTg4MGQ3YTVmNjQ4MDlmZGM5ODgxZGVjMjlmMTlhODAxY2VmIn0sInNpZ25hdHVyZSI6IjB4OTNhZWVkZTJjZWZmOTlhY2I2NzY3YjdjYmMzMDgzNjQ1OWM4NzE3YzAyOTliMmY1MTlhMzkyMTllNTA0YzU4NzM3MjY3OTU1ODc5YmYzMTMxNjBlNWQ3Y2ZkNzI2NTU1MmJmZDg2ZTkzZTY3NmUyZThmMDNkNDc2ZTE4YzAyNGMxYiJ9fQ==",
+    "txHash": "0x93aeede2ceff99acb6767b7cbc30836459c8717c0299b2f519a39219e504c587",
+    "blockNumber": null,
+    "timestamp": "2026-04-27T10:35:34.306Z",
+    "chain": "arc-testnet",
+    "type": "x402-offchain"
+  },
+  {
+    "channelId": "nexus-dash-1777286134265-3",
+    "amountUSDC": 0.005,
+    "x402Header": "eyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJhcmMtdGVzdG5ldCIsInBheWxvYWQiOnsiYXV0aG9yaXphdGlvbiI6eyJmcm9tIjoiMHhGOTg3Qjk0NDI3YkRlNzhiYjY3RWY5MUM3MjIwMTVBQzY5ZGU1NUM1IiwidG8iOiIweEY5ODdCOTQ0MjdiRGU3OGJiNjdFZjkxQzcyMjAxNUFDNjlkZTU1QzUiLCJ2YWx1ZSI6IjUwMDAiLCJ2YWxpZEFmdGVyIjoiMTc3NzI4NjEyNCIsInZhbGlkQmVmb3JlIjoiMTc3NzI4NjQzNCIsIm5vbmNlIjoiMHhlY2U2NmEwMTUxMzk0ZDUxOTljNzExMTNlNWNhMjVlNGJhNGI3M2RiYjJmYzRjODM0MDU5OWZiMmVhMjUzMmZiIn0sInNpZ25hdHVyZSI6IjB4NjRjYjMzMWMyM2M5NWZiOGRmNGExYzc1NzRhZjc0MmRlYjUwMWM4NDdjMGNlMWFmNDdmOTIwODA1ZjQ0ZjYzZDY2NTQ4Njc4MGQ0OTAwZWVkZDgxN2IxZWQ1MjkxYjc2ZmUyZmJiYjU3MzdjZmNmMWQ0ZTkyYjBjMmVhODNmM2IxYiJ9fQ==",
+    "txHash": "0x64cb331c23c95fb8df4a1c7574af742deb501c847c0ce1af47f920805f44f63d",
+    "blockNumber": null,
+    "timestamp": "2026-04-27T10:35:34.306Z",
+    "chain": "arc-testnet",
+    "type": "x402-offchain"
+  },
+  {
+    "channelId": "nexus-dash-1777286472535-0",
+    "amountUSDC": 0.005,
+    "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "txHash": "0xf010b83795151ffc0aeda0ee77e4baa53dce7d1377f5e9d110e86f45dd608c5e",
+    "blockNumber": 39285703,
+    "timestamp": "2026-04-27T10:41:18.782Z",
+    "chain": "arc-testnet",
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777286472535-1",
+    "amountUSDC": 0.005,
+    "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "txHash": "0x553444752ace4a578712815e123173758067f3797a0bbbd6eafe38bb040b8cbc",
+    "blockNumber": 39285703,
+    "timestamp": "2026-04-27T10:41:18.782Z",
+    "chain": "arc-testnet",
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777286472535-2",
+    "amountUSDC": 0.005,
+    "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "txHash": "0x1ee18f5d178e496f3c16ecfb7b8023fab67db339e6e4ac6909c296dbc03c6a34",
+    "blockNumber": 39285703,
+    "timestamp": "2026-04-27T10:41:18.782Z",
+    "chain": "arc-testnet",
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  },
+  {
+    "channelId": "nexus-dash-1777286472535-3",
+    "amountUSDC": 0.005,
+    "from": "0xF987B94427bDe78bb67Ef91C722015AC69de55C5",
+    "txHash": "0x9a8ff94c612d711eb0f507f6e49cd6d2572bef7efa577c4db3ec5091bc7f47db",
+    "blockNumber": 39285703,
+    "timestamp": "2026-04-27T10:41:18.782Z",
+    "chain": "arc-testnet",
+    "fee_usdc": 0.00109076,
+    "gas_used": 54538,
+    "fee_enriched": true
+  }
+]

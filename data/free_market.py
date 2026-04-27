@@ -1,0 +1,651 @@
+"""
+FreeMarketClient — Drop-in companion to PrismClient using CoinGecko + Binance.
+Mirrors PrismClient's exact method signatures and return types so it can be
+used as a fallback or primary source for any symbol PRISM fails on.
+
+Sources:
+  - Binance Public API : price, 24h change, volume, OHLCV (no key required)
+  - CoinGecko Free API : price, 24h change, volume, market data (no key required)
+
+Symbol coverage:
+  BTC, ETH, SOL, ADA, POLKA/DOT, AVAX, MATIC, UNI, AAVE, LINK,
+  DOGE, SHIB, PEPE, FLOKI, ARB, OP — everything NEXUS tracks.
+
+Usage (in dashboard_server.py or wherever PrismClient is used):
+    from data.free_market import FreeMarketClient
+    free = FreeMarketClient()
+
+    # Use as primary for altcoins, keep PRISM for BTC signals/risk
+    price = free.get_price("SOL")
+    signals = free.get_signals("ETH")
+    batch = free.get_prices_batch(["SOL", "ADA", "MATIC"])
+"""
+
+import logging
+import time
+import math
+import requests
+from typing import Optional, Dict, Any, List
+from dataclasses import dataclass, field
+
+from agents.base import PrismSignal, PrismRisk, Candle
+
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Symbol maps
+# ---------------------------------------------------------------------------
+
+# NEXUS symbol → CoinGecko asset ID
+COINGECKO_IDS: Dict[str, str] = {
+    "BTC":   "bitcoin",
+    "ETH":   "ethereum",
+    "SOL":   "solana",
+    "ADA":   "cardano",
+    "POLKA": "polkadot",
+    "DOT":   "polkadot",
+    "AVAX":  "avalanche-2",
+    "MATIC": "matic-network",
+    "UNI":   "uniswap",
+    "AAVE":  "aave",
+    "LINK":  "chainlink",
+    "DOGE":  "dogecoin",
+    "SHIB":  "shiba-inu",
+    "PEPE":  "pepe",
+    "FLOKI": "floki",
+    "ARB":   "arbitrum",
+    "OP":    "optimism",
+}
+
+# NEXUS symbol → Binance trading pair
+BINANCE_PAIRS: Dict[str, str] = {
+    "BTC":   "BTCUSDT",
+    "ETH":   "ETHUSDT",
+    "SOL":   "SOLUSDT",
+    "ADA":   "ADAUSDT",
+    "POLKA": "DOTUSDT",
+    "DOT":   "DOTUSDT",
+    "AVAX":  "AVAXUSDT",
+    "MATIC": "MATICUSDT",
+    "UNI":   "UNIUSDT",
+    "AAVE":  "AAVEUSDT",
+    "LINK":  "LINKUSDT",
+    "DOGE":  "DOGEUSDT",
+    "SHIB":  "SHIBUSDT",
+    "PEPE":  "PEPEUSDT",
+    "FLOKI": "FLOKIUSDT",
+    "ARB":   "ARBUSDT",
+    "OP":    "OPUSDT",
+}
+
+# Binance kline interval map (minutes → Binance interval string)
+BINANCE_INTERVALS: Dict[int, str] = {
+    1:    "1m",
+    3:    "3m",
+    5:    "5m",
+    15:   "15m",
+    30:   "30m",
+    60:   "1h",
+    120:  "2h",
+    240:  "4h",
+    360:  "6h",
+    480:  "8h",
+    720:  "12h",
+    1440: "1d",
+}
+
+# ---------------------------------------------------------------------------
+# Internal cache
+# ---------------------------------------------------------------------------
+
+@dataclass
+class _CacheEntry:
+    data: Any
+    timestamp: float = field(default_factory=time.time)
+    ttl: int = 30
+
+    def is_expired(self) -> bool:
+        return time.time() - self.timestamp > self.ttl
+
+
+class _Cache:
+    def __init__(self):
+        self._store: Dict[str, _CacheEntry] = {}
+
+    def get(self, key: str) -> Optional[Any]:
+        entry = self._store.get(key)
+        if entry and not entry.is_expired():
+            return entry.data
+        return None
+
+    def set(self, key: str, data: Any, ttl: int = 30):
+        self._store[key] = _CacheEntry(data=data, ttl=ttl)
+
+
+# ---------------------------------------------------------------------------
+# FreeMarketClient
+# ---------------------------------------------------------------------------
+
+class FreeMarketClient:
+    """
+    Free market data client using CoinGecko + Binance.
+    Mirrors PrismClient's interface exactly for drop-in use.
+
+    Strategy per method:
+      get_price()      → Binance ticker (primary), CoinGecko (fallback)
+      get_signals()    → Binance OHLCV-derived RSI + MACD approximation
+      get_risk()       → Binance OHLCV-derived volatility + drawdown
+      get_ohlcv()      → Binance klines (primary), CoinGecko OHLC (fallback)
+      get_prices_batch()        → Binance bulk ticker (single API call)
+      get_all_supported_prices() → same
+    """
+
+    BINANCE_BASE = "https://api.binance.com/api/v3"
+    COINGECKO_BASE = "https://api.coingecko.com/api/v3"
+
+    def __init__(self):
+        self._cache = _Cache()
+        self._session = requests.Session()
+        self._session.headers.update({
+            "User-Agent": "NEXUS-FreeMarketClient/1.0",
+            "Accept": "application/json",
+        })
+
+    # ------------------------------------------------------------------
+    # Internal HTTP helpers
+    # ------------------------------------------------------------------
+
+    def _get(self, url: str, params: Optional[Dict] = None, timeout: int = 8) -> Optional[Any]:
+        """Generic GET with error handling. Returns parsed JSON or None."""
+        try:
+            resp = self._session.get(url, params=params, timeout=timeout)
+            resp.raise_for_status()
+            if not resp.text.strip():
+                return None
+            return resp.json()
+        except requests.exceptions.HTTPError as e:
+            logger.warning(f"HTTP error {e.response.status_code} for {url}")
+        except requests.exceptions.Timeout:
+            logger.warning(f"Timeout fetching {url}")
+        except Exception as e:
+            logger.warning(f"Request failed for {url}: {e}")
+        return None
+
+    def _binance_pair(self, symbol: str) -> Optional[str]:
+        pair = BINANCE_PAIRS.get(symbol.upper())
+        if not pair:
+            logger.warning(f"No Binance pair mapping for symbol: {symbol}")
+        return pair
+
+    def _coingecko_id(self, symbol: str) -> Optional[str]:
+        cg_id = COINGECKO_IDS.get(symbol.upper())
+        if not cg_id:
+            logger.warning(f"No CoinGecko ID mapping for symbol: {symbol}")
+        return cg_id
+
+    # ------------------------------------------------------------------
+    # Price — mirrors PrismClient.get_price()
+    # ------------------------------------------------------------------
+
+    def get_price(self, symbol: str) -> Optional[Dict]:
+        """
+        Returns: {"price": float, "change_24h_pct": float, "volume_24h": float}
+        Primary: Binance 24hr ticker
+        Fallback: CoinGecko simple/price
+        """
+        cache_key = f"price_{symbol}"
+        cached = self._cache.get(cache_key)
+        if cached:
+            return cached
+
+        # --- Primary: Binance ---
+        pair = self._binance_pair(symbol)
+        if pair:
+            data = self._get(
+                f"{self.BINANCE_BASE}/ticker/24hr",
+                params={"symbol": pair},
+            )
+            if data and "lastPrice" in data:
+                result = {
+                    "price": float(data["lastPrice"]),
+                    "change_24h_pct": float(data.get("priceChangePercent", 0.0)),
+                    "volume_24h": float(data.get("quoteVolume", 0.0)),
+                }
+                self._cache.set(cache_key, result, ttl=15)
+                logger.debug(f"Binance price {symbol}: ${result['price']:,.4f}")
+                return result
+
+        # --- Fallback: CoinGecko ---
+        cg_id = self._coingecko_id(symbol)
+        if cg_id:
+            data = self._get(
+                f"{self.COINGECKO_BASE}/simple/price",
+                params={
+                    "ids": cg_id,
+                    "vs_currencies": "usd",
+                    "include_24hr_change": "true",
+                    "include_24hr_vol": "true",
+                },
+            )
+            if data and cg_id in data:
+                d = data[cg_id]
+                result = {
+                    "price": float(d.get("usd", 0.0)),
+                    "change_24h_pct": float(d.get("usd_24h_change", 0.0)),
+                    "volume_24h": float(d.get("usd_24h_vol", 0.0)),
+                }
+                self._cache.set(cache_key, result, ttl=15)
+                logger.debug(f"CoinGecko price {symbol}: ${result['price']:,.4f}")
+                return result
+
+        logger.warning(f"FreeMarketClient: could not fetch price for {symbol}")
+        return None
+
+    # ------------------------------------------------------------------
+    # Batch prices — mirrors PrismClient.get_prices_batch()
+    # ------------------------------------------------------------------
+
+    def get_prices_batch(self, symbols: List[str]) -> Dict[str, Optional[Dict]]:
+        """
+        Fetch prices for multiple symbols in as few API calls as possible.
+        Uses Binance bulk bookTicker for speed, CoinGecko multi-id as fallback.
+        Returns: {symbol: {"price": float, "change_24h_pct": float, "volume_24h": float}}
+        """
+        cache_key = f"batch_{'_'.join(sorted(symbols))}"
+        cached = self._cache.get(cache_key)
+        if cached:
+            return cached
+
+        results: Dict[str, Optional[Dict]] = {s.upper(): None for s in symbols}
+
+        # --- Primary: Binance individual calls (Session reuse keeps this fast) ---
+        # NOTE: The bulk /ticker/24hr?symbols=[...] endpoint returns HTTP 400
+        # because requests URL-encodes the JSON brackets. Individual calls avoid this.
+        for symbol in symbols:
+            sym = symbol.upper()
+            pair = self._binance_pair(sym)
+            if not pair:
+                continue
+            data = self._get(
+                f"{self.BINANCE_BASE}/ticker/24hr",
+                params={"symbol": pair},
+            )
+            if data and "lastPrice" in data:
+                results[sym] = {
+                    "price": float(data["lastPrice"]),
+                    "change_24h_pct": float(data.get("priceChangePercent", 0.0)),
+                    "volume_24h": float(data.get("quoteVolume", 0.0)),
+                    "source": "binance",
+                }
+
+        # --- Fallback: CoinGecko multi-id for anything still missing ---
+        missing = [s.upper() for s in symbols if results.get(s.upper()) is None]
+        if missing:
+            cg_ids = {s: self._coingecko_id(s) for s in missing if self._coingecko_id(s)}
+            if cg_ids:
+                id_str = ",".join(cg_ids.values())
+                data = self._get(
+                    f"{self.COINGECKO_BASE}/simple/price",
+                    params={
+                        "ids": id_str,
+                        "vs_currencies": "usd",
+                        "include_24hr_change": "true",
+                        "include_24hr_vol": "true",
+                    },
+                )
+                if data:
+                    id_to_sym = {v: k for k, v in cg_ids.items()}
+                    for cg_id, d in data.items():
+                        sym = id_to_sym.get(cg_id)
+                        if sym:
+                            results[sym] = {
+                                "price": float(d.get("usd", 0.0)),
+                                "change_24h_pct": float(d.get("usd_24h_change", 0.0)),
+                                "volume_24h": float(d.get("usd_24h_vol", 0.0)),
+                                "source": "coingecko",
+                            }
+
+        self._cache.set(cache_key, results, ttl=15)
+        fetched = sum(1 for v in results.values() if v is not None)
+        logger.debug(f"Batch prices: {fetched}/{len(symbols)} symbols fetched")
+        return results
+
+    def get_all_supported_prices(self) -> Dict[str, Optional[Dict]]:
+        """
+        Get prices for all mapped symbols.
+        Mirrors PrismClient.get_all_supported_prices().
+        """
+        return self.get_prices_batch(list(COINGECKO_IDS.keys()))
+
+    # ------------------------------------------------------------------
+    # OHLCV — mirrors PrismClient.get_ohlcv()
+    # ------------------------------------------------------------------
+
+    def get_ohlcv(
+        self, symbol: str, interval_minutes: int, limit: int = 100
+    ) -> Optional[List[Candle]]:
+        """
+        Returns list of Candle objects.
+        Primary: Binance klines
+        Fallback: CoinGecko OHLC (daily only, limited)
+        """
+        cache_key = f"ohlcv_{symbol}_{interval_minutes}_{limit}"
+        cached = self._cache.get(cache_key)
+        if cached:
+            return cached
+
+        # --- Primary: Binance klines ---
+        pair = self._binance_pair(symbol)
+        interval = BINANCE_INTERVALS.get(interval_minutes, "1h")
+
+        if pair:
+            data = self._get(
+                f"{self.BINANCE_BASE}/klines",
+                params={"symbol": pair, "interval": interval, "limit": limit},
+            )
+            if data and isinstance(data, list):
+                candles = []
+                for k in data:
+                    try:
+                        candles.append(Candle(
+                            timestamp=int(k[0]) // 1000,
+                            open=float(k[1]),
+                            high=float(k[2]),
+                            low=float(k[3]),
+                            close=float(k[4]),
+                            volume=float(k[5]),
+                        ))
+                    except (IndexError, ValueError):
+                        continue
+                if candles:
+                    self._cache.set(cache_key, candles, ttl=60)
+                    logger.debug(f"Binance OHLCV {symbol} {interval}: {len(candles)} candles")
+                    return candles
+
+        # --- Fallback: CoinGecko OHLC (daily granularity) ---
+        cg_id = self._coingecko_id(symbol)
+        if cg_id:
+            days = max(1, (interval_minutes * limit) // 1440)
+            data = self._get(
+                f"{self.COINGECKO_BASE}/coins/{cg_id}/ohlc",
+                params={"vs_currency": "usd", "days": min(days, 365)},
+            )
+            if data and isinstance(data, list):
+                candles = []
+                for row in data[-limit:]:
+                    try:
+                        candles.append(Candle(
+                            timestamp=int(row[0]) // 1000,
+                            open=float(row[1]),
+                            high=float(row[2]),
+                            low=float(row[3]),
+                            close=float(row[4]),
+                            volume=0.0,  # CoinGecko OHLC doesn't include volume
+                        ))
+                    except (IndexError, ValueError):
+                        continue
+                if candles:
+                    self._cache.set(cache_key, candles, ttl=60)
+                    logger.debug(f"CoinGecko OHLC {symbol}: {len(candles)} candles (daily)")
+                    return candles
+
+        logger.warning(f"FreeMarketClient: could not fetch OHLCV for {symbol}")
+        return None
+
+    # ------------------------------------------------------------------
+    # Signals — mirrors PrismClient.get_signals()
+    # ------------------------------------------------------------------
+
+    def get_signals(self, symbol: str, timeframe: str = "1h") -> Optional[PrismSignal]:
+        """
+        Derives a PrismSignal from Binance OHLCV data using RSI + MACD.
+        Returns PrismSignal with same fields as PRISM API response.
+        """
+        cache_key = f"signal_{symbol}_{timeframe}"
+        cached = self._cache.get(cache_key)
+        if cached:
+            return cached
+
+        interval_map = {"1h": 60, "4h": 240, "1d": 1440, "15m": 15, "30m": 30}
+        interval_minutes = interval_map.get(timeframe, 60)
+
+        candles = self.get_ohlcv(symbol, interval_minutes, limit=60)
+        if not candles or len(candles) < 20:
+            logger.warning(f"FreeMarketClient: not enough candles for signals on {symbol}")
+            return None
+
+        closes = [c.close for c in candles]
+        current_price = closes[-1]
+
+        rsi = _calc_rsi(closes, period=14)
+        macd_line, signal_line, histogram = _calc_macd(closes)
+
+        # Derive direction from RSI + MACD
+        bullish_score = 0
+        bearish_score = 0
+
+        if rsi < 30:
+            bullish_score += 2  # oversold
+        elif rsi < 45:
+            bullish_score += 1
+        elif rsi > 70:
+            bearish_score += 2  # overbought
+        elif rsi > 55:
+            bearish_score += 1
+
+        if histogram > 0:
+            bullish_score += 1
+        elif histogram < 0:
+            bearish_score += 1
+
+        if macd_line > signal_line:
+            bullish_score += 1
+        else:
+            bearish_score += 1
+
+        net_score = bullish_score - bearish_score
+        signal_count = bullish_score + bearish_score
+
+        if net_score >= 3:
+            direction = "strong_bullish"
+        elif net_score >= 1:
+            direction = "bullish"
+        elif net_score <= -3:
+            direction = "strong_bearish"
+        elif net_score <= -1:
+            direction = "bearish"
+        else:
+            direction = "neutral"
+
+        confidence = min(1.0, abs(net_score) / max(signal_count, 1))
+        score = min(1.0, max(-1.0, net_score / max(signal_count, 1)))
+
+        strength = (
+            "strong" if abs(net_score) >= 3
+            else "moderate" if abs(net_score) >= 2
+            else "weak"
+        )
+
+        reasoning = (
+            f"strength={strength}, rsi={rsi:.1f}, "
+            f"macd_hist={histogram:.4f}, net={net_score}/{signal_count}"
+        )
+
+        indicators = {
+            "rsi": round(rsi, 2),
+            "macd": round(macd_line, 4),
+            "macd_signal": round(signal_line, 4),
+            "macd_histogram": round(histogram, 4),
+        }
+
+        signal = PrismSignal(
+            direction=direction,
+            confidence=confidence,
+            score=score,
+            reasoning=reasoning,
+            indicators=indicators,
+            current_price=current_price,
+            rsi=rsi,
+            macd_histogram=histogram,
+        )
+
+        self._cache.set(cache_key, signal, ttl=120)
+        logger.debug(f"FreeMarketClient signals {symbol} ({timeframe}): {direction} | {reasoning}")
+        return signal
+
+    # ------------------------------------------------------------------
+    # Risk — mirrors PrismClient.get_risk()
+    # ------------------------------------------------------------------
+
+    def get_risk(self, symbol: str) -> Optional[PrismRisk]:
+        """
+        Derives a PrismRisk from 90 days of daily Binance OHLCV.
+        Computes: volatility, max drawdown, Sharpe, Sortino.
+        Returns PrismRisk with same fields as PRISM API response.
+        """
+        cache_key = f"risk_{symbol}"
+        cached = self._cache.get(cache_key)
+        if cached:
+            return cached
+
+        candles = self.get_ohlcv(symbol, interval_minutes=1440, limit=90)
+        if not candles or len(candles) < 10:
+            logger.warning(f"FreeMarketClient: not enough data for risk on {symbol}")
+            return None
+
+        closes = [c.close for c in candles]
+        returns = [
+            (closes[i] - closes[i - 1]) / closes[i - 1]
+            for i in range(1, len(closes))
+        ]
+
+        if not returns:
+            return None
+
+        # Daily volatility (std of returns)
+        mean_r = sum(returns) / len(returns)
+        variance = sum((r - mean_r) ** 2 for r in returns) / len(returns)
+        daily_vol = math.sqrt(variance) * 100  # as percentage
+
+        # Annual volatility
+        annual_vol = daily_vol * math.sqrt(252)
+
+        # Max drawdown
+        peak = closes[0]
+        max_dd = 0.0
+        for price in closes:
+            if price > peak:
+                peak = price
+            dd = (peak - price) / peak * 100
+            if dd > max_dd:
+                max_dd = dd
+
+        # Current drawdown
+        current_peak = max(closes)
+        current_dd = (current_peak - closes[-1]) / current_peak * 100
+
+        # Sharpe ratio (annualised, assumes 0% risk-free)
+        avg_daily = mean_r * 100
+        sharpe = (avg_daily / daily_vol * math.sqrt(252)) if daily_vol > 0 else 0.0
+
+        # Sortino ratio (downside deviation only)
+        neg_returns = [r for r in returns if r < 0]
+        if neg_returns:
+            down_var = sum(r ** 2 for r in neg_returns) / len(neg_returns)
+            down_vol = math.sqrt(down_var) * 100
+            sortino = (avg_daily / down_vol * math.sqrt(252)) if down_vol > 0 else 0.0
+        else:
+            sortino = 0.0
+
+        risk_score = min(100.0, max(0.0, max_dd * 2 + annual_vol))
+
+        risk = PrismRisk(
+            risk_score=risk_score,
+            atr_pct=round(daily_vol, 4),
+            volatility_30d=round(annual_vol, 2),
+            max_drawdown_30d=round(max_dd, 2),
+            sharpe_ratio=round(sharpe, 3),
+            sortino_ratio=round(sortino, 3),
+            current_drawdown=round(current_dd, 2),
+        )
+
+        self._cache.set(cache_key, risk, ttl=300)
+        logger.debug(
+            f"FreeMarketClient risk {symbol}: "
+            f"vol={annual_vol:.1f}% dd={max_dd:.1f}% sharpe={sharpe:.2f}"
+        )
+        return risk
+
+
+# ---------------------------------------------------------------------------
+# Technical indicator calculations (no external dependencies)
+# ---------------------------------------------------------------------------
+
+def _calc_rsi(closes: List[float], period: int = 14) -> float:
+    """Wilder's RSI."""
+    if len(closes) < period + 1:
+        return 50.0
+
+    gains, losses = [], []
+    for i in range(1, len(closes)):
+        delta = closes[i] - closes[i - 1]
+        gains.append(max(delta, 0))
+        losses.append(max(-delta, 0))
+
+    avg_gain = sum(gains[:period]) / period
+    avg_loss = sum(losses[:period]) / period
+
+    for i in range(period, len(gains)):
+        avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+        avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+
+    if avg_loss == 0:
+        return 100.0
+    rs = avg_gain / avg_loss
+    return round(100 - (100 / (1 + rs)), 2)
+
+
+def _calc_ema(closes: List[float], period: int) -> List[float]:
+    """Exponential moving average."""
+    if len(closes) < period:
+        return closes[:]
+    k = 2 / (period + 1)
+    ema = [sum(closes[:period]) / period]
+    for price in closes[period:]:
+        ema.append(price * k + ema[-1] * (1 - k))
+    return ema
+
+
+def _calc_macd(
+    closes: List[float],
+    fast: int = 12,
+    slow: int = 26,
+    signal: int = 9,
+) -> tuple:
+    """
+    Standard MACD.
+    Returns (macd_line, signal_line, histogram) as latest values.
+    """
+    if len(closes) < slow + signal:
+        return 0.0, 0.0, 0.0
+
+    ema_fast = _calc_ema(closes, fast)
+    ema_slow = _calc_ema(closes, slow)
+
+    # Align lengths (slow EMA is shorter)
+    offset = len(ema_fast) - len(ema_slow)
+    macd_line_series = [
+        ema_fast[i + offset] - ema_slow[i]
+        for i in range(len(ema_slow))
+    ]
+
+    if len(macd_line_series) < signal:
+        return 0.0, 0.0, 0.0
+
+    signal_line_series = _calc_ema(macd_line_series, signal)
+
+    macd_val = macd_line_series[-1]
+    signal_val = signal_line_series[-1]
+    histogram = macd_val - signal_val
+
+    return round(macd_val, 6), round(signal_val, 6), round(histogram, 6)

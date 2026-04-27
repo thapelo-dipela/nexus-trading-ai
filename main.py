@@ -23,6 +23,8 @@ from agents.base import MarketData, Candle, PrismSignal, PrismRisk, VoteDirectio
 from consensus.engine import ConsensusEngine
 from consensus.regime import RegimeDetector, MarketRegime
 from data.prism import PrismClient
+from data.stock_market import StockMarketClient
+from execution.alpaca_client import AlpacaClient
 from execution.kraken import KrakenClient
 from execution import compute_position_size
 from execution.positions import PositionManager, ExitReason
@@ -34,6 +36,8 @@ import importlib
 yield_module = importlib.import_module("yield")
 YieldOptimizer = yield_module.YieldOptimizer
 from agents.mean_reversion import MeanReversionAgent
+from agents.payer_agent import PayerAgent
+from agents.receiver_agent import ReceiverAgent
 from execution.leaderboard import LeaderboardManager
 import requests
 
@@ -75,7 +79,7 @@ def save_live_decisions(cycle_num, agent_decisions, consensus_direction, consens
         logger.debug(f"Failed to save live decisions: {e}")
 
 
-def save_cycle_log(cycle_num, consensus_direction, consensus_confidence, llm_rationale="", orderflow_metrics=None, signed_votes=None, strategy=""):
+def save_cycle_log(cycle_num, consensus_direction, consensus_confidence, llm_rationale="", orderflow_metrics=None, signed_votes=None, strategy="", stock_signal=None):
     """
     Save cycle data to nexus_cycle_log.json for dashboard audit trail.
     Includes LLM rationale, strategy, and signed vote audit log.
@@ -87,6 +91,7 @@ def save_cycle_log(cycle_num, consensus_direction, consensus_confidence, llm_rat
             "consensus_direction": consensus_direction.value if consensus_direction else "HOLD",
             "consensus_confidence": float(consensus_confidence),
             "strategy": strategy or config.ACTIVE_STRATEGY,
+            "stock_signal": stock_signal or {},
             "llm_rationale": llm_rationale or "",
             "orderflow": orderflow_metrics or {},
             "signed_votes": signed_votes or [],
@@ -212,6 +217,9 @@ def trade_cycle(
     regime_detector: RegimeDetector,
     cycle_number: int = 0,
     dry_run: bool = False,
+    btc_signal=None,
+    alpaca_client=None,
+    stock_market=None,
 ) -> bool:
     """
     Execute a single trade cycle with comprehensive compliance and validation:
@@ -371,6 +379,82 @@ def trade_cycle(
     if not llm_rationale and llm_agent and hasattr(llm_agent, '_last_rationale'):
         llm_rationale = llm_agent._last_rationale
 
+    # ── Nanopayment signal fetch (PayerAgent → ReceiverAgent) ───────────────
+    # PayerAgent pays $0.000001 USDC per call to fetch a fresh paid signal.
+    # ReceiverAgent validates the response before we act on it.
+    try:
+        if 'payer_agent' in dir():
+            paid_response = payer_agent.get_signals(
+                symbol=getattr(market_data, 'pair', 'BTC').replace('XXBTZUSD', 'BTC')[:3]
+            )
+            if receiver_agent.validate_receipt(paid_response):
+                paid_data = paid_response.get('data', {})
+                paid_direction = paid_data.get('direction', '')
+                paid_confidence = float(paid_data.get('confidence', 0))
+                # If paid signal agrees with consensus, small confidence boost
+                if (paid_direction == 'bullish' and consensus_direction == VoteDirection.BUY) or                    (paid_direction == 'bearish' and consensus_direction == VoteDirection.SELL):
+                    boost = round(paid_confidence * 0.05, 4)
+                    consensus_confidence = min(0.95, consensus_confidence + boost)
+                    logger.info(
+                        f"[cyan]💳 Paid signal AGREES ({paid_direction}) "
+                        f"+{boost:.4f} boost → confidence {consensus_confidence:.3f}[/cyan]"
+                    )
+                elif paid_direction in ('bullish', 'bearish'):
+                    logger.info(
+                        f"[yellow]💳 Paid signal DISAGREES ({paid_direction} vs "
+                        f"{consensus_direction.value}) — no adjustment[/yellow]"
+                    )
+                logger.info(
+                    f"[dim]💳 Nanopayment: receipts={receiver_agent.receipt_count()} "
+                    f"total_spent={receiver_agent.total_spent_usdc():.6f} USDC[/dim]"
+                )
+    except Exception as _np_e:
+        logger.debug(f"Nanopayment signal fetch skipped: {_np_e}")
+
+    # ── BTC Correlation adjustment ────────────────────────────────────────────
+    # If JSE/US stocks are lagging BTC → boost BUY confidence
+    # If JSE/US stocks are beating BTC → suppress low-confidence BUY trades
+    if btc_signal is not None:
+        sig = getattr(btc_signal, 'signal', None)
+        if sig == 'BUY_CRYPTO' and consensus_direction == VoteDirection.BUY:
+            boost = min(0.10, abs(getattr(btc_signal, 'relative_strength', 0)) * 0.01)
+            consensus_confidence = min(0.95, consensus_confidence + boost)
+            logger.info(
+                f"[green]BTC correlation BOOST +{boost:.3f} → "
+                f"confidence now {consensus_confidence:.3f}[/green]"
+            )
+        elif sig == 'SELL_CRYPTO' and consensus_direction == VoteDirection.BUY:
+            if consensus_confidence < 0.60:
+                logger.info(
+                    "[yellow]BTC correlation SUPPRESS — JSE outperforming BTC, "
+                    "confidence too low — skipping trade[/yellow]"
+                )
+                return True  # skip this cycle
+
+    # ── Alpaca US stock trade when correlation is strong ─────────────────────
+    if (alpaca_client and alpaca_client.is_ready and
+            btc_signal is not None and
+            getattr(config, 'US_STOCKS_ENABLED', False)):
+        sig = getattr(btc_signal, 'signal', None)
+        rel = abs(getattr(btc_signal, 'relative_strength', 0))
+        if sig == 'SELL_CRYPTO' and rel > 8.0 and not dry_run:
+            # Rotate small amount into top US stock as hedge
+            top_us = getattr(stock_market, 'US_TOP_STOCKS', ['SPY'])[:1]
+            for ticker in top_us:
+                try:
+                    result = alpaca_client.place_order(
+                        symbol=ticker,
+                        notional=50.0,   # $50 paper trade
+                        side='buy',
+                        dry_run=dry_run,
+                    )
+                    logger.info(
+                        f"[cyan]Alpaca paper BUY {ticker} $50 "
+                        f"(hedge — JSE rel_strength={rel:.1f}%)[/cyan]"
+                    )
+                except Exception as _e:
+                    logger.debug(f"Alpaca order failed: {_e}")
+
     # Sign votes for on-chain audit trail
     signed_votes_list = []
     try:
@@ -382,14 +466,26 @@ def trade_cycle(
         logger.debug(f"[dim]Vote signing failed: {e}[/dim]")
 
     # Save cycle log for dashboard audit trail
+    # Build stock signal dict for cycle log
+    _stock_signal_log = {}
+    if btc_signal is not None:
+        _stock_signal_log = {
+            "signal":             getattr(btc_signal, 'signal', ''),
+            "btc_return_30d":     getattr(btc_signal, 'btc_return_30d', 0),
+            "stock_return_30d":   getattr(btc_signal, 'stock_return_30d', 0),
+            "relative_strength":  getattr(btc_signal, 'relative_strength', 0),
+            "basket":             getattr(btc_signal, 'basket', ''),
+        }
+
     save_cycle_log(
         cycle_number,
         consensus_direction,
         consensus_confidence,
         llm_rationale=llm_rationale,
-        orderflow_metrics=None,  # Can be enriched later from agent data
+        orderflow_metrics=None,
         signed_votes=signed_votes_list,
         strategy=active_strategy,
+        stock_signal=_stock_signal_log,
     )
 
     # Load current positions for dashboard display
@@ -433,6 +529,22 @@ def trade_cycle(
         logger.info(
             f"[yellow]Insufficient confidence {consensus_confidence:.3f} "
             f"< {config.CONFIDENCE_THRESHOLD}[/yellow]"
+        )
+        consensus_engine.record_hold(market_data, votes, market_data.current_price)
+        return True
+
+    # ============ STEP 4b: Check Trade Block ============
+    # If direction is blocked due to repeated losses, reject trade
+    if position_manager.is_direction_blocked(consensus_direction.value):
+        block_status = position_manager.get_block_status()
+        if consensus_direction == VoteDirection.BUY:
+            remaining = block_status["buy_cycles_remaining"]
+        else:
+            remaining = block_status["sell_cycles_remaining"]
+        
+        logger.warning(
+            f"[red]TRADE BLOCKED[/red]: {consensus_direction.value} blocked "
+            f"for {remaining} more cycle(s) due to repeated losses"
         )
         consensus_engine.record_hold(market_data, votes, market_data.current_price)
         return True
@@ -737,6 +849,24 @@ def live_trading_loop(dry_run: bool = False):
     prism_client = PrismClient(config.PRISM_API_KEY, kraken_client)
     reputation_client = ReputationClient()
 
+    # ── Stock + Alpaca clients (non-blocking — failures don't stop crypto loop)
+    stock_market = None
+    alpaca_client = None
+    try:
+        stock_market = StockMarketClient()
+        logger.info("[green]✅ StockMarketClient ready (Yahoo Finance — JSE + US)[/green]")
+    except Exception as _e:
+        logger.warning(f"[yellow]⚠️  StockMarketClient unavailable: {_e}[/yellow]")
+    try:
+        alpaca_client = AlpacaClient()
+        if alpaca_client.is_ready:
+            mode = "LIVE" if alpaca_client.is_live else "PAPER"
+            logger.info(f"[green]✅ AlpacaClient ready ({mode} trading)[/green]")
+        else:
+            logger.info("[yellow]⚠️  AlpacaClient: add ALPACA_API_KEY + ALPACA_API_SECRET to .env[/yellow]")
+    except Exception as _e:
+        logger.warning(f"[yellow]⚠️  AlpacaClient unavailable: {_e}[/yellow]")
+
     # Initialize agents
     agents = create_default_agents(anthropic_api_key=config.ANTHROPIC_API_KEY)
 
@@ -781,6 +911,24 @@ def live_trading_loop(dry_run: bool = False):
                 continue
 
             # Execute trade cycle with all engines
+            # BTC correlation signal — runs before trade_cycle
+            btc_signal = None
+            if stock_market and getattr(config, 'BTC_CORRELATION_ENABLED', False):
+                try:
+                    use_jse = getattr(config, 'JSE_ENABLED', True)
+                    top_n   = getattr(config, 'JSE_TOP_N', 20)
+                    btc_signal = stock_market.btc_correlation_signal(
+                        use_jse=use_jse, top_n=top_n
+                    )
+                    logger.info(
+                        f"[bold blue]BTC Correlation[/bold blue]: "
+                        f"{btc_signal.signal} | "
+                        f"BTC 30d={btc_signal.btc_return_30d:+.1f}% "
+                        f"Stock 30d={btc_signal.stock_return_30d:+.1f}%"
+                    )
+                except Exception as _e:
+                    logger.debug(f"BTC correlation signal failed: {_e}")
+
             trade_cycle(
                 market_data,
                 agents,
@@ -794,6 +942,9 @@ def live_trading_loop(dry_run: bool = False):
                 regime_detector,
                 cycle_number=cycle_count,
                 dry_run=dry_run,
+                btc_signal=btc_signal,
+                alpaca_client=alpaca_client,
+                stock_market=stock_market,
             )
 
             # Periodic leaderboard submission (every 120 cycles)
@@ -826,6 +977,7 @@ def main():
     parser.add_argument("--capital-status", action="store_true", help="Check sandbox capital sub-account status and exit")
     parser.add_argument("--ping", action="store_true", help="Verify PRISM and Kraken connectivity")
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable debug logging")
+    parser.add_argument("--check-prism", action="store_true", help="Check PRISM API key and connectivity only")
 
     args = parser.parse_args()
     setup_logging(args.verbose)
@@ -836,6 +988,19 @@ def main():
         prism_client = PrismClient(config.PRISM_API_KEY, kraken_client)
         success = ping_prism_and_kraken(prism_client, kraken_client)
         sys.exit(0 if success else 1)
+
+    # --check-prism: test PRISM API only (no Kraken needed)
+    if args.check_prism:
+        kraken_client = KrakenClient()
+        prism_client = PrismClient(config.PRISM_API_KEY, kraken_client)
+        console.print("[bold]NEXUS --check-prism: PRISM API Check[/bold]")
+        resolved = prism_client.resolve_asset(config.PRISM_SYMBOL)
+        if resolved and resolved.get("symbol") == config.PRISM_SYMBOL:
+            console.print(f"[green]✓ PRISM API key is valid. Symbol: {resolved['symbol']}[/green]")
+            sys.exit(0)
+        else:
+            console.print("[red]✗ PRISM API key invalid or unreachable[/red]")
+            sys.exit(1)
 
     # --leaderboard: print agent leaderboard and exit
     if args.leaderboard:
