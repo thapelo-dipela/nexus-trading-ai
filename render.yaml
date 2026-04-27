@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: nexus-trading-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python dashboard_server.py & python main.py --dry-run & wait
+    envVars:
+      - key: PORT
+        value: 3000
