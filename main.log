@@ -16340,3 +16340,16 @@ number, not 'NoneType'[/yellow]
   mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
 [yellow]HOLD (confidence=0.207)[/yellow]                                        
 [dim]Sleeping 300s...[/dim]                                                     
+                                                                                
+[bold]Cycle #1105[/bold]                                                        
+[yellow]Failed to parse PRISM risk: float() argument must be a string or a      
+number, not 'NoneType'[/yellow]                                                 
+[bold blue]Market Regime[/bold blue]: trending | Weights: {'momentum': 1.5,     
+'sentiment': 0.8, 'risk_guardian': 1.0, 'mean_reversion': 0.5}                  
+  orderflow: BUY (conf=0.25, regime_mult=1.0)                                   
+  momentum: BUY (conf=0.55, regime_mult=1.5)                                    
+  sentiment: SELL (conf=0.25, regime_mult=0.8)                                  
+  risk_guardian: HOLD (conf=0.20, regime_mult=1.0)                              
+  mean_reversion: SELL (conf=0.78, regime_mult=0.5)                             
+[yellow]HOLD (confidence=0.207)[/yellow]                                        
+[dim]Sleeping 300s...[/dim]                                                     
